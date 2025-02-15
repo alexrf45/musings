@@ -1,0 +1,12 @@
+[submodule "docs/themes/nostyleplease"]
+	path = docs/themes/nostyleplease
+	url = https://github.com/hanwenguo/hugo-theme-nostyleplease.git
+[submodule "docs/-depth=1"]
+	path = docs/-depth=1
+	url = https://github.com/fauzanmy/pehtheme-hugo.git
+[submodule "docs/pehtheme-hugo"]
+	path = docs/pehtheme-hugo
+	url = https://github.com/fauzanmy/pehtheme-hugo.git
+[submodule "docs/themes/pehtheme"]
+	path = docs/themes/pehtheme
+	url = https://github.com/fauzanmy/pehtheme-hugo.git
