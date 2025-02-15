@@ -1,2 +1,5 @@
-# musings
+# Musings
+
+---
+
 Writing is healing
