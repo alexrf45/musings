@@ -1,0 +1,58 @@
+#baseURL: http://localhost
+
+languageCode: en-us
+
+title: Musings of Fr3d
+
+theme: hextra
+enableGitInfo: false
+params:
+  page:
+    width: wide
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/favicon-32x32.png
+      dark: images/favicon-32x32.png
+      link: /
+      width: 32
+      height: 32
+  highlight:
+    copy:
+      enable: true
+      # hover | always
+      display: hover
+
+menu:
+  main:
+    - name: Home Lab
+      pageRef: /home_lab
+      weight: 3
+    - name: Writing
+      pageRef: /writing
+      weight: 2
+    - name: Search
+      weight: 1
+      params:
+        type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/alexrf45/musings"
+      params:
+        icon: github 
+  sidebar:
+    - name: GitHub Profile
+      url: "https://github.com/alexrf45/home-ops"
+
+
+markup:
+  highlight:
+    noClasses: true
+    # anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    # lineNos: true
+    style: monokai

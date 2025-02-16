@@ -1,18 +1,3 @@
-[submodule "docs/themes/nostyleplease"]
-	path = docs/themes/nostyleplease
-	url = https://github.com/hanwenguo/hugo-theme-nostyleplease.git
-[submodule "docs/-depth=1"]
-	path = docs/-depth=1
-	url = https://github.com/fauzanmy/pehtheme-hugo.git
-[submodule "docs/pehtheme-hugo"]
-	path = docs/pehtheme-hugo
-	url = https://github.com/fauzanmy/pehtheme-hugo.git
-[submodule "docs/themes/pehtheme"]
-	path = docs/themes/pehtheme
-	url = https://github.com/fauzanmy/pehtheme-hugo.git
-[submodule "blog/themes/PaperMod"]
-	path = blog/themes/PaperMod
-	url = https://github.com/adityatelange/hugo-PaperMod.git
-[submodule "blog1/themes/hextra"]
-	path = blog1/themes/hextra
+[submodule "app/themes/hextra"]
+	path = app/themes/hextra
 	url = https://github.com/imfing/hextra.git
