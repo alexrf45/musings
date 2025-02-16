@@ -22,7 +22,7 @@ jobs:
         uses: ietf-tools/semver-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: dev
+          branch: main
           fallbackTag: 'v1.0.0'
           additionalCommits: 'docs,update'
       - name: Push tag
