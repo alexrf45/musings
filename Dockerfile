@@ -32,3 +32,4 @@ WORKDIR /usr/share/nginx/html
 # Copy HTML from previous build into the Workdir.
 COPY --from=build /opt/app/public .
 
+EXPOSE 8080
