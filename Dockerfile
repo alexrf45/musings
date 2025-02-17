@@ -16,7 +16,7 @@ WORKDIR /opt/app
 COPY app .
 
 # Run Hugo in the Workdir to generate HTML.
-RUN hugo  --minify
+RUN hugo  --minify --baseURL 'https://prod.blog.fr3d.dev'
 
 #####################################################################
 #                            Deploy Stage                           #
