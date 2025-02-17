@@ -5,30 +5,32 @@
 #                            Build Stage                            #
 #####################################################################
 # Stage 1
-FROM alpine:latest AS build
+FROM alpine:latest AS builder
 
-# Install the Hugo go app.
-RUN apk add --update hugo
+RUN apk add hugo=0.139.0-r2
 
-WORKDIR /opt/app
+WORKDIR /tmp/app
 
-# Copy Hugo config into the container Workdir.
 COPY app .
 
-# Run Hugo in the Workdir to generate HTML.
-RUN hugo  --minify --baseURL 'https://prod.blog.fr3d.dev'
+RUN hugo --minify
 
 #####################################################################
 #                            Deploy Stage                           #
 #####################################################################
 
 # Stage 2
-FROM nginx:stable-alpine
+FROM nginx:alpine-slim
 
-# Set workdir to the NGINX default dir.
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY default /etc/nginx/sites-enabled/default
+
 WORKDIR /usr/share/nginx/html
 
-# Copy HTML from previous build into the Workdir.
-COPY --from=build /opt/app/public .
+# Copy the generated files to keep image as small as possible.
+COPY --from=builder /tmp/app/public .
 
-EXPOSE 80
+EXPOSE 80/tcp
+
+CMD ["nginx", "-g", "daemon off;"]
