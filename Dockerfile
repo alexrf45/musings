@@ -23,9 +23,8 @@ RUN hugo  --minify --baseURL 'https://prod.blog.fr3d.dev'
 #####################################################################
 
 # Stage 2
-FROM cgr.dev/chainguard/nginx:latest
+FROM nginx:stable-alpine
 
-USER nginx
 # Set workdir to the NGINX default dir.
 WORKDIR /usr/share/nginx/html
 
