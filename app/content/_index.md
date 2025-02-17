@@ -6,5 +6,5 @@ title: "Live for the journey not the destination"
 
 {{< cards cols="1" >}}
 {{< card link="/home_lab" title="Home Lab" image="images/lab.jpg"   >}}
-{{< card link="/blog" title="Writing" image="images/forest_full.jpg"  method="Resize" >}}
+{{< card link="/writing" title="Writing" image="images/forest_full.jpg"  method="Resize" >}}
 {{< /cards >}}
