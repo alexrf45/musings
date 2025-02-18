@@ -44,7 +44,7 @@ menu:
       params:
         icon: github 
   sidebar:
-    - name: GitHub Profile
+    - name: Home Ops Github Repo
       url: "https://github.com/alexrf45/home-ops"
 
 
