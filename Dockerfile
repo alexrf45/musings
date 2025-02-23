@@ -22,9 +22,9 @@ RUN hugo --minify
 # Stage 2
 FROM nginx:alpine-slim
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
-COPY default /etc/nginx/sites-enabled/default
+COPY ./nginx/default /etc/nginx/sites-enabled/default
 
 WORKDIR /usr/share/nginx/html
 
