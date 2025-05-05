@@ -7,7 +7,7 @@
 # Stage 1
 FROM alpine:latest AS builder
 
-RUN apk add hugo=0.139.0-r2
+RUN apk add hugo=0.139.0-r4
 
 WORKDIR /tmp/app
 

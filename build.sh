@@ -1,6 +1,8 @@
 #!/bin/bash
 
-docker stop blog
+#docker stop blog
+
+git submodule update --init
 
 docker build -t blog:test . --no-cache
 
