@@ -7,7 +7,8 @@
 # Stage 1
 FROM alpine:latest AS builder
 
-RUN apk add hugo=0.139.0-r4
+RUN apk update \
+ && apk add --no-cache hugo
 
 WORKDIR /tmp/app
 
