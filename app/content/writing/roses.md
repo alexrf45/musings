@@ -1,5 +1,5 @@
 ---
-title: A Handful of Roses
+title: Roses
 id: love_grief_roses_trust
 date: 2025-05-19T11:30:50-04:00
 summary: Hold the rose, sentenced to bleed
