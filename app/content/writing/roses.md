@@ -12,7 +12,6 @@ keywords:
   - healing
 ---
 
-```text
 A rose, petals of red, rich with life, ripe for the picking of unsuspecting hands.
 
 Thorns, the warning of a superfical kind of appreciation that never lands.
@@ -26,6 +25,3 @@ In an instant, blood stains the stem, the hand tenses, feeling the pain of love'
 Holding the rose in admiration, organic luster fading.
 
 Only then does the rose and the hand understand the stakes of which they are trading.
-
-
-```
