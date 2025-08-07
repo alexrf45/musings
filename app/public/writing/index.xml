@@ -1,19 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Musings of Fr3d – My Writing</title>
+    <title>My Writing on Musings of Fr3d</title>
     <link>//localhost:1313/writing/</link>
     <description>Recent content in My Writing on Musings of Fr3d</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 16 Feb 2025 05:00:50 -0500</lastBuildDate>
-    
-	  <atom:link href="//localhost:1313/writing/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 23 Jun 2025 04:06:06 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/writing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Release the Rhythm</title>
+      <link>//localhost:1313/writing/release_the_rhythm/</link>
+      <pubDate>Mon, 23 Jun 2025 04:06:06 -0400</pubDate>
+      <guid>//localhost:1313/writing/release_the_rhythm/</guid>
+      <description>Will you listen to your pleasure?</description>
+    </item>
+    <item>
+      <title>One Day</title>
+      <link>//localhost:1313/writing/one_day/</link>
+      <pubDate>Wed, 21 May 2025 13:19:50 -0400</pubDate>
+      <guid>//localhost:1313/writing/one_day/</guid>
+      <description>Why have hope when clarity comes in clear</description>
+    </item>
+    <item>
+      <title>Roses</title>
+      <link>//localhost:1313/writing/roses/</link>
+      <pubDate>Mon, 19 May 2025 11:15:50 -0400</pubDate>
+      <guid>//localhost:1313/writing/roses/</guid>
+      <description>Hold the rose, sentenced to bleed</description>
+    </item>
+    <item>
+      <title>The Sandstorm</title>
+      <link>//localhost:1313/writing/sandstorm/</link>
+      <pubDate>Fri, 16 May 2025 04:19:50 -0400</pubDate>
+      <guid>//localhost:1313/writing/sandstorm/</guid>
+      <description>There is no love without grief</description>
+    </item>
+    <item>
+      <title>30 tips for 30 years</title>
+      <link>//localhost:1313/writing/30_tips_for_30_years/</link>
+      <pubDate>Sun, 16 Feb 2025 04:14:30 -0400</pubDate>
+      <guid>//localhost:1313/writing/30_tips_for_30_years/</guid>
+      <description>I wrote this for my wife, I hope it resonates</description>
+    </item>
+    <item>
+      <title>Meditation 8 Jan 2025</title>
+      <link>//localhost:1313/writing/meditation_20250108/</link>
+      <pubDate>Sun, 16 Feb 2025 04:14:30 -0400</pubDate>
+      <guid>//localhost:1313/writing/meditation_20250108/</guid>
+      <description>Theme: Nature</description>
+    </item>
+    <item>
+      <title>Valentines Day 2025</title>
+      <link>//localhost:1313/writing/poems/</link>
+      <pubDate>Fri, 14 Feb 2025 04:18:30 -0400</pubDate>
+      <guid>//localhost:1313/writing/poems/</guid>
+      <description>Three poems about love</description>
+    </item>
   </channel>
 </rss>

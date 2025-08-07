@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.148.2">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="//localhost:1313/docker-course-agenda/" />
+  <link rel="canonical" href="//localhost:1313/docker-course-agenda/" /><link
+    rel="alternate"
+    type="application/atom+xml"
+    href="//localhost:1313/index.xml"
+    title="Musings of Fr3d"
+  />
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/\/localhost:1313\/"
+      },
+      "articleSection" : "",
+      "name" : "Docker Course",
+      "headline" : "Docker Course",
+      "description" : "Basic Fundamentals of Docker",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-05-22 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-05-22 00:00:00 \u002b0000 UTC",
+      "url" : "\/\/localhost:1313\/docker-course-agenda\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>Docker Course</title>
+  <meta property="og:title" content="Docker Course" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content="Basic Fundamentals of Docker"
+  />
+  <meta
+    name="description"
+    content="Basic Fundamentals of Docker"
+  />
+  <meta property="og:locale" content="en" /><meta property="og:image" content="" />
+  
+  
+  <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:0 1em;color:#57606a;border-left:.25em solid #d0d7de}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:#f6f8fa;border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:inherit;border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.post-content img{max-width:100%;display:block;margin-right:auto;margin-top:6px}.post-content .post-gallery{display:flex;flex-wrap:wrap;gap:6px}.post-content .post-gallery img{margin-right:auto;margin-top:auto;width:calc(50% - 3px)}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}.post-content .post-gallery img{width:100%}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+  <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+   <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Musings of Fr3d">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade"
+    rel="stylesheet"
+  />
+  
+  
+
+  
+  
+</head>
+
+
+<body>
+  <article class="post English" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >Fr3d</a
+    >
+  </div>
+  <div class="header-subtitle"></div>
+</header>
+<div class="row end-md header-items">
+  
+  <div class="header-item">
+    <a href="https://blog.fr3d.dev" target="_blank">About Me</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="https://github.com/alexrf45" target="_blank">Github</a>
+  </div>
+  
+</div>
+<div class="row">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Docker Course</h1>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <h1 id="section-1-docker-fundamentals">Section 1: Docker Fundamentals</h1>
+<h2 id="what-is-docker">What is Docker?</h2>
+<ul>
+<li>Docker is an open platform for developing, shipping, and running applications using what&rsquo;s called containers and container images.</li>
+<li>Docker operates through the use of Linux Capabilities</li>
+<li><a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">man pages Linux capabilities</a></li>
+<li><a href="https://www.schutzwerk.com/en/blog/linux-container-capabilities/">Linux Capabilities Explained</a>
+<ul>
+<li>Linux divides the privileges traditionally associated with superuser into distinct units, known as <em>capabilities</em>, which can be independently enabled and
+disabled. Capabilities are a per-thread attribute.
+<ul>
+<li>Docker uses Linux capabilities &ldquo;under the hood&rdquo; to build,run and operate containers
+<ul>
+<li>Capabilities can be set at build time , run time and modified as needed</li>
+<li>Traditionally containers use the <strong>CAP_SETFCAP</strong> flag at minimum to map a new user namespace for the container
+<ul>
+<li>User namespaces isolate security-related identifiers and
+attributes, in particular, user IDs and group IDs</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="docker-components">Docker Components</h2>
+<ol>
+<li>Docker Daemon: Listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.
+<ol>
+<li>Listens remotely by default on port 2375 (unencrypted) or 2376 (encrypted)</li>
+</ol>
+</li>
+<li>Docker Client: The docker cli uses the Docker API to communicate with the Docker Daemon and issue commands such as <code>run</code>, <code>build</code> <code>inspect</code>
+<ol>
+<li>Package manager, binary or even container image for automated pipelines</li>
+</ol>
+</li>
+<li>Docker Registry: A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker looks for images on Docker Hub by default. You can even run your own private registry.
+<ol>
+<li>Private registry listens on port 5000 by default</li>
+<li>Public registries are somewhat secure</li>
+<li>Registries can be hosted on prem or cloud, based off a pipeline</li>
+</ol>
+</li>
+</ol>
+<h1 id="section-2-docker-use-cases">Section 2: Docker Use Cases</h1>
+<ol>
+<li>&ldquo;Dependency Hell&rdquo; - Development Environment</li>
+<li>Repeatable environment/configuration pipeline</li>
+<li>Micro-services architecture</li>
+<li>Software Testing</li>
+</ol>
+<h1 id="section-3-docker-install">Section 3: Docker Install</h1>
+<p>Ref: <a href="https://github.com/docker/docker-install">https://github.com/docker/docker-install</a></p>
+<h2 id="method-1-docker-install-script-recommended">Method #1: Docker Install Script (Recommended)</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/docker/docker-install.git &amp;&amp; cd docker-install.git
+</span></span><span style="display:flex;"><span>&amp;&amp; sh get-docker.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>or YOLO
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>curl -fsSL https://get.docker.com -o get-docker.sh
+</span></span><span style="display:flex;"><span>sh get-docker.sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo usermod -aG docker $USER
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo docker run hello-world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>log out and log back in
+</span></span></code></pre></div><ul>
+<li>This method also installs docker-buildx and docker-compose!!</li>
+</ul>
+<h2 id="method-2-package-manager">Method #2: Package Manager</h2>
+<p>** all of this can be in a simple shell script and ran as <code>chmod +x docker.sh &amp;&amp; ./docker.sh</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="font-weight:bold">for</span> pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; <span style="font-weight:bold">do</span> sudo apt-get remove $pkg; <span style="font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt-get install ca-certificates curl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo install -m 0755 -d /etc/apt/keyrings
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo chmod a+r /etc/apt/keyrings/docker.asc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># Add the repository to Apt sources:</span>
+</span></span><span style="display:flex;"><span>echo <span style="font-weight:bold;font-style:italic">\
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic"></span>  <span style="font-style:italic">&#34;deb [arch=</span><span style="font-weight:bold">$(</span>dpkg --print-architecture<span style="font-weight:bold">)</span><span style="font-style:italic"> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+</span></span></span><span style="display:flex;"><span><span style="font-style:italic">  </span><span style="font-weight:bold">$(</span>. /etc/os-release &amp;&amp; echo <span style="font-style:italic">&#34;</span>$VERSION_CODENAME<span style="font-style:italic">&#34;</span><span style="font-weight:bold">)</span><span style="font-style:italic"> stable&#34;</span> | <span style="font-weight:bold;font-style:italic">\
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic"></span>  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo docker run hello-world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo usermod -aG docker $USER
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>log out and log back in
+</span></span></code></pre></div><ul>
+<li>This method tends to install a stable and older version of Docker. Reliable for most use cases</li>
+</ul>
+<h1 id="section-4-docker-commands">Section 4: Docker Commands</h1>
+<h2 id="docker-pull"><code>docker pull</code></h2>
+<h3 id="pull-specified-image-tag">Pull specified image tag</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull ubuntu:24.10 debian:latest
+</span></span></code></pre></div><h3 id="pull-latest-image">Pull latest Image</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull apline:latest
+</span></span></code></pre></div><h2 id="docker-image"><code>docker image</code></h2>
+<h3 id="example-1">Example 1</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span> ~  $ docker image ls
+</span></span><span style="display:flex;"><span>REPOSITORY                    TAG            IMAGE ID       CREATED        SIZE
+</span></span><span style="display:flex;"><span>fonalex45/aegis               latest         6ec09f33a9a5   42 hours ago   5.91GB
+</span></span><span style="display:flex;"><span>fonalex45/aegis               dev            01b01e89b1f2   3 days ago     5.91GB
+</span></span><span style="display:flex;"><span>bitnami/argo-cd               latest         8c73e989d55c   2 weeks ago    451MB
+</span></span><span style="display:flex;"><span>rancher/k3s-upgrade           v1.29.1-k3s2   92ddfbef6560   2 weeks ago    77.9MB
+</span></span><span style="display:flex;"><span>aegis                         local          4e8467eb9d10   3 weeks ago    5.97GB
+</span></span><span style="display:flex;"><span>ubuntu                        latest         bf3dc08bfed0   6 weeks ago    76.2MB
+</span></span><span style="display:flex;"><span>docker-slim-empty-image       latest         42790182bcac   7 weeks ago     0B
+</span></span><span style="display:flex;"><span>httpd                         2.4            fa0099f1c09d   2 months ago    148MB
+</span></span><span style="display:flex;"><span>cgr.dev/chainguard/postgres   latest         d788f19fbeb7   3 months ago    105MB
+</span></span><span style="display:flex;"><span>neo4j                         4.4            dd60f1e20710   3 months ago    497MB
+</span></span><span style="display:flex;"><span>cgr.dev/chainguard/kubectl    latest         2bfac86afe3e   3 months ago   50.4MB
+</span></span><span style="display:flex;"><span>specterops/bloodhound         latest         c8091c2cc951   3 months ago   93.4MB
+</span></span><span style="display:flex;"><span>debian                        latest         52f537fe0336   3 months ago    116MB
+</span></span><span style="display:flex;"><span>quay.io/derailed/k9s          latest         8620d34236ff   5 months ago    152MB
+</span></span><span style="display:flex;"><span>pandoc/extra                  latest         e8aaded5ca33   14 months ago   915MB
+</span></span><span style="display:flex;"><span>lazyteam/lazydocker           latest         6518a6686572   2 years ago    55.7MB
+</span></span><span style="display:flex;"><span>postgres                      13.2           82b8b88e26bc   3 years ago     314MB
+</span></span><span style="display:flex;"><span>plass/mdtopdf                 latest         3268bc5faa8a   3 years ago    2.01GB
+</span></span></code></pre></div><h3 id="example-2">Example 2</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span> ~  $ docker image rm httpd:2.4
+</span></span><span style="display:flex;"><span>Untagged: httpd:2.4
+</span></span><span style="display:flex;"><span>Untagged: httpd@sha256:73b2e9e2861bcfe682b9a67d83433b6a6b36176459134aa25ec711058075fd47
+</span></span><span style="display:flex;"><span>Deleted: sha256:fa0099f1c09d7d1dc852123c9456a23436df95715812df3db8b960ef6609e288
+</span></span></code></pre></div><h3 id="example-3">Example 3</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span> ~  $ docker image rm 82b8b88e26bc
+</span></span><span style="display:flex;"><span>Untagged: postgres:13.2
+</span></span><span style="display:flex;"><span>Untagged: postgres@sha256:0eee5caa50478ef50b89062903a5b901eb818dfd577d2be6800a4735af75e53f
+</span></span><span style="display:flex;"><span>Deleted: sha256:82b8b88e26bcfa205a3fd81c9f0a1d84e1a6a8f5f2499f54668c17de94262148
+</span></span><span style="display:flex;"><span>Deleted: sha256:1f82b6b7009661837c5afc0f376951e856419664c28ba3ff90547dcdb222f5a6
+</span></span><span style="display:flex;"><span>Deleted: sha256:f7dc0c3e14a612a19609d59ad59abaffd5aece82b012a4057068ee315b29f7d3
+</span></span><span style="display:flex;"><span>Deleted: sha256:32be5cc3d9f966fb5558fa4cc804010571a78845f0f4c3d462cafc3799eaf308
+</span></span><span style="display:flex;"><span>Deleted: sha256:44b0a3b2c1de0bfca1c2ce99a58e7a253dc8ddd1214be90bdac745fa3a65d1b3
+</span></span><span style="display:flex;"><span>Deleted: sha256:be22136d0529fa512f9bc61bdff9eab156a91a4ce8d431921d2bba050d990354
+</span></span><span style="display:flex;"><span>Deleted: sha256:3c5f695312af6c3f1bace1548b69702a592e6d93e9d813bc2626e66639a8f109
+</span></span><span style="display:flex;"><span>Deleted: sha256:1ecc4ca56779d060ab771a0a97f95c55222c54e76315c7d3508b4cdb07d4b379
+</span></span><span style="display:flex;"><span>Deleted: sha256:c6aa7bd76d2439562106e364ed7afafeb3ef20cf11ccecf07dfb24f0fc5b57fe
+</span></span><span style="display:flex;"><span>Deleted: sha256:6334d51b3f6ca36aa1b9a3f47b11d4c817cc7d2ec57cfb374087ec4480d0cf8c
+</span></span><span style="display:flex;"><span>Deleted: sha256:f8dcd5511126bc0496eea80dfa84d284c439621b855427812b6ed58d0f5442eb
+</span></span><span style="display:flex;"><span>Deleted: sha256:ed6b2836a50984859ad41483f300ce89dd3f3e265a8257aec3cbf99fcfdbb908
+</span></span><span style="display:flex;"><span>Deleted: sha256:afac210c368ff0cd84946322a370af20274d14447a93b1b7818c2a960cb4e401
+</span></span><span style="display:flex;"><span>Deleted: sha256:e276aa5564e0172b85247e18a24ea0ffdeb2d60d718f3b96dcdc67e18a9711b2
+</span></span><span style="display:flex;"><span>Deleted: sha256:02c055ef67f5904019f43a41ea5f099996d8e7633749b6e606c400526b2c4b33
+</span></span></code></pre></div><h3 id="example-4">Example 4</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span> ~  $ docker image tag debian:latest debian:demo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ~  $ docker image ls | grep demo
+</span></span><span style="display:flex;"><span>debian            demo           52f537fe0336   3 months ago    116MB
+</span></span></code></pre></div><h2 id="docker-run"><code>docker run</code></h2>
+<h3 id="example-1-1">Example 1</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>docker run <span style="">\</span>
+</span></span><span style="display:flex;"><span>-it <span style="">\</span>
+</span></span><span style="display:flex;"><span>--rm <span style="">\</span>
+</span></span><span style="display:flex;"><span>-v `pwd`:/root/data <span style="">\</span>
+</span></span><span style="display:flex;"><span>--net=host <span style="">\</span>
+</span></span><span style="display:flex;"><span>ubuntu:24.10
+</span></span></code></pre></div><ul>
+<li><code>-it</code> - interactive terminal</li>
+<li><code>--rm</code> - removes container after exit</li>
+<li><code>--net=host</code> - uses host network versus Docker bridge</li>
+<li><code>-v</code>pwd<code>:/root/data</code></li>
+</ul>
+<h3 id="example-2-1">Example 2</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#prints user id of container which runs as root by default from within the container
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ~  $ docker run -it --rm debian:latest id
+</span></span><span style="display:flex;"><span>uid=0(root) gid=0(root) groups=0(root)
+</span></span></code></pre></div><h2 id="docker-build"><code>docker build</code></h2>
+<h3 id="example-1-2">Example 1</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~ $ mkdir Docker_Course &amp;&amp; cd Docker_Course
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Docker_Course  $  vim Dockerfile
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FROM ubuntu
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RUN apt-get update &amp;&amp; apt-get install curl wget git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CMD curl https://fr3d.dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># save and close the file</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># build the image</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Docker_Course  $  docker build -t demo:local .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Docker_Course  $ d run --rm demo:local &gt; index.html
+</span></span><span style="display:flex;"><span>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span></span><span style="display:flex;"><span>                                 Dload  Upload   Total   Spent    Left  Speed
+</span></span><span style="display:flex;"><span>100 10259  100 10259    0     0  84768      0 --:--:-- --:--:-- --:--:-- 85491
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Docker_Course  $ firefox index.html
+</span></span><span style="display:flex;"><span><span style="font-style:italic"># the html file will look crazy but this is a rough example of building and running a container</span>
+</span></span></code></pre></div><h2 id="docker-ps"><code>docker ps</code></h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ~  $ docker ps
+</span></span><span style="display:flex;"><span>CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ~  $ docker ps -la
+</span></span><span style="display:flex;"><span>CONTAINER ID   IMAGE           COMMAND      CREATED       STATUS    PORTS     NAMES
+</span></span><span style="display:flex;"><span>d069cae603e6   ubuntu:latest   <span style="font-style:italic">&#34;-it --rm&#34;</span>   5 weeks ago   Created             elegant_mclean
+</span></span></code></pre></div><h2 id="docker-network"><code>docker network</code></h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~  $ docker network ls
+</span></span><span style="display:flex;"><span>NETWORK ID     NAME      DRIVER    SCOPE
+</span></span><span style="display:flex;"><span>3736d73e9fbd   bridge    bridge    local
+</span></span><span style="display:flex;"><span>5c6cc76e16e9   host      host      local
+</span></span><span style="display:flex;"><span>d45ba4357b84   none      null      local
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ~  $ docker network create mynet
+</span></span><span style="display:flex;"><span> ea2958a08fb81f6bb6a8fa58c611d23b697b3d7896b66d021f115d87a6e23d22 - SHA256 SUM
+</span></span><span style="display:flex;"><span> ~  $ docker network inspect mynet --format <span style="font-style:italic">&#34;{{json .Options}}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ~  $ docker network ls
+</span></span><span style="display:flex;"><span> NETWORK ID     NAME      DRIVER    SCOPE
+</span></span><span style="display:flex;"><span>3736d73e9fbd   bridge    bridge    local
+</span></span><span style="display:flex;"><span>5c6cc76e16e9   host      host      local
+</span></span><span style="display:flex;"><span>ea2958a08fb8   mynet     bridge    local
+</span></span><span style="display:flex;"><span>d45ba4357b84   none      null      local<span style="font-weight:bold;font-style:italic">\
+</span></span></span><span style="display:flex;"><span><span style="font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span> ~  $ docker network ls | grep mynet
+</span></span><span style="display:flex;"><span>ea2958a08fb8   mynet     bridge    local
+</span></span></code></pre></div><h1 id="section-5-docker-demo">Section 5: Docker Demo</h1>
+<p>Ref: <a href="https://fr3d.dev/Nginx-TLS/">DevOps Demo #5: Nginx &amp; SSL/TLS with Docker (Updated)</a></p>
+<p>Have folks reference Demo as we move along to verify instructions/quality</p>
+<p>Take Home: <a href="https://fr3d.dev/dev-box/">DevOps Demo #2: Docker &amp; React Web App</a></p>
+<h1 id="section-6-conclusion">Section 6: Conclusion</h1>
+<p>This is a basic overview of Docker and relevant use cases</p>
+<p>Topics for further practice:</p>
+<ul>
+<li>Building Docker images from tarbells and exporting containers/images to tarbells</li>
+<li>Docker compose</li>
+<li></li>
+</ul>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const disqus = document.getElementById('disqus_thread');
+    if (!disqus) {
+      return;
+    }
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        const iframes = disqus.getElementsByTagName('iframe');
+        if (iframes.length > 1) {
+          const commentsIframe = iframes[1];
+          while (disqus.firstChild) {
+            disqus.removeChild(disqus.firstChild);
+          }
+          disqus.appendChild(commentsIframe);
+          observer.disconnect();
+        }
+      });
+    });
+    observer.observe(disqus, { childList: true, subtree: true });
+  });
+</script>
+
+  
+
+</body>
+
+</html>

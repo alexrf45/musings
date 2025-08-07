@@ -1,125 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Musings of Fr3d – Homelab, Proxmox, Virtualization, Terraform</title>
+    <title>Homelab, Proxmox, Virtualization, Terraform on Musings of Fr3d</title>
     <link>//localhost:1313/tags/homelab-proxmox-virtualization-terraform/</link>
     <description>Recent content in Homelab, Proxmox, Virtualization, Terraform on Musings of Fr3d</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <generator>Hugo</generator>
+    <language>en</language>
     <lastBuildDate>Tue, 13 Feb 2024 00:30:00 -0400</lastBuildDate>
-    
-	  <atom:link href="//localhost:1313/tags/homelab-proxmox-virtualization-terraform/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <atom:link href="//localhost:1313/tags/homelab-proxmox-virtualization-terraform/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Home Lab #1: Proxmox Post Install</title>
       <link>//localhost:1313/home-lab-1/</link>
       <pubDate>Tue, 13 Feb 2024 00:30:00 -0400</pubDate>
-      
       <guid>//localhost:1313/home-lab-1/</guid>
-      <description>
-        
-        
-        &lt;h2&gt;Prerequisites&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;prerequisites&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#prerequisites&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200&#34;&gt;
-  &lt;div class=&#34;ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2&#34;&gt;&lt;div class=&#34;hx-select-none hx-text-xl&#34; style=&#34;font-family: &#39;Apple Color Emoji&#39;, &#39;Segoe UI Emoji&#39;, &#39;Segoe UI Symbol&#39;;&#34;&gt;ℹ️&lt;/div&gt;&lt;/div&gt;
-
-  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;ul&gt;
-&lt;li&gt;Familarity with Linux, Proxmox and Terraform&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h2&gt;Intro&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;intro&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#intro&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Hypervisors are a core part of building a home lab. Whether it is Proxmox, Hyper-V or even just VirtualBox, a hypervisor gives us a large arena to experiment and test our skills.&lt;/p&gt;
-&lt;p&gt;I use Proxmox at home and currently run a two node cluster, one on an old desktop and one on a NUC.&lt;/p&gt;
-&lt;p&gt;Ref: &lt;a href=&#34;https://www.amazon.com/dp/B0C89TQ1YF?psc=1&amp;amp;ref=ppx_yo2ov_dt_b_product_details&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Beelink S12&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ve installed proxmox countless times and I find myself running the same commands over and over again. I will eventually automate more of the hardware portion but after getting Proxmox installed, I make the following configuration changes to hit the ground running:&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;h3&gt;Add a Admin user for the GUI&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;add-a-admin-user-for-the-gui&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#add-a-admin-user-for-the-gui&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-
-&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pveum user add admin@pve -comment &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;admin user&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pveum passwd admin@pve
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pveum group add admin -comment &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;System Administrators&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pveum acl modify / -group admin -role Administrator
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pveum user modify admin@pve -group admin&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
-  &lt;button
-    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
-    title=&#34;Copy code&#34;
-  &gt;
-    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
-    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;h3&gt;Add sudo user on the Debian Host&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;add-sudo-user-on-the-debian-host&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#add-sudo-user-on-the-debian-host&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-
-&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adduser admin
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;usermod -aG sudo admin
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;passwd admin &lt;span style=&#34;color:#75715e&#34;&gt;#change the admin account password&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
-  &lt;button
-    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
-    title=&#34;Copy code&#34;
-  &gt;
-    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
-    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;h3&gt;Generate Proxmox API Token&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;generate-proxmox-api-token&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#generate-proxmox-api-token&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
-
-&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sudo pveum role add TerraformProv &lt;span style=&#34;color:#ae81ff&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;    -privs &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;Datastore.AllocateSpace Datastore.Audit
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;              Pool.Allocate Sys.Audit Sys.Console
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;              Sys.Modify VM.Allocate VM.Audit
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;              VM.Clone VM.Config.CDROM VM.Config.Cloudinit
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;              VM.Config.CPU VM.Config.Disk VM.Config.HWType
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;              VM.Config.Memory VM.Config.Network VM.Config.Options
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;              VM.Migrate VM.Monitor VM.PowerMgmt SDN.Use SDN.Allocate SDN.Audit
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sudo pveum user add tf-user@pve
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sudo pveum aclmod / -user tf-user@pve -role TerraformProv
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sudo pveum user token add tf-user@pve terraform-provisioner --privsep &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Make sure to copy the API token displayed in the prompt and store it in a secure place.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#It&amp;#39;s required to authenticate with the proxmox API.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Token needed in provider config&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#home-1 = xxxxxxxx-xxxxxxx-xxxxxx-xxxxxxxx&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sudo pveum aclmod / -token &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tf-user@pve!terraform-provisioner&amp;#39;&lt;/span&gt; -role TerraformProv&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
-  &lt;button
-    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
-    title=&#34;Copy code&#34;
-  &gt;
-    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
-    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;h2&gt;Summary&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;summary&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#summary&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;These steps can help anyone get their Proxmox journey started. On a side note , I did not show how to secure SSH access for Proxmox. That is your homework!&lt;/p&gt;
-
-      </description>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;Hypervisors are a core part of building a home lab. Whether it is Proxmox, Hyper-V or even just VirtualBox, a hypervisor gives us a large arena to experiment and test our skills.&lt;/p&gt;&#xA;&lt;p&gt;I use Proxmox at home and currently run a two node cluster, one on an old desktop and one on a NUC.&lt;/p&gt;&#xA;&lt;p&gt;Ref: &lt;a href=&#34;https://www.amazon.com/dp/B0C89TQ1YF?psc=1&amp;amp;ref=ppx_yo2ov_dt_b_product_details&#34;&gt;Beelink S12&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve installed proxmox countless times and I find myself running the same commands over and over again. I will eventually automate more of the hardware portion but after getting Proxmox installed, I make the following configuration changes to hit the ground running:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

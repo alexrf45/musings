@@ -8,7 +8,7 @@ server {
         index  index.html index.xml;
     }
 
-    error_page  404              /usr/share/nginx/html/404.html;
+    error_page  404        /usr/share/nginx/html/404.html;
 
     # redirect server error pages to the static page /50x.html
     #

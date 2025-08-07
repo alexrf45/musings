@@ -1,19 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Musings of Fr3d – </title>
+    <title>Musings of Fr3d</title>
     <link>//localhost:1313/home_lab/</link>
     <description>Recent content on Musings of Fr3d</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 16 Feb 2025 05:00:57 -0500</lastBuildDate>
-    
-	  <atom:link href="//localhost:1313/home_lab/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 13 Jan 2025 00:30:00 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/home_lab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hardware</title>
+      <link>//localhost:1313/home_lab/hardware/</link>
+      <pubDate>Mon, 13 Jan 2025 00:30:00 -0400</pubDate>
+      <guid>//localhost:1313/home_lab/hardware/</guid>
+      <description>&lt;p&gt;Over the course of 2024, I transformed my home lab into a&#xA;form factor design that could all fit on my desk.&lt;/p&gt;&#xA;&lt;h2 id=&#34;current-specs&#34;&gt;Current Specs&lt;/h2&gt;&#xA;&lt;p&gt;Proxmox Hosts:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;(4) &lt;a href=&#34;https://www.amazon.com/dp/B0C89TQ1YF?psc=1&amp;amp;ref=ppx_yo2ov_dt_b_product_details&#34;&gt;Beelink S12&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;(1) &lt;a href=&#34;https://a.co/d/gdsqcIS&#34;&gt;Beelink S13&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Home Lab #1: Proxmox Post Install</title>
+      <link>//localhost:1313/home-lab-1/</link>
+      <pubDate>Tue, 13 Feb 2024 00:30:00 -0400</pubDate>
+      <guid>//localhost:1313/home-lab-1/</guid>
+      <description>&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;&#xA;&lt;p&gt;Hypervisors are a core part of building a home lab. Whether it is Proxmox, Hyper-V or even just VirtualBox, a hypervisor gives us a large arena to experiment and test our skills.&lt;/p&gt;&#xA;&lt;p&gt;I use Proxmox at home and currently run a two node cluster, one on an old desktop and one on a NUC.&lt;/p&gt;&#xA;&lt;p&gt;Ref: &lt;a href=&#34;https://www.amazon.com/dp/B0C89TQ1YF?psc=1&amp;amp;ref=ppx_yo2ov_dt_b_product_details&#34;&gt;Beelink S12&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ve installed proxmox countless times and I find myself running the same commands over and over again. I will eventually automate more of the hardware portion but after getting Proxmox installed, I make the following configuration changes to hit the ground running:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DevOps Demo 3 - Dotfiles Git Repo</title>
+      <link>//localhost:1313/home_lab/dotfiles_git/</link>
+      <pubDate>Mon, 22 May 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/home_lab/dotfiles_git/</guid>
+      <description>A clean way to maintain important config files for your workstation.</description>
+    </item>
+    <item>
+      <title>Docker Course</title>
+      <link>//localhost:1313/home_lab/docker-course-agenda/</link>
+      <pubDate>Mon, 22 May 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/home_lab/docker-course-agenda/</guid>
+      <description>Basic Fundamentals of Docker</description>
+    </item>
   </channel>
 </rss>
