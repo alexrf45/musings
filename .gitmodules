@@ -4,3 +4,6 @@
 [submodule "app/themes/yinyang"]
 	path = app/themes/yinyang
 	url = https://github.com/joway/hugo-theme-yinyang.git
+[submodule "app/themes/black-and-light"]
+	path = app/themes/black-and-light
+	url = https://github.com/davidhampgonsalves/hugo-black-and-light-theme.git
