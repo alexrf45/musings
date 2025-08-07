@@ -1,9 +1,6 @@
 # Use specific version tags for reproducible builds
 FROM alpine:3.19 AS builder
 
-RUN addgroup -g 1000 -S hugo && \
-  adduser -S -D -H -u 1000 -h /tmp/app -s /sbin/nologin -G hugo -g hugo hugo
-
 RUN apk update && \
   apk add --no-cache \
   hugo=0.140.0 \
@@ -12,30 +9,19 @@ RUN apk update && \
 
 WORKDIR /tmp/app
 
-RUN chown -R hugo:hugo /tmp/app
-
-USER hugo
-
-COPY --chown=hugo:hugo app .
-
 RUN hugo --minify --gc --cleanDestinationDir
 
 FROM nginx:1.29-alpine-slim
 
 RUN apk update && \
-  apk upgrade && \
   apk add --no-cache \
   ca-certificates \
   tzdata && \
   rm -rf /var/cache/apk/* && \
-  rm -rf /usr/share/nginx/html/* && \
-  mkdir -p /var/cache/nginx/client_temp && \
-  mkdir -p /var/cache/nginx/proxy_temp && \
-  mkdir -p /var/cache/nginx/fastcgi_temp && \
-  mkdir -p /var/cache/nginx/uwsgi_temp && \
-  mkdir -p /var/cache/nginx/scgi_temp
+  rm -rf /usr/share/nginx/html/*
 
 COPY --chown=root:root ./nginx/nginx-prod.conf /etc/nginx/nginx.conf
+
 COPY --chown=root:root ./nginx/blog /etc/nginx/conf.d/default.conf
 
 RUN chmod 644 /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
@@ -44,6 +30,7 @@ RUN addgroup -g 1000 -S nginx-app && \
   adduser -S -D -H -u 1000 -h /var/cache/nginx -s /sbin/nologin -G nginx-app -g nginx-app nginx-app
 
 WORKDIR /usr/share/nginx/html
+
 COPY --from=builder --chown=nginx-app:nginx-app /tmp/app/public .
 
 RUN find /usr/share/nginx/html -type f -exec chmod 644 {} \; && \

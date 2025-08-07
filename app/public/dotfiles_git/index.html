@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
+<html lang="en">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="generator" content="Hugo 0.148.2">
@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="" />
-  <meta property="og:url" content="//localhost:1313/" />
-  <link rel="canonical" href="//localhost:1313/" /><link
+  <meta property="og:url" content="//localhost:1313/dotfiles_git/" />
+  <link rel="canonical" href="//localhost:1313/dotfiles_git/" /><link
     rel="alternate"
     type="application/atom+xml"
     href="//localhost:1313/index.xml"
@@ -24,27 +24,33 @@
            "@id": "\/\/localhost:1313\/"
       },
       "articleSection" : "",
-      "name" : "Musings of Fr3d",
-      "headline" : "Musings of Fr3d",
-      "description" : "",
+      "name" : "DevOps Demo 3 - Dotfiles Git Repo",
+      "headline" : "DevOps Demo 3 - Dotfiles Git Repo",
+      "description" : "A clean way to maintain important config files for your workstation.",
       "inLanguage" : "en-US",
       "author" : "",
       "creator" : "",
       "publisher": "",
       "accountablePerson" : "",
       "copyrightHolder" : "",
-      "copyrightYear" : "0001",
-      "datePublished": "0001-01-01 00:00:00 \u002b0000 UTC",
-      "dateModified" : "0001-01-01 00:00:00 \u002b0000 UTC",
-      "url" : "\/\/localhost:1313\/",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-05-22 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-05-22 00:00:00 \u002b0000 UTC",
+      "url" : "\/\/localhost:1313\/dotfiles_git\/",
       "keywords" : [  ]
   }
 </script>
-<title>Musings of Fr3d</title>
-  <meta property="og:title" content="Musings of Fr3d" />
-  <meta property="og:type" content="website" />
-  <meta property="og:description" content="" />
-  <meta name="description" content="" />
+<title>DevOps Demo 3 - Dotfiles Git Repo</title>
+  <meta property="og:title" content="DevOps Demo 3 - Dotfiles Git Repo" />
+  <meta property="og:type" content="article" />
+  <meta
+    property="og:description"
+    content="A clean way to maintain important config files for your workstation."
+  />
+  <meta
+    name="description"
+    content="A clean way to maintain important config files for your workstation."
+  />
   <meta property="og:locale" content="en" /><meta property="og:image" content="" />
   
   
@@ -69,10 +75,11 @@
 
 
 <body>
-  <article class="posts">
+  <article class="post English" id="article">
     <div class="row">
       <div class="col-xs-12">
-        
+        <div class="site-header">
+          
 <header>
   <div class="header-title">
     <a href="/"
@@ -97,9 +104,72 @@
 </div>
 <div class="header-line"></div>
 
-        <div id="posts-list">
-          
         </div>
+        <header class="post-header">
+          <h1 class="post-title">DevOps Demo 3 - Dotfiles Git Repo</h1>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <h1 id="summary">Summary</h1>
+<p>Tired of manually copying config files to your desktop or rewriting them everytime a new VM or machine is set up?</p>
+<p>There is easy way to back up your dotfiles and other important config: Git!</p>
+<p>Before we begin:</p>
+<blockquote>
+<p>[!IMPORTANT]
+Make sure to set up an empty public repo named dotfiles,
+ensure a README is created and credentials for git access are set up (if cloning via ssh)</p></blockquote>
+<blockquote>
+<p>[!WARNING]
+DO NOT STORE API KEYS &amp; OTHER SENSITIVE CREDENTIALS IN YOUR DOTFILES!</p></blockquote>
+<h1 id="setup">Setup</h1>
+<p>Below are some quick steps to get it set up:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic">#this prevents you from commiting this directory to the repo creating a weird loop</span>
+</span></span><span style="display:flex;"><span>echo <span style="font-style:italic">&#34;.cfg&#34;</span> &gt;&gt; .gitignore
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic">#clones the repo to the .cfg directory</span>
+</span></span><span style="display:flex;"><span>git clone --bare git@github.com:ORG/dotfiles.git $HOME/.cfg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic">#store this alias in your shell rc or alias file</span>
+</span></span><span style="display:flex;"><span>alias dev=<span style="font-style:italic">&#39;/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-style:italic">#cleans up your prompt so you only see untracked files when you explicitly ask for them</span>
+</span></span><span style="display:flex;"><span>dev config --local status.showUntrackedFiles no
+</span></span></code></pre></div><p>A few notes on the set up above:</p>
+<ul>
+<li>
+<p>Refresh your shell after adding the alias:
+Example: <code>echo 'alias dev='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'' &gt;&gt; .bashrc OR .zshrc &amp;&amp; . ~/.bashrc or . ~/.zshrc</code></p>
+</li>
+<li>
+<p>Adding files to your repo goes as follows:
+Example: <code>dev add FILE</code></p>
+</li>
+<li>
+<p>Commit Files:
+Example: <code>dev commit -a</code></p>
+</li>
+<li>
+<p>Push to repo:
+Example: <code>dev push</code></p>
+</li>
+<li>
+<p>Ensure the remote origin is configured to point to the dotfiles repo before the first push.</p>
+</li>
+</ul>
+<p>Here is a link to my public dotfiles for reference. <a href="https://github.com/alexrf45/dotfiles">dotfiles</a></p>
+<p>Feel free to explore and see what works for you. Until next time, stay curious my friends!</p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
 
         <div class="site-footer">
   
@@ -134,6 +204,8 @@
     observer.observe(disqus, { childList: true, subtree: true });
   });
 </script>
+
+  
 
 </body>
 
