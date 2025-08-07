@@ -1,0 +1,20 @@
+#baseurl = "https://www.example.com/"
+title = "Musings"
+author = "Sean Fontaine"
+canonifyurls = true
+languagecode = "en"
+theme = "black-and-light"
+
+pygmentsstyle = "bw"
+pygmentscodefences = true
+
+[params]
+sitename = "Musings"
+disableWebFonts = false
+
+[[menu.main]]
+name = "Spotify"
+url = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi?si=b47ad360d7284e8b"
+[[menu.main]]
+name = "Projects"
+url = "https://github.com/alexrf45"
