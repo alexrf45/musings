@@ -12,7 +12,6 @@ keywords:
   - healing
 ---
 
-```text
 Step out of those clothes and into your dirty thoughts.
 
 Beg from the entrance until I touch your beating heart.
@@ -32,5 +31,3 @@ The only decision is a mission to please.
 
 Will you finish on your knees or surrender to the length...
 beneath the stars, our bodies, in sync.
-
-```
