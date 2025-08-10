@@ -13,7 +13,7 @@ keywords:
   - purpose
 ---
 
-Live and breath, rhythm and speed, dashing further, no caution, no heed.
+Live and breathe, rhythm and speed, dashing further, no caution, no heed.
 
 Desire the course, chart the path, live in the moment, forget the past.
 
