@@ -10,8 +10,6 @@ tags:
   - fantasy
 ---
 
-# The Last Keeper
-
 Snow caps peer over the horizon, the expanse of clouds mark the realm
 of the scared ones. (Nobuyuki) Kenshin steps into the field, a daily ritual of
 reverance for the land. The dew is faint at dawn, each droplet a familar friend.
