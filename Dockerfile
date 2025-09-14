@@ -2,7 +2,8 @@
 FROM alpine:3.22 AS builder
 
 RUN apk update && \
-  apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo \
+  apk add --no-cache \
+  --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo \
   ca-certificates && \
   rm -rf /var/cache/apk/*
 
