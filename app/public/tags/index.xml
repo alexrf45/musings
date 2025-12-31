@@ -6,6 +6,35 @@
     <description>Recent content in Tags on Musings</description>
     <generator>Hugo</generator>
     <language>en</language>
+    <lastBuildDate>Sun, 14 Sep 2025 04:15:00 -0400</lastBuildDate>
     <atom:link href="//localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Draft</title>
+      <link>//localhost:1313/tags/draft/</link>
+      <pubDate>Sun, 14 Sep 2025 04:15:00 -0400</pubDate>
+      <guid>//localhost:1313/tags/draft/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fantasy</title>
+      <link>//localhost:1313/tags/fantasy/</link>
+      <pubDate>Sun, 14 Sep 2025 04:15:00 -0400</pubDate>
+      <guid>//localhost:1313/tags/fantasy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Short-Story</title>
+      <link>//localhost:1313/tags/short-story/</link>
+      <pubDate>Sun, 14 Sep 2025 04:15:00 -0400</pubDate>
+      <guid>//localhost:1313/tags/short-story/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Writing</title>
+      <link>//localhost:1313/tags/writing/</link>
+      <pubDate>Sun, 14 Sep 2025 04:15:00 -0400</pubDate>
+      <guid>//localhost:1313/tags/writing/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
