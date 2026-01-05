@@ -1,0 +1,14 @@
+session_name: Writing
+windows:
+  - window_name: repo
+    layout: tiled
+    panes:
+      - cd ~/musings/ && v .
+  - window_name: fr3d (notes)
+    layout: tiled
+    panes:
+      - cd ~/notes/fr3d/
+  - window_name: notes-vault
+    layout: tiled
+    panes:
+      - cd ~/notes/notes-vault/
