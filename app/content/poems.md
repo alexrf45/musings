@@ -41,7 +41,7 @@ understand it was not a heart to harm but a heart from which to learn and yearn 
 Scars remain but the lines tell a story of a path from which I retreat from more and more each day.
 There is much warmth, a desire that fires my thoughts into the depths of the universe where I find you.
 
-This is a letter to you, but a small token of gratitude ftor the soul that loves through time and space, the soul
+This is a letter to you, but a small token of gratitude for the soul that loves through time and space, the soul
 that I love and the soul that loves me with every fiber of existence.
 
 ## The power of Four
@@ -49,8 +49,8 @@ that I love and the soul that loves me with every fiber of existence.
 ---
 
 Nature dances and moves with a precision of numbers, delicate angles and intricate dimensions. I count the stars
-in the sky but always find there are never enough to add up to my love for you. Balance the division of logic and emotion
-and see that two halves become four quarters, four seasons of waxing and waning. I count each day as another moment in the
-tapestry of the universe, a love interwoven between our fingers and connected by our kiss.
+in the sky but always find there are never enough to add up to my love for you.
+Balance the division of logic and emotion and see that two halves become four quarters, four seasons of waxing and waning.
+I count each day as another moment in the tapestry of the universe, a love interwoven between our fingers and connected by our kiss.
 
 Four hands and four eyes. How beautiful!
