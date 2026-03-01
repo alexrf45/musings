@@ -4,11 +4,12 @@ windows:
     layout: tiled
     panes:
       - cd ~/musings/ && v .
+  - window_name: flask
+    layout: even-horizontal
+    panes:
+      - cd ~/musings && source .venv/bin/activate && APP_ENV=development flask run --debug --port 5000
+      - cd ~/musings && docker compose up db
   - window_name: fr3d (notes)
     layout: tiled
     panes:
       - cd ~/notes/fr3d/
-  - window_name: notes-vault
-    layout: tiled
-    panes:
-      - cd ~/notes/notes-vault/

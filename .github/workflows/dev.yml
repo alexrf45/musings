@@ -1,0 +1,48 @@
+name: Dev Build
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  docker:
+    name: Push Dev Image
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Notify Slack — starting
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#dev'
+          message: Starting musings dev build...
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: fonalex45/blog:dev
+
+      - name: Notify Slack — result
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          channel: '#dev'
+          message: Musings dev build complete
+        if: always()

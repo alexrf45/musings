@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} — Musings{% endblock %}
+
+{% block head %}
+  <!-- highlight.js — Gruvbox Dark theme -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-dark-medium.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-xl-7">
+
+    <!-- Back link -->
+    <a href="{{ url_for('posts.index') }}" class="text-muted small d-inline-flex align-items-center gap-1 mb-4">
+      <i class="bi bi-arrow-left"></i> All posts
+    </a>
+
+    <!-- Post header -->
+    <header class="mb-5">
+      <h1 class="fw-bold lh-sm mb-3">{{ post.title }}</h1>
+      <div class="post-meta d-flex align-items-center gap-3 flex-wrap">
+        <span>
+          <i class="bi bi-calendar3 me-1"></i>
+          <time datetime="{{ post.created_at.isoformat() }}">
+            {{ post.created_at.strftime('%B %-d, %Y') }}
+          </time>
+        </span>
+        {% if post.updated_at and post.updated_at != post.created_at %}
+          <span>
+            <i class="bi bi-pencil me-1"></i>
+            Updated {{ post.updated_at.strftime('%B %-d, %Y') }}
+          </span>
+        {% endif %}
+        {% if not post.published %}
+          <span class="badge bg-warning text-dark">Draft</span>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('posts.edit_post', slug=post.slug) }}"
+             class="btn btn-outline-secondary btn-sm ms-auto">
+            <i class="bi bi-pencil me-1"></i>Edit
+          </a>
+          <button type="button" class="btn btn-danger btn-sm"
+                  data-bs-toggle="modal" data-bs-target="#deletePostModal">
+            <i class="bi bi-trash me-1"></i>Delete
+          </button>
+        {% endif %}
+      </div>
+    </header>
+
+    <hr class="mb-5">
+
+    <!-- Post body -->
+    <div class="post-body mb-5">
+      {{ post.body | markdown | safe }}
+    </div>
+
+    <hr class="mb-5">
+
+    <!-- Comments section -->
+    <section id="comments">
+      <h2 class="h5 mb-4" style="font-family: system-ui, sans-serif; color: var(--gb-yellow-b);">
+        <i class="bi bi-chat-square-text me-2"></i>
+        {{ comments | length }} {{ 'Comment' if comments | length == 1 else 'Comments' }}
+      </h2>
+
+      {% if comments %}
+        <div class="d-flex flex-column gap-3 mb-5">
+          {% for comment in comments %}
+            <div class="comment-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <span class="comment-author">{{ comment.author_name }}</span>
+                  <span class="comment-date ms-2">
+                    &middot; {{ comment.created_at.strftime('%b %-d, %Y') }}
+                  </span>
+                </div>
+                {% if current_user.is_authenticated %}
+                  <form method="POST"
+                        action="{{ url_for('posts.delete_comment', comment_id=comment.id) }}"
+                        class="d-inline">
+                    {{ form.hidden_tag() }}
+                    <button type="submit" class="btn btn-danger btn-sm py-0 px-2"
+                            title="Delete comment"
+                            onclick="return confirm('Delete this comment?')">
+                      <i class="bi bi-x"></i>
+                    </button>
+                  </form>
+                {% endif %}
+              </div>
+              <p class="comment-body mt-2 mb-0">{{ comment.body }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted mb-5">No comments yet. Be the first!</p>
+      {% endif %}
+
+      <!-- Comment form -->
+      <div class="card p-4">
+        <h3 class="h6 mb-3" style="font-family: system-ui, sans-serif; color: var(--gb-fg2);">
+          Leave a comment
+        </h3>
+        <form method="POST" action="{{ url_for('posts.view_post', slug=post.slug) }}#comments"
+              novalidate>
+          {{ form.hidden_tag() }}
+
+          <div class="mb-3">
+            {{ form.author_name.label(class="form-label") }}
+            {{ form.author_name(class="form-control", placeholder="Your name") }}
+            {% for err in form.author_name.errors %}
+              <div class="text-danger small mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            {{ form.body.label(class="form-label") }}
+            {{ form.body(class="form-control", rows=4, placeholder="Write your comment…") }}
+            {% for err in form.body.errors %}
+              <div class="text-danger small mt-1">{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-send me-1"></i>Post comment
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Delete post modal -->
+{% if current_user.is_authenticated %}
+<div class="modal fade" id="deletePostModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete post?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>This will permanently delete <strong>{{ post.title }}</strong> and all its comments.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="POST" action="{{ url_for('posts.delete_post', slug=post.slug) }}">
+          {{ form.hidden_tag() }}
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash me-1"></i>Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("pre code").forEach(el => hljs.highlightElement(el));
+    });
+  </script>
+{% endblock %}

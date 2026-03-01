@@ -1,0 +1,412 @@
+/* ============================================================
+   Gruvbox Dark — Bootstrap 5 override
+   Palette: https://github.com/morhetz/gruvbox
+   ============================================================ */
+
+/* Google Fonts — JetBrains Mono for code */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ── Palette variables ─────────────────────────────────────── */
+:root {
+  --gb-bg-hard:      #1d2021;
+  --gb-bg:           #282828;
+  --gb-bg-soft:      #32302f;
+  --gb-bg1:          #3c3836;
+  --gb-bg2:          #504945;
+  --gb-bg3:          #665c54;
+  --gb-bg4:          #7c6f64;
+
+  --gb-fg:           #ebdbb2;
+  --gb-fg1:          #d5c4a1;
+  --gb-fg2:          #bdae93;
+  --gb-fg3:          #a89984;
+
+  --gb-red:          #cc241d;
+  --gb-red-b:        #fb4934;
+  --gb-green:        #98971a;
+  --gb-green-b:      #b8bb26;
+  --gb-yellow:       #d79921;
+  --gb-yellow-b:     #fabd2f;
+  --gb-blue:         #458588;
+  --gb-blue-b:       #83a598;
+  --gb-purple:       #b16286;
+  --gb-purple-b:     #d3869b;
+  --gb-aqua:         #689d6a;
+  --gb-aqua-b:       #8ec07c;
+  --gb-orange:       #d65d0e;
+  --gb-orange-b:     #fe8019;
+}
+
+/* ── Bootstrap CSS variable overrides ──────────────────────── */
+:root {
+  --bs-body-bg:            var(--gb-bg);
+  --bs-body-color:         var(--gb-fg);
+  --bs-emphasis-color:     var(--gb-fg);
+  --bs-secondary-color:    var(--gb-fg3);
+  --bs-border-color:       var(--gb-bg2);
+  --bs-link-color:         var(--gb-blue-b);
+  --bs-link-hover-color:   var(--gb-yellow-b);
+  --bs-code-color:         var(--gb-aqua-b);
+  --bs-heading-color:      var(--gb-yellow-b);
+  --bs-font-monospace:     "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+body {
+  background-color: var(--gb-bg-hard);
+  color: var(--gb-fg);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.75;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--gb-yellow-b);
+  font-weight: 600;
+}
+
+a {
+  color: var(--gb-blue-b);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+a:hover { color: var(--gb-yellow-b); }
+
+hr {
+  border-color: var(--gb-bg2);
+  opacity: 1;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.navbar {
+  background-color: var(--gb-bg-hard) !important;
+  border-bottom: 1px solid var(--gb-bg2);
+}
+.navbar-brand {
+  color: var(--gb-yellow-b) !important;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.navbar-brand:hover { color: var(--gb-yellow) !important; }
+.nav-link {
+  color: var(--gb-fg2) !important;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+}
+.nav-link:hover,
+.nav-link.active { color: var(--gb-yellow-b) !important; }
+.navbar-toggler {
+  border-color: var(--gb-bg2);
+}
+.navbar-toggler-icon {
+  filter: invert(85%) sepia(15%) saturate(300%) hue-rotate(10deg);
+}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.card {
+  background-color: var(--gb-bg);
+  border: 1px solid var(--gb-bg2);
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.card:hover {
+  border-color: var(--gb-yellow);
+  transform: translateY(-2px);
+}
+.card-title a {
+  color: var(--gb-yellow-b);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+.card-title a:hover { color: var(--gb-yellow); }
+.card-text { color: var(--gb-fg2); }
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--gb-yellow);
+  border-color: var(--gb-yellow);
+  color: var(--gb-bg-hard);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--gb-yellow-b);
+  border-color: var(--gb-yellow-b);
+  color: var(--gb-bg-hard);
+}
+.btn-outline-secondary {
+  border-color: var(--gb-bg2);
+  color: var(--gb-fg3);
+}
+.btn-outline-secondary:hover {
+  background-color: var(--gb-bg1);
+  border-color: var(--gb-bg3);
+  color: var(--gb-fg1);
+}
+.btn-danger {
+  background-color: var(--gb-red);
+  border-color: var(--gb-red);
+}
+.btn-danger:hover {
+  background-color: var(--gb-red-b);
+  border-color: var(--gb-red-b);
+}
+.btn-sm { font-size: 0.78rem; }
+
+/* ── Forms ──────────────────────────────────────────────────── */
+.form-control,
+.form-select {
+  background-color: var(--gb-bg1);
+  border-color: var(--gb-bg2);
+  color: var(--gb-fg);
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--gb-bg1);
+  border-color: var(--gb-yellow);
+  color: var(--gb-fg);
+  box-shadow: 0 0 0 0.25rem rgba(215, 153, 33, 0.2);
+}
+.form-control::placeholder { color: var(--gb-fg3); }
+.form-label {
+  color: var(--gb-fg2);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.form-check-input {
+  background-color: var(--gb-bg1);
+  border-color: var(--gb-bg2);
+}
+.form-check-input:checked {
+  background-color: var(--gb-yellow);
+  border-color: var(--gb-yellow);
+}
+
+/* ── Alerts / Flash ─────────────────────────────────────────── */
+.alert-success  { background-color: rgba(152,151,26,.15); border-color: var(--gb-green-b); color: var(--gb-green-b); }
+.alert-danger   { background-color: rgba(204,36,29,.15);  border-color: var(--gb-red-b);   color: var(--gb-red-b);   }
+.alert-warning  { background-color: rgba(215,153,33,.15); border-color: var(--gb-yellow-b);color: var(--gb-yellow-b);}
+.alert-info     { background-color: rgba(69,133,136,.15); border-color: var(--gb-blue-b);  color: var(--gb-blue-b);  }
+
+/* ── Post body typography ───────────────────────────────────── */
+.post-body { font-size: 1.08rem; }
+.post-body h1, .post-body h2, .post-body h3,
+.post-body h4, .post-body h5, .post-body h6 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.post-body p { margin-bottom: 1.25rem; }
+.post-body blockquote {
+  border-left: 4px solid var(--gb-yellow);
+  padding-left: 1.25rem;
+  color: var(--gb-fg2);
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+.post-body pre {
+  background-color: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+}
+.post-body code {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.9em;
+  color: var(--gb-aqua-b);
+  background-color: var(--gb-bg1);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+.post-body pre code {
+  color: var(--gb-fg);
+  background: transparent;
+  padding: 0;
+}
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.post-body th {
+  background-color: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  padding: 0.5rem 0.75rem;
+  color: var(--gb-yellow-b);
+  font-family: system-ui, -apple-system, sans-serif;
+  text-align: left;
+}
+.post-body td {
+  border: 1px solid var(--gb-bg2);
+  padding: 0.5rem 0.75rem;
+}
+
+/* ── Comments ───────────────────────────────────────────────── */
+.comment-card {
+  background-color: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+.comment-author {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  color: var(--gb-aqua-b);
+  font-size: 0.9rem;
+}
+.comment-date {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--gb-fg3);
+  font-size: 0.8rem;
+}
+.comment-body { color: var(--gb-fg1); font-size: 0.95rem; }
+
+/* ── Pagination ─────────────────────────────────────────────── */
+.page-link {
+  background-color: var(--gb-bg1);
+  border-color: var(--gb-bg2);
+  color: var(--gb-blue-b);
+}
+.page-link:hover {
+  background-color: var(--gb-bg2);
+  border-color: var(--gb-bg3);
+  color: var(--gb-yellow-b);
+}
+.page-item.active .page-link {
+  background-color: var(--gb-yellow);
+  border-color: var(--gb-yellow);
+  color: var(--gb-bg-hard);
+}
+.page-item.disabled .page-link {
+  background-color: var(--gb-bg);
+  border-color: var(--gb-bg2);
+  color: var(--gb-bg3);
+}
+
+/* ── Badge ──────────────────────────────────────────────────── */
+.badge.bg-secondary {
+  background-color: var(--gb-bg2) !important;
+  color: var(--gb-fg2);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+.badge.bg-success {
+  background-color: var(--gb-green) !important;
+  color: var(--gb-bg-hard);
+}
+.badge.bg-warning {
+  background-color: var(--gb-yellow) !important;
+  color: var(--gb-bg-hard);
+}
+
+/* ── Admin table ────────────────────────────────────────────── */
+.table {
+  color: var(--gb-fg);
+  border-color: var(--gb-bg2);
+}
+.table > :not(caption) > * > * {
+  background-color: transparent;
+  border-bottom-color: var(--gb-bg2);
+  color: var(--gb-fg);
+}
+.table-hover > tbody > tr:hover > * {
+  background-color: var(--gb-bg1);
+}
+.table thead th {
+  color: var(--gb-yellow-b);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--gb-bg2);
+  color: var(--gb-fg3);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+}
+
+/* ── Modal ──────────────────────────────────────────────────── */
+.modal-content {
+  background-color: var(--gb-bg1);
+  border-color: var(--gb-bg2);
+  color: var(--gb-fg);
+}
+.modal-header {
+  border-bottom-color: var(--gb-bg2);
+}
+.modal-footer {
+  border-top-color: var(--gb-bg2);
+}
+.btn-close { filter: invert(1); }
+
+/* ── EasyMDE / Markdown editor ──────────────────────────────── */
+.EasyMDEContainer .CodeMirror {
+  background-color: var(--gb-bg1);
+  color: var(--gb-fg);
+  border: 1px solid var(--gb-bg2);
+  border-top: none;
+  font-family: var(--bs-font-monospace);
+  font-size: 0.95rem;
+}
+.EasyMDEContainer .CodeMirror-scroll { min-height: 400px; }
+.EasyMDEContainer .CodeMirror-cursor { border-left-color: var(--gb-yellow-b); }
+.EasyMDEContainer .CodeMirror-selected { background: var(--gb-bg2) !important; }
+.EasyMDEContainer .editor-toolbar {
+  background-color: var(--gb-bg);
+  border: 1px solid var(--gb-bg2);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+.EasyMDEContainer .editor-toolbar button {
+  color: var(--gb-fg2) !important;
+}
+.EasyMDEContainer .editor-toolbar button:hover,
+.EasyMDEContainer .editor-toolbar button.active {
+  background-color: var(--gb-bg2);
+  border-color: var(--gb-bg2);
+}
+.EasyMDEContainer .editor-toolbar i.separator {
+  border-color: var(--gb-bg2);
+}
+.EasyMDEContainer .editor-preview {
+  background-color: var(--gb-bg);
+  color: var(--gb-fg);
+}
+.EasyMDEContainer .editor-preview-side {
+  background-color: var(--gb-bg);
+  border-left-color: var(--gb-bg2);
+}
+.EasyMDEContainer .editor-statusbar {
+  color: var(--gb-fg3);
+  background-color: var(--gb-bg);
+  border: 1px solid var(--gb-bg2);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+
+/* ── Misc utilities ─────────────────────────────────────────── */
+.text-muted { color: var(--gb-fg3) !important; }
+.post-meta {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  color: var(--gb-fg3);
+}
+.section-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--gb-yellow-b);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+/* custom scrollbar (webkit) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--gb-bg-hard); }
+::-webkit-scrollbar-thumb { background: var(--gb-bg2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gb-bg3); }

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}All Posts — Musings{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 mb-0">All Posts</h1>
+      <a href="{{ url_for('posts.create_post') }}" class="btn btn-primary btn-sm">
+        <i class="bi bi-pencil-square me-1"></i>New Post
+      </a>
+    </div>
+
+    {% if posts %}
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Created</th>
+              <th>Comments</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for post in posts %}
+              <tr>
+                <td>
+                  <a href="{{ url_for('posts.view_post', slug=post.slug) }}"
+                     class="fw-semibold" style="color: var(--gb-fg1);">
+                    {{ post.title }}
+                  </a>
+                </td>
+                <td class="post-meta">{{ post.created_at.strftime('%Y-%m-%d') }}</td>
+                <td class="post-meta">{{ post.comments.count() }}</td>
+                <td>
+                  {% if post.published %}
+                    <span class="badge bg-success">Published</span>
+                  {% else %}
+                    <span class="badge bg-warning text-dark">Draft</span>
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                  <a href="{{ url_for('posts.edit_post', slug=post.slug) }}"
+                     class="btn btn-outline-secondary btn-sm me-1">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <button type="button" class="btn btn-danger btn-sm"
+                          data-bs-toggle="modal"
+                          data-bs-target="#deleteModal{{ post.id }}">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Delete modals -->
+      {% for post in posts %}
+        <div class="modal fade" id="deleteModal{{ post.id }}" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete post?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <p>Permanently delete <strong>{{ post.title }}</strong> and all its comments?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary"
+                        data-bs-dismiss="modal">Cancel</button>
+                <form method="POST"
+                      action="{{ url_for('posts.delete_post', slug=post.slug) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash me-1"></i>Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    {% else %}
+      <div class="text-center py-5">
+        <p class="text-muted fs-5">No posts yet.</p>
+        <a href="{{ url_for('posts.create_post') }}" class="btn btn-primary mt-2">
+          Write the first post
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
