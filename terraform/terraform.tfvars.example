@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars (git-ignored) and fill in your values.
+
+hcloud_token   = "your-hetzner-api-token-here"
+domain         = "testing.fr3d.dev"
+server_name    = "musings"
+
+# 1Password — service account token + vault UUID
+# Create a service account at: https://my.1password.com/developer-tools/infrastructure-secrets/serviceaccount
+op_service_account_token = "ops_eyJ..."
+op_vault_id              = "xxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Title of the 1Password item whose credential field holds your Cloudflare API token.
+# Defaults to "Cloudflare API Token" — only set this if your item has a different name.
+# op_cloudflare_item_title = "Cloudflare API Token"
+
+# Cloudflare Zone ID — found on the right-hand sidebar of your domain in the Cloudflare dashboard.
+cloudflare_zone_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
