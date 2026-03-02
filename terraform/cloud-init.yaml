@@ -45,7 +45,7 @@ write_files:
       enabled  = true
       port     = ssh
       logpath  = /var/log/auth.log
-      maxretry = 3
+      maxretry = 6
       bantime  = 86400
 
       # ── Nginx: repeated 4xx (bot scanning, bad requests) ─────────────────
@@ -123,7 +123,7 @@ write_files:
       PasswordAuthentication no
       PermitRootLogin prohibit-password
       X11Forwarding no
-      MaxAuthTries 3
+      MaxAuthTries 6
       LoginGraceTime 30
 
 # ── Run commands ──────────────────────────────────────────────────────────────

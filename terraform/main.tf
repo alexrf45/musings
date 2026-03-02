@@ -6,10 +6,6 @@ terraform {
       source  = "hetznercloud/hcloud"
       version = "~> 1.49"
     }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
     onepassword = {
       source  = "1Password/onepassword"
       version = "~> 3.2"
@@ -22,6 +18,9 @@ terraform {
       source  = "hashicorp/null"
       version = "~> 3.0"
     }
+  }
+  backend "s3" {
+
   }
 }
 
@@ -40,44 +39,17 @@ data "onepassword_item" "cloudflare_token" {
 }
 
 provider "cloudflare" {
-  api_token = data.onepassword_item.cloudflare_token.credential
+  api_token = data.onepassword_item.cloudflare_token.password
 }
 
-# ── SSH key ──────────────────────────────────────────────────────────────────
-# Generate an ED25519 keypair entirely in Terraform — the private key is held
-# in state and written to 1Password; it never touches the local filesystem.
-
-resource "tls_private_key" "blog" {
-  algorithm = "ED25519"
+data "onepassword_item" "blog_ssh_key" {
+  vault = var.op_vault_id
+  title = var.op_ssh_key_item_title
 }
 
 resource "hcloud_ssh_key" "blog" {
   name       = "${var.server_name}-key"
-  public_key = tls_private_key.blog.public_key_openssh
-}
-
-# Store the keypair in 1Password so you can SSH in later via the 1Password
-# SSH agent without the private key ever being written to disk.
-resource "onepassword_item" "blog_ssh_key" {
-  vault    = var.op_vault_id
-  title    = "${var.server_name}-ssh-key"
-  category = "ssh_key"
-
-  section {
-    label = "Keypair"
-
-    field {
-      label = "private key"
-      type  = "CONCEALED"
-      value = tls_private_key.blog.private_key_openssh
-    }
-
-    field {
-      label = "public key"
-      type  = "STRING"
-      value = tls_private_key.blog.public_key_openssh
-    }
-  }
+  public_key = data.onepassword_item.blog_ssh_key.public_key
 }
 
 # ── Firewall ──────────────────────────────────────────────────────────────────
@@ -123,7 +95,7 @@ resource "hcloud_firewall" "blog" {
 
 resource "hcloud_server" "blog" {
   name         = var.server_name
-  server_type  = "cx22"
+  server_type  = "cx23"
   image        = "ubuntu-24.04"
   location     = "fsn1"
   ssh_keys     = [hcloud_ssh_key.blog.id]
@@ -171,11 +143,11 @@ resource "null_resource" "mount_volume" {
   }
 
   connection {
-    type        = "ssh"
-    user        = "root"
-    private_key = tls_private_key.blog.private_key_openssh
-    host        = hcloud_server.blog.ipv4_address
-    timeout     = "3m"
+    type    = "ssh"
+    user    = "root"
+    agent   = true # relies on 1Password SSH agent (SSH_AUTH_SOCK must be set)
+    host    = hcloud_server.blog.ipv4_address
+    timeout = "3m"
   }
 
   provisioner "remote-exec" {

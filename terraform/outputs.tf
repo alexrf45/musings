@@ -30,5 +30,5 @@ output "dns_aaaa_record" {
 
 output "op_ssh_key_item" {
   description = "1Password item holding the server SSH keypair"
-  value       = onepassword_item.blog_ssh_key.title
+  value       = data.onepassword_item.blog_ssh_key.title
 }

@@ -26,6 +26,12 @@ variable "op_vault_id" {
   type        = string
 }
 
+variable "op_ssh_key_item_title" {
+  description = "Title of the 1Password SSH Key item holding the server keypair"
+  type        = string
+  default     = "musings-blog-ssh-key"
+}
+
 variable "op_cloudflare_item_title" {
   description = "Title of the 1Password item that holds the Cloudflare API token (credential field)"
   type        = string
