@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1-alpha](https://github.com/alexrf45/musings/compare/v1.0.0-alpha...v1.0.1-alpha) (2026-03-03)
+
+
+### Bug Fixes
+
+* **deploy:** add watchtower scope label to app service ([28a3371](https://github.com/alexrf45/musings/commit/28a33717be217a67d6d0b7933660c6cfeb581b11))
+
 ## [1.0.0-alpha](https://github.com/alexrf45/musings/compare/v0.0.1-alpha...v1.0.0-alpha) (2026-03-02)
 
 
