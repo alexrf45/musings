@@ -16,7 +16,7 @@ services:
       timeout: 5s
       retries: 5
   app:
-    image: fonalex45/blog:latest
+    image: fonalex45/blog:0.0.1-alpha
     restart: unless-stopped
     depends_on:
       db:
