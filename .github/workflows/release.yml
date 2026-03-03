@@ -83,7 +83,7 @@ jobs:
         uses: act10ns/slack@v2
         with:
           status: starting
-          channel: '#docker-build'
+          channel: '#musings'
           message: Starting musings release build ${{ env.TAG }}...
 
       - name: Set up QEMU
@@ -120,6 +120,6 @@ jobs:
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
-          channel: '#prod'
+          channel: '#musings'
           message: Release ${{ env.TAG }} complete for musings
         if: always()
