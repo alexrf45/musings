@@ -3,17 +3,17 @@
 # Run ONCE after deploying the stack, with DNS already pointing at the server.
 #
 # Prerequisites:
-#   - deploy/.env.enc committed to the repo
+#   - deploy folder contents copied to /opt/musings (docker-compose.yml, .env.enc, nginx/, etc.)
 #   - age private key at /root/.config/sops/age/keys.txt
 #
-# Usage: bash deploy/scripts/init-letsencrypt.sh blog.fr3d.dev admin@fr3d.dev
+# Usage: bash /opt/musings/scripts/init-letsencrypt.sh blog.fr3d.dev admin@fr3d.dev
 
 set -euo pipefail
 
 DOMAIN="${1:?Usage: $0 <domain> <email>}"
 EMAIL="${2:?Usage: $0 <domain> <email>}"
 
-DEPLOY_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DEPLOY_DIR="/opt/musings"
 ENV_ENC="${DEPLOY_DIR}/.env.enc"
 ENV_PLAIN="${DEPLOY_DIR}/.env"
 SOPS_KEY="/root/.config/sops/age/keys.txt"
