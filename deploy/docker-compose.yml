@@ -21,6 +21,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    labels:
+      - "com.centurylinklabs.watchtower.scope=musings-prod"
     environment:
       APP_ENV:       production
       DATABASE_URL:  postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
