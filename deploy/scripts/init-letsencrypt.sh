@@ -33,7 +33,7 @@ if [ ! -f "${SOPS_KEY}" ]; then
 fi
 
 echo "→ Decrypting secrets..."
-SOPS_AGE_KEY_FILE="${SOPS_KEY}" sops --decrypt "${ENV_ENC}" > "${ENV_PLAIN}"
+SOPS_AGE_KEY_FILE="${SOPS_KEY}" sops --decrypt --input-type dotenv --output-type dotenv "${ENV_ENC}" > "${ENV_PLAIN}"
 chmod 600 "${ENV_PLAIN}"
 
 # Shred plaintext on exit — even if a later step fails.
@@ -43,8 +43,36 @@ trap 'shred -u "${ENV_PLAIN}" 2>/dev/null || true && echo "→ Plaintext .env sh
 sed -i "s/DOMAIN_PLACEHOLDER/${DOMAIN}/g" "${NGINX_CONF}"
 echo "→ Domain set to: ${DOMAIN}"
 
-# ── Start nginx (HTTP only is enough for ACME challenge) ──────────────────────
-echo "→ Starting nginx..."
+# ── Bootstrap: start nginx with HTTP-only config so certbot can run ───────────
+# The full config references TLS certs that don't exist yet; nginx refuses to
+# start. Temporarily replace it with a minimal HTTP-only config so certbot can
+# complete the ACME challenge, then restore the full config afterward.
+NGINX_CONF_FULL="${NGINX_CONF}.full"
+cp "${NGINX_CONF}" "${NGINX_CONF_FULL}"
+
+mkdir -p /opt/musings/data/certbot-www /opt/musings/data/certbot-certs
+
+cat > "${NGINX_CONF}" <<NGINXEOF
+limit_req_zone \$binary_remote_addr zone=login:10m  rate=5r/m;
+limit_req_zone \$binary_remote_addr zone=global:10m rate=30r/s;
+
+server {
+    listen      80;
+    listen      [::]:80;
+    server_name ${DOMAIN};
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://\$host\$request_uri;
+    }
+}
+NGINXEOF
+
+# ── Start nginx (HTTP-only bootstrap) ─────────────────────────────────────────
+echo "→ Starting nginx (HTTP-only bootstrap)..."
 ${COMPOSE} up -d nginx
 
 for i in $(seq 1 15); do
@@ -64,6 +92,12 @@ ${COMPOSE} run --rm certbot certonly \
   -d "${DOMAIN}"
 
 echo "→ Certificate obtained."
+
+# ── Restore full TLS nginx config and reload ──────────────────────────────────
+echo "→ Restoring full nginx config (TLS)..."
+cp "${NGINX_CONF_FULL}" "${NGINX_CONF}"
+${COMPOSE} exec nginx nginx -s reload
+echo "→ Nginx reloaded with TLS configuration."
 
 # ── Generate DH parameters (2048-bit) for stronger TLS ────────────────────────
 if [ ! -f "${CERTS_DIR}/ssl-dhparams.pem" ]; then
