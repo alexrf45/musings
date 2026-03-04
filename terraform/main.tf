@@ -39,7 +39,7 @@ data "onepassword_item" "cloudflare_token" {
 }
 
 provider "cloudflare" {
-  api_token = data.onepassword_item.cloudflare_token.password
+  api_token = data.onepassword_item.cloudflare_token.credential
 }
 
 data "onepassword_item" "blog_ssh_key" {
