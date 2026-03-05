@@ -8,6 +8,7 @@ Usage:
 import argparse
 import os
 import sys
+import time
 from pathlib import Path
 
 # Allow running from repo root without installing
@@ -21,6 +22,7 @@ def main():
     parser.add_argument("--url", required=True, help="Base URL of the blog (e.g. https://example.com)")
     parser.add_argument("--content-dir", default="app/content", help="Path to Hugo content directory")
     parser.add_argument("--dry-run", action="store_true", help="Parse files but do not POST")
+    parser.add_argument("--delay", type=float, default=6.0, help="Seconds between requests (default: 6)")
     args = parser.parse_args()
 
     secret = os.environ.get("API_SECRET_KEY", "")
@@ -59,6 +61,7 @@ def main():
         print(f"[{status}] {md_file.name}: HTTP {resp.status_code} — {resp.text}")
         if not resp.ok:
             errors += 1
+        time.sleep(args.delay)
 
     if errors:
         print(f"\n{errors} error(s) occurred.", file=sys.stderr)
