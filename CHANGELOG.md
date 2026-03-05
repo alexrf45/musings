@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0-alpha](https://github.com/alexrf45/musings/compare/v1.0.0-alpha...v1.1.0-alpha) (2026-03-05)
+
+
+### Features
+
+* **api:** add POST /api/v1/posts endpoint for Hugo→Flask sync ([81319ef](https://github.com/alexrf45/musings/commit/81319ef9e7505d0310e2e6419ea8dbfb405f5deb))
+
+
+### Bug Fixes
+
+* **deploy:** add watchtower scope label to app service ([28a3371](https://github.com/alexrf45/musings/commit/28a33717be217a67d6d0b7933660c6cfeb581b11))
+* **deploy:** fix SOPS dotenv format and nginx bootstrap for cert issuance ([b22be61](https://github.com/alexrf45/musings/commit/b22be61f1c0f9c6ebe800fd187147dcfae0fca2c))
+* **deploy:** pin proxy network name to avoid Compose project prefix ([8a8298e](https://github.com/alexrf45/musings/commit/8a8298ed7dd2c66d285cbcbdc070b880eb08a8d1))
+
 ## [1.0.0-alpha](https://github.com/alexrf45/musings/compare/v0.0.1-alpha...v1.0.0-alpha) (2026-03-02)
 
 
