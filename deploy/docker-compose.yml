@@ -39,6 +39,7 @@ services:
       - "traefik.http.routers.app.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.app.entrypoints=websecure"
       - "traefik.http.routers.app.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.app.service=app"
       - "traefik.http.routers.app.middlewares=security-headers@docker,global-ratelimit@docker"
       - "traefik.http.routers.app.priority=1"
 
@@ -46,6 +47,7 @@ services:
       - "traefik.http.routers.app-login.rule=Host(`${DOMAIN}`) && Path(`/login`)"
       - "traefik.http.routers.app-login.entrypoints=websecure"
       - "traefik.http.routers.app-login.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.app-login.service=app"
       - "traefik.http.routers.app-login.middlewares=security-headers@docker,login-ratelimit@docker"
       - "traefik.http.routers.app-login.priority=10"
 
@@ -71,7 +73,7 @@ services:
       - "traefik.http.middlewares.security-headers.headers.forceSTSHeader=true"
       - "traefik.http.middlewares.security-headers.headers.frameDeny=true"
       - "traefik.http.middlewares.security-headers.headers.contentTypeNosniff=true"
-      - "traefik.http.middlewares.security-headers.headers.browserXssFilter=true"
+      - "traefik.http.middlewares.security-headers.headers.customResponseHeaders.X-XSS-Protection=1; mode=block"
       - "traefik.http.middlewares.security-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
       - "traefik.http.middlewares.security-headers.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com cdn.jsdelivr.net; img-src 'self' data: https:;"
       - "traefik.http.middlewares.security-headers.headers.customResponseHeaders.Server="
