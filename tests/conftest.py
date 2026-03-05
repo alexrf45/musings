@@ -6,6 +6,7 @@ os.environ.setdefault("APP_ENV", "testing")
 os.environ.setdefault("ADMIN_USERNAME", "admin")
 os.environ.setdefault("ADMIN_PASSWORD", "testpassword")
 os.environ.setdefault("SECRET_KEY", "test-secret-key")
+os.environ.setdefault("API_SECRET_KEY", "test-api-secret-key")
 
 from blog import create_app, db  # noqa: E402
 

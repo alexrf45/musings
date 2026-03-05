@@ -38,6 +38,7 @@ def create_app(config_name: str | None = None) -> Flask:
     # Jinja filter: {{ post.body | markdown | safe }}
     app.jinja_env.filters["markdown"] = _md
 
+    from blog.api import api_bp
     from blog.auth import auth as auth_blueprint
     from blog.errors import errors as errors_blueprint
     from blog.posts import posts as posts_blueprint
@@ -45,6 +46,8 @@ def create_app(config_name: str | None = None) -> Flask:
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(posts_blueprint)
     app.register_blueprint(errors_blueprint)
+    app.register_blueprint(api_bp)
+    csrf.exempt(api_bp)
 
     with app.app_context():
         # Import models so Flask-Migrate can detect them

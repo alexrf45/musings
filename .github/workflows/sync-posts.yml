@@ -1,0 +1,34 @@
+name: Sync Hugo Posts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'app/content/**'
+
+jobs:
+  sync:
+    name: Sync changed posts to blog API
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install pyyaml requests
+
+      - name: Sync changed posts
+        env:
+          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+          BLOG_URL: ${{ secrets.BLOG_URL }}
+        run: |
+          git diff --name-only HEAD^ HEAD \
+            | grep '^app/content/.*\.md$' \
+            | xargs -r -I{} python scripts/sync_posts.py {}

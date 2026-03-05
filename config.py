@@ -11,6 +11,7 @@ class Config:
     ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
     ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "changeme")
     POSTS_PER_PAGE = int(os.environ.get("POSTS_PER_PAGE", "10"))
+    API_SECRET_KEY = os.environ.get("API_SECRET_KEY", "")
 
 
 class DevelopmentConfig(Config):
