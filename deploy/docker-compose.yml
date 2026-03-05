@@ -17,7 +17,7 @@ services:
       retries: 5
 
   app:
-    image: fonalex45/blog:latest
+    image: fonalex45/blog:0.0.1-alpha
     restart: unless-stopped
     depends_on:
       db:
@@ -80,7 +80,7 @@ services:
 
   # ── Traefik reverse proxy + ACME ──────────────────────────────────────────────
   traefik:
-    image: traefik:v3.3
+    image: traefik:v3.6
     restart: unless-stopped
     ports:
       - "80:80"
@@ -94,7 +94,7 @@ services:
       - proxy
 
   watchtower:
-    image: containrrr/watchtower:latest
+    image: nickfedor/watchtower:1.14.3
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
