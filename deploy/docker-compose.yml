@@ -112,4 +112,5 @@ networks:
     # Private network: app ↔ db only
     internal: true
   proxy:
+    name: proxy
     # Public-facing network: traefik ↔ app
