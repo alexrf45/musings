@@ -124,10 +124,6 @@ Dockerfile: Python 3.13-slim, installs deps, copies `blog/`, `migrations/`, `wsg
 
 Semver managed by release-please; current version in `.github/release-please-manifest.json`. Start: `0.0.1-alpha`. Conventional commits drive version bumps.
 
-### Nginx (`nginx/`)
-
-Existing nginx config (unchanged) used in local Docker dev (non-TLS, port 8080).
-
 ## Infrastructure (`terraform/`)
 
 Provisions a Hetzner Cloud server in Frankfurt, creates Cloudflare DNS records, and stores the SSH keypair in 1Password.
@@ -164,18 +160,16 @@ After `terraform apply`, the null_resource waits for cloud-init to finish, then 
 
 ```
 deploy/
-├── docker-compose.yml          # db, app, nginx, certbot, watchtower
-├── .env.enc                    # SOPS-encrypted env vars (committed to repo)
-├── .env.example                # reference for required env vars
-├── nginx/blog.conf             # nginx site config (domain templated by init script)
-└── scripts/init-letsencrypt.sh # first-run: decrypt secrets, obtain cert, start stack
+├── docker-compose.yml       # db, app, traefik, watchtower
+├── .env.enc                 # SOPS-encrypted env vars (committed to repo)
+├── traefik/traefik.yml      # Traefik static config (ACME, entrypoints, providers)
+└── scripts/init.sh          # first-run: decrypt secrets, prep dirs, start stack
 ```
 
 **Services:**
 - `db` — Postgres 17, data on `/opt/musings/data/postgres`
-- `app` — `fonalex45/blog:latest`, proxied by nginx on internal network
-- `nginx` — terminates TLS (certs at `/opt/musings/data/certbot-certs`), logs to `/var/log/nginx/` for fail2ban
-- `certbot` — auto-renews cert every 12 h via webroot challenge
+- `app` — `fonalex45/blog:latest`, proxied by Traefik on internal network
+- `traefik` — terminates TLS via ACME (certs at `/opt/musings/data/traefik/acme.json`), logs to `/var/log/traefik/` for fail2ban, handles HTTP→HTTPS redirect
 - `watchtower` — polls Docker Hub every 5 min, pulls new `app` image automatically, notifies Slack
 
 **Deployment steps on the server:**
@@ -183,21 +177,29 @@ deploy/
 cd /opt/musings
 git clone <repo> .
 # Place age private key at /root/.config/sops/age/keys.txt
-bash deploy/scripts/init-letsencrypt.sh blog.fr3d.dev admin@fr3d.dev
+bash deploy/scripts/init.sh
 ```
 
-The init script decrypts `deploy/.env.enc` (via SOPS + age), patches the nginx config, obtains the Let's Encrypt certificate, generates DH params, brings up the full stack, then shreds the plaintext `.env` on exit (even on failure).
+The init script decrypts `deploy/.env.enc` (via SOPS + age), creates `/opt/musings/data/traefik/acme.json` (chmod 600), brings up the full stack, then shreds the plaintext `.env` on exit (even on failure). Traefik obtains the TLS certificate automatically via ACME HTTP-01 challenge.
 
 **fail2ban jails configured on host (via cloud-init):**
 
 | Jail | Log | Trigger | Ban |
 |---|---|---|---|
 | `sshd` | `/var/log/auth.log` | 3 failed SSH auths | 24 h |
-| `musings-login` | `/var/log/nginx/access.log` | 10 POST /login in 5 min | 24 h |
-| `nginx-limit-req` | `/var/log/nginx/access.log` | 10 × 429 in 2 min | 2 h |
-| `nginx-botsearch` | `/var/log/nginx/access.log` | 10 × 4xx in 5 min | 1 h |
+| `musings-login` | `/var/log/traefik/access.log` | 10 POST /login in 5 min | 24 h |
+| `nginx-limit-req` | `/var/log/traefik/access.log` | 10 × 429 in 2 min | 2 h |
+| `nginx-botsearch` | `/var/log/traefik/access.log` | 10 × 4xx in 5 min | 1 h |
 
-nginx also applies `limit_req zone=login burst=3` on `/login` (5 req/min) and `zone=global burst=60` globally, so rate-limiting fires before fail2ban as a first layer.
+Traefik applies rate limiting via middleware labels: 30 req/s (burst 60) globally, 5 req/min (burst 3) on `/login`.
+
+**Manual steps on existing server (cloud-init already ran):**
+```bash
+sed -i 's|/var/log/nginx/access.log|/var/log/traefik/access.log|g' /etc/fail2ban/jail.local
+systemctl restart fail2ban
+mkdir -p /var/log/traefik
+# Edit /etc/logrotate.d/nginx-docker: change path + replace postrotate with copytruncate
+```
 
 ## Testing notes
 

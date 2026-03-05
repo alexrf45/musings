@@ -15,65 +15,88 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
   app:
-    image: fonalex45/blog:0.0.1-alpha
+    image: fonalex45/blog:latest
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
-    labels:
-      - "com.centurylinklabs.watchtower.scope=musings-prod"
     environment:
-      APP_ENV:       production
-      DATABASE_URL:  postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      SECRET_KEY:    ${SECRET_KEY}
+      APP_ENV:        production
+      DATABASE_URL:   postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      SECRET_KEY:     ${SECRET_KEY}
       ADMIN_USERNAME: ${ADMIN_USERNAME}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     networks:
       - internal
       - proxy
-  # ── Nginx reverse proxy ────────────────────────────────────────────────────
-  nginx:
-    image: nginx:1.29-alpine-slim
+    labels:
+      - "com.centurylinklabs.watchtower.scope=musings-prod"
+      - "traefik.enable=true"
+
+      # ── Main router (all traffic) ─────────────────────────────────────────────
+      - "traefik.http.routers.app.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.app.middlewares=security-headers@docker,global-ratelimit@docker"
+      - "traefik.http.routers.app.priority=1"
+
+      # ── Login router (stricter rate limit, higher priority) ───────────────────
+      - "traefik.http.routers.app-login.rule=Host(`${DOMAIN}`) && Path(`/login`)"
+      - "traefik.http.routers.app-login.entrypoints=websecure"
+      - "traefik.http.routers.app-login.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.app-login.middlewares=security-headers@docker,login-ratelimit@docker"
+      - "traefik.http.routers.app-login.priority=10"
+
+      # ── Service ───────────────────────────────────────────────────────────────
+      - "traefik.http.services.app.loadbalancer.server.port=8080"
+
+      # ── Global rate limit: 30 req/s, burst 60, per source IP ─────────────────
+      - "traefik.http.middlewares.global-ratelimit.ratelimit.average=30"
+      - "traefik.http.middlewares.global-ratelimit.ratelimit.period=1s"
+      - "traefik.http.middlewares.global-ratelimit.ratelimit.burst=60"
+      - "traefik.http.middlewares.global-ratelimit.ratelimit.sourcecriterion.ipstrategy.depth=1"
+
+      # ── Login rate limit: 5 req/min, burst 3, per source IP ──────────────────
+      - "traefik.http.middlewares.login-ratelimit.ratelimit.average=5"
+      - "traefik.http.middlewares.login-ratelimit.ratelimit.period=60s"
+      - "traefik.http.middlewares.login-ratelimit.ratelimit.burst=3"
+      - "traefik.http.middlewares.login-ratelimit.ratelimit.sourcecriterion.ipstrategy.depth=1"
+
+      # ── Security headers ──────────────────────────────────────────────────────
+      - "traefik.http.middlewares.security-headers.headers.stsSeconds=63072000"
+      - "traefik.http.middlewares.security-headers.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.security-headers.headers.stsPreload=true"
+      - "traefik.http.middlewares.security-headers.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.security-headers.headers.frameDeny=true"
+      - "traefik.http.middlewares.security-headers.headers.contentTypeNosniff=true"
+      - "traefik.http.middlewares.security-headers.headers.browserXssFilter=true"
+      - "traefik.http.middlewares.security-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
+      - "traefik.http.middlewares.security-headers.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com cdn.jsdelivr.net; img-src 'self' data: https:;"
+      - "traefik.http.middlewares.security-headers.headers.customResponseHeaders.Server="
+
+  # ── Traefik reverse proxy + ACME ──────────────────────────────────────────────
+  traefik:
+    image: traefik:v3.3
     restart: unless-stopped
-    depends_on:
-      - app
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/blog.conf:/etc/nginx/conf.d/default.conf:ro
-      - /opt/musings/data/certbot-certs:/etc/letsencrypt:ro
-      - /opt/musings/data/certbot-www:/var/www/certbot:ro
-      # Bind log directory to host so fail2ban can read it
-      - /var/log/nginx:/var/log/nginx
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/traefik.yml:/traefik.yml:ro
+      - /opt/musings/data/traefik/acme.json:/letsencrypt/acme.json
+      - /var/log/traefik:/var/log/traefik
     networks:
       - proxy
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost/health || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-  certbot:
-    image: certbot/certbot:latest
-    restart: unless-stopped
-    volumes:
-      - /opt/musings/data/certbot-certs:/etc/letsencrypt
-      - /opt/musings/data/certbot-www:/var/www/certbot
-    # Renew every 12 hours; certbot skips if cert has >30 days remaining
-    entrypoint: >
-      /bin/sh -c "trap exit TERM;
-      while :; do
-        certbot renew --webroot -w /var/www/certbot --quiet;
-        sleep 12h & wait $${!};
-      done"
+
   watchtower:
     image: containrrr/watchtower:latest
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      # Only watch the app container, not infra services
       WATCHTOWER_SCOPE:                  musings-prod
       WATCHTOWER_POLL_INTERVAL:          300      # check every 5 minutes
       WATCHTOWER_CLEANUP:                "true"   # remove old images after update
@@ -84,7 +107,7 @@ services:
 
 networks:
   internal:
-    # Private network: app ↔ db only, not reachable from nginx
+    # Private network: app ↔ db only
     internal: true
   proxy:
-    # Public-facing network: nginx ↔ app
+    # Public-facing network: traefik ↔ app

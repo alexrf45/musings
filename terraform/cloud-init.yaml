@@ -48,20 +48,20 @@ write_files:
       maxretry = 6
       bantime  = 86400
 
-      # ── Nginx: repeated 4xx (bot scanning, bad requests) ─────────────────
+      # ── Traefik: repeated 4xx (bot scanning, bad requests) ───────────────
       [nginx-botsearch]
       enabled  = true
       port     = http,https
-      logpath  = /var/log/nginx/access.log
+      logpath  = /var/log/traefik/access.log
       maxretry = 10
       findtime = 300
       bantime  = 3600
 
-      # ── Nginx: rate-limit hits (429 from limit_req) ───────────────────────
+      # ── Traefik: rate-limit hits (429 responses) ──────────────────────────
       [nginx-limit-req]
       enabled  = true
       port     = http,https
-      logpath  = /var/log/nginx/access.log
+      logpath  = /var/log/traefik/access.log
       maxretry = 10
       findtime = 120
       bantime  = 7200
@@ -71,7 +71,7 @@ write_files:
       enabled  = true
       port     = http,https
       filter   = musings-login
-      logpath  = /var/log/nginx/access.log
+      logpath  = /var/log/traefik/access.log
       maxretry = 10
       findtime = 300
       bantime  = 86400
@@ -101,20 +101,17 @@ write_files:
       failregex = ^<HOST> - \S+ \[.*\] "\S+ \S+ HTTP/\d\.\d" (400|403|404)
       ignoreregex = ^<HOST> - \S+ \[.*\] "GET /favicon
 
-  # ── logrotate: nginx container logs ───────────────────────────────────────
-  - path: /etc/logrotate.d/nginx-docker
+  # ── logrotate: traefik container logs ─────────────────────────────────────
+  - path: /etc/logrotate.d/traefik-docker
     content: |
-      /var/log/nginx/*.log {
+      /var/log/traefik/*.log {
           daily
           missingok
           rotate 14
           compress
           delaycompress
           notifempty
-          sharedscripts
-          postrotate
-              docker exec $(docker ps -qf name=nginx) nginx -s reopen 2>/dev/null || true
-          endscript
+          copytruncate
       }
 
   # ── SSH hardening ──────────────────────────────────────────────────────────
@@ -147,10 +144,9 @@ runcmd:
   - usermod -aG docker deploy
 
   # ── Create deployment directory structure ─────────────────────────────────
-  - mkdir -p /opt/musings/{nginx,scripts}
-  - mkdir -p /var/log/nginx
+  - mkdir -p /opt/musings/scripts
+  - mkdir -p /var/log/traefik
   - chown -R deploy:deploy /opt/musings
-  - chown syslog:adm /var/log/nginx
 
   # ── Configure UFW (defense-in-depth, Hetzner firewall is primary) ─────────
   - ufw default deny incoming
