@@ -1,11 +1,10 @@
-# syntax=docker/dockerfile:1
 FROM python:3.13-slim AS base
 
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    FLASK_APP=wsgi:app
+  PYTHONUNBUFFERED=1 \
+  FLASK_APP=wsgi:app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -17,9 +16,9 @@ COPY config.py    config.py
 COPY entrypoint.sh entrypoint.sh
 
 RUN addgroup --gid 1001 --system app && \
-    adduser  --uid 1001 --system --gid 1001 --no-create-home app && \
-    chown -R app:app /app && \
-    chmod +x /app/entrypoint.sh
+  adduser  --uid 1001 --system --gid 1001 --no-create-home app && \
+  chown -R app:app /app && \
+  chmod +x /app/entrypoint.sh
 
 USER app
 
