@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1-alpha](https://github.com/alexrf45/musings/compare/v1.1.0-alpha...v1.1.1-alpha) (2026-03-08)
+
+
+### Bug Fixes
+
+* no more hugo ([ee49525](https://github.com/alexrf45/musings/commit/ee49525843e964cb89d3b768ff4ae45bf2c8eab9))
+
 ## [1.1.0-alpha](https://github.com/alexrf45/musings/compare/v1.0.0-alpha...v1.1.0-alpha) (2026-03-05)
 
 
