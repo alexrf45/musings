@@ -23,6 +23,17 @@ _md = mistune.create_markdown(
 )
 
 
+def _poem_excerpt(body: str, lines: int = 3) -> str:
+    result = []
+    for line in body.splitlines():
+        stripped = line.rstrip("\\").strip()
+        if stripped:
+            result.append(stripped)
+            if len(result) >= lines:
+                break
+    return "\n".join(result)
+
+
 def create_app(config_name: str | None = None) -> Flask:
     if config_name is None:
         config_name = os.environ.get("APP_ENV", "default")
@@ -35,8 +46,9 @@ def create_app(config_name: str | None = None) -> Flask:
     login_manager.init_app(app)
     csrf.init_app(app)
 
-    # Jinja filter: {{ post.body | markdown | safe }}
+    # Jinja filters
     app.jinja_env.filters["markdown"] = _md
+    app.jinja_env.filters["poem_excerpt"] = _poem_excerpt
 
     from blog.api import api_bp
     from blog.auth import auth as auth_blueprint

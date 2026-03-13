@@ -27,6 +27,14 @@ ADMIN_USERNAME=admin
 ADMIN_PASSWORD=...
 ```
 
+### Full-stack local dev (recommended)
+
+```bash
+docker compose up -d                          # db + app at http://localhost:8080; blog/ is volume-mounted (hot reload)
+docker compose build && docker compose up -d  # rebuild image after dep/config changes
+docker compose logs app -f                    # tail app logs
+```
+
 ### Run locally (Flask dev server + Postgres via Docker Compose)
 
 ```bash
@@ -87,11 +95,13 @@ blog/
     ├── index.html       # Paginated post list
     ├── post.html        # Post view + highlight.js + anonymous comment form
     ├── auth/login.html
+    ├── partials/        # comment.html, comment_form.html, comment_posted.html
     ├── posts/           # Admin: create.html, edit.html, list_admin.html
     └── errors/          # 403.html, 404.html, 500.html
 ```
 
 Other root-level files: `wsgi.py` (Gunicorn entry), `config.py` (Dev/Testing/Production configs), `migrations/` (Flask-Migrate/Alembic).
+`blog/utils.py` — `is_htmx()` helper (checks `HX-Request` header); used in views to branch HTMX vs standard responses.
 
 ### Authentication
 
@@ -111,6 +121,7 @@ Single admin user — credentials from env vars (`ADMIN_USERNAME`, `ADMIN_PASSWO
 - **Editor**: EasyMDE loaded from CDN on create/edit pages only; includes autosave and side-by-side preview.
 - **No server-side sessions**: Flask-Login cookie sessions; no session DB.
 - **CSRF**: Flask-WTF on all forms; `WTF_CSRF_ENABLED = False` in testing config only.
+- **HTMX**: version **1.9.12** (pinned — 2.x was downgraded due to Bootstrap modal JS interference). `is_htmx()` in `blog/utils.py` detects HTMX requests. Delete flows use `hx-confirm` (native browser dialog) + server-side `HX-Redirect` header; no Bootstrap modals used for destructive actions.
 
 ### Build pipeline
 

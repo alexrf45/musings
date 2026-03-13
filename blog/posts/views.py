@@ -14,13 +14,18 @@ from blog.utils import is_htmx
 @posts.route("/")
 def index():
     page = request.args.get("page", 1, type=int)
-    per_page = 10
+    per_page = 20
+    featured = (
+        Post.query.filter_by(published=True, featured=True)
+        .order_by(Post.created_at.desc())
+        .first()
+    )
     pagination = (
         Post.query.filter_by(published=True)
         .order_by(Post.created_at.desc())
         .paginate(page=page, per_page=per_page, error_out=False)
     )
-    return render_template("index.html", pagination=pagination)
+    return render_template("index.html", pagination=pagination, featured=featured)
 
 
 @posts.route("/post/<slug>", methods=["GET", "POST"])
@@ -85,10 +90,11 @@ def create_post():
             slug=slug,
             body=form.body.data,
             published=form.published.data,
+            featured=form.featured.data,
         )
         db.session.add(post)
         db.session.commit()
-        flash(f'Post "{post.title}" created.', "success")
+        flash(f'"{post.title}" created.', "success")
         return redirect(url_for("posts.view_post", slug=post.slug))
     return render_template("posts/create.html", form=form)
 
@@ -102,8 +108,9 @@ def edit_post(slug: str):
         post.title = form.title.data.strip()
         post.body = form.body.data
         post.published = form.published.data
+        post.featured = form.featured.data
         db.session.commit()
-        flash(f'Post "{post.title}" updated.', "success")
+        flash(f'"{post.title}" updated.', "success")
         return redirect(url_for("posts.view_post", slug=post.slug))
     return render_template("posts/edit.html", form=form, post=post)
 
@@ -115,7 +122,7 @@ def delete_post(slug: str):
     title = post.title
     db.session.delete(post)
     db.session.commit()
-    flash(f'Post "{title}" deleted.', "info")
+    flash(f'"{title}" deleted.', "info")
     if is_htmx():
         response = make_response("", 204)
         response.headers["HX-Redirect"] = url_for("posts.admin_list")

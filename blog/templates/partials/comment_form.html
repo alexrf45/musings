@@ -1,4 +1,9 @@
-<div id="comment-form-card" class="card p-4">
+<div id="comment-form-card" class="card p-4"
+     x-data="{
+       body: '',
+       authorName: localStorage.getItem('comment_author') || '',
+       saveAuthor() { localStorage.setItem('comment_author', this.authorName) }
+     }">
   <h3 class="h6 mb-3 comment-form-heading">Leave a comment</h3>
   <form hx-post="{{ url_for('posts.view_post', slug=post.slug) }}"
         hx-target="#comment-form-card"
@@ -9,7 +14,7 @@
 
     <div class="mb-3">
       {{ form.author_name.label(class="form-label") }}
-      {{ form.author_name(class="form-control", placeholder="Your name") }}
+      {{ form.author_name(class="form-control", placeholder="Your name", **{"x-model": "authorName", "@blur": "saveAuthor()"}) }}
       {% for err in form.author_name.errors %}
         <div class="text-danger small mt-1">{{ err }}</div>
       {% endfor %}
@@ -17,10 +22,14 @@
 
     <div class="mb-3">
       {{ form.body.label(class="form-label") }}
-      {{ form.body(class="form-control", rows=4, placeholder="Write your comment…") }}
+      {{ form.body(class="form-control", rows=4, placeholder="Write your comment…", maxlength=2000, **{"x-model": "body"}) }}
       {% for err in form.body.errors %}
         <div class="text-danger small mt-1">{{ err }}</div>
       {% endfor %}
+      <div class="d-flex justify-content-end mt-1">
+        <small :class="body.length > 1800 ? 'text-warning' : 'text-muted'"
+               x-text="body.length + '/2000'">0/2000</small>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary">

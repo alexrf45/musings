@@ -58,6 +58,7 @@ class Post(db.Model):
     slug = db.Column(db.String(220), unique=True, nullable=False, index=True)
     body = db.Column(db.Text, nullable=False)
     published = db.Column(db.Boolean, default=True, nullable=False)
+    featured = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=_now, nullable=False)
     updated_at = db.Column(
         db.DateTime(timezone=True), default=_now, onupdate=_now, nullable=False

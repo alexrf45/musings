@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}New Post — Musings{% endblock %}
+{% block title %}New Poem — luvandre{% endblock %}
 
 {% block head %}
   <link rel="stylesheet"
@@ -12,9 +12,9 @@
   <div class="col-lg-9">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 mb-0">New Post</h1>
+      <h1 class="h3 mb-0" style="font-family: var(--font-heading); font-weight: 400;">New Poem</h1>
       <a href="{{ url_for('posts.admin_list') }}" class="btn btn-outline-secondary btn-sm">
-        <i class="bi bi-arrow-left me-1"></i>Back
+        <i class="bi bi-arrow-left me-1"></i>back
       </a>
     </div>
 
@@ -25,7 +25,7 @@
         {{ form.title.label(class="form-label") }}
         {{ form.title(class="form-control form-control-lg",
                       autofocus=True,
-                      placeholder="Post title…") }}
+                      placeholder="Poem title…") }}
         {% for err in form.title.errors %}
           <div class="text-danger small mt-1">{{ err }}</div>
         {% endfor %}
@@ -44,8 +44,12 @@
           {{ form.published(class="form-check-input") }}
           {{ form.published.label(class="form-check-label") }}
         </div>
+        <div class="form-check">
+          {{ form.featured(class="form-check-input") }}
+          {{ form.featured.label(class="form-check-label") }}
+        </div>
         <button type="submit" class="btn btn-primary">
-          <i class="bi bi-check2-circle me-1"></i>Publish
+          <i class="bi bi-check2-circle me-1"></i>publish
         </button>
       </div>
 
@@ -60,7 +64,7 @@
     new EasyMDE({
       element: document.getElementById("body"),
       spellChecker: false,
-      autosave: { enabled: true, uniqueId: "musings-new-post", delay: 3000 },
+      autosave: { enabled: true, uniqueId: "luvandre-new-poem", delay: 3000 },
       toolbar: [
         "bold", "italic", "strikethrough", "|",
         "heading-1", "heading-2", "heading-3", "|",

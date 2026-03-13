@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.title }} — Musings{% endblock %}
+{% block title %}{{ post.title }} — luvandre{% endblock %}
 
 {% block head %}
   <!-- highlight.js — Gruvbox Dark theme -->
@@ -14,74 +14,65 @@
 
     <!-- Back link -->
     <a href="{{ url_for('posts.index') }}"
-       class="text-muted small d-inline-flex align-items-center gap-1 mb-4">
-      <i class="bi bi-arrow-left"></i> All posts
+       class="text-muted small d-inline-flex align-items-center gap-1 mb-5"
+       style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;">
+      <i class="bi bi-arrow-left"></i> all poems
     </a>
 
-    <!-- Post header -->
+    <!-- Poem header -->
     <header class="mb-5">
-      <h1 class="fw-bold lh-sm mb-3">{{ post.title }}</h1>
-      <div class="post-meta d-flex align-items-center gap-3 flex-wrap">
+      <h1 class="poem-title">{{ post.title }}</h1>
+      <div class="poem-meta-line">
         <span>
-          <i class="bi bi-calendar3 me-1"></i>
           <time datetime="{{ post.created_at.isoformat() }}">
             {{ post.created_at.strftime('%B %-d, %Y') }}
           </time>
         </span>
-        {% set word_count = post.body.split() | length %}
-        {% set read_time = [word_count // 200, 1] | max %}
-        <span class="read-time">
-          <i class="bi bi-clock me-1"></i>{{ read_time }} min read
-        </span>
         {% if post.updated_at and post.updated_at != post.created_at %}
-          <span>
-            <i class="bi bi-pencil me-1"></i>
-            Updated {{ post.updated_at.strftime('%B %-d, %Y') }}
-          </span>
+          <span>updated {{ post.updated_at.strftime('%B %-d, %Y') }}</span>
         {% endif %}
         {% if not post.published %}
-          <span class="badge bg-warning text-dark">Draft</span>
+          <span class="badge bg-warning text-dark">draft</span>
         {% endif %}
         {% if current_user.is_authenticated %}
           <a href="{{ url_for('posts.edit_post', slug=post.slug) }}"
              class="btn btn-outline-secondary btn-sm ms-auto">
-            <i class="bi bi-pencil me-1"></i>Edit
+            <i class="bi bi-pencil me-1"></i>edit
           </a>
           <form hx-post="{{ url_for('posts.delete_post', slug=post.slug) }}"
                 hx-confirm="Permanently delete '{{ post.title }}' and all its comments?"
                 hx-indicator="#htmx-indicator">
             {{ form.hidden_tag() }}
             <button type="submit" class="btn btn-danger btn-sm">
-              <i class="bi bi-trash me-1"></i>Delete
+              <i class="bi bi-trash me-1"></i>delete
             </button>
           </form>
         {% endif %}
       </div>
     </header>
 
-    <hr class="mb-5">
+    <hr class="poem-divider">
 
-    <!-- Post body -->
-    <div class="post-body mb-5">
+    <!-- Poem body -->
+    <div class="poem-body mb-6">
       {{ post.body | markdown | safe }}
     </div>
 
-    <hr class="mb-5">
+    <hr class="poem-divider" style="margin-top: 3rem;">
 
     <!-- Comments section -->
-    <section id="comments">
-      <h2 id="comment-count" class="h5 mb-4 comment-count-heading">
-        <i class="bi bi-chat-square-text me-2"></i>
-        {{ comments | length }} {{ 'Comment' if comments | length == 1 else 'Comments' }}
+    <section id="comments" class="mt-5">
+      <h2 id="comment-count" class="comment-count-heading mb-4">
+        {{ comments | length }} {{ 'comment' if comments | length == 1 else 'comments' }}
       </h2>
 
-      <div id="comments-list" class="d-flex flex-column gap-3 mb-5">
+      <div id="comments-list" class="d-flex flex-column gap-4 mb-5">
         {% for comment in comments %}
           {% include "partials/comment.html" %}
         {% endfor %}
       </div>
       {% if not comments %}
-        <p class="text-muted mb-5">No comments yet. Be the first!</p>
+        <p class="mb-5" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--gb-fg3); letter-spacing: 0.08em;">no comments yet</p>
       {% endif %}
 
       <!-- Comment form -->
@@ -98,6 +89,28 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll("pre code").forEach(el => hljs.highlightElement(el));
+    });
+
+    // HTMX 1.9 does not call htmx.process() on content inserted via OOB swap
+    // (hx-swap-oob="beforeend:#comments-list"). The delete form inside the newly
+    // appended comment card is never initialized, so clicking does nothing.
+    // A MutationObserver on #comments-list fires synchronously when HTMX
+    // appends the new node, bypassing HTMX's event lifecycle entirely.
+    document.addEventListener("DOMContentLoaded", function() {
+      var cl = document.getElementById("comments-list");
+      if (!cl) return;
+      new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          m.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) {
+              // Strip hx-swap-oob so htmx.process() doesn't re-trigger the OOB
+              // directive on an already-inserted node, which would strip its id.
+              node.removeAttribute("hx-swap-oob");
+              htmx.process(node);
+            }
+          });
+        });
+      }).observe(cl, { childList: true });
     });
   </script>
 {% endblock %}

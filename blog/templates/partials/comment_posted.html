@@ -5,31 +5,8 @@
   OOB 2: comment count heading refreshed.
 #}
 
-{# ── Main body: fresh empty form ─────────────────────────────────────────── #}
-<div id="comment-form-card" class="card p-4">
-  <h3 class="h6 mb-3 comment-form-heading">Leave a comment</h3>
-  <form hx-post="{{ url_for('posts.view_post', slug=post.slug) }}"
-        hx-target="#comment-form-card"
-        hx-swap="outerHTML"
-        hx-indicator="#htmx-indicator"
-        novalidate>
-    {{ form.hidden_tag() }}
-
-    <div class="mb-3">
-      {{ form.author_name.label(class="form-label") }}
-      {{ form.author_name(class="form-control", placeholder="Your name") }}
-    </div>
-
-    <div class="mb-3">
-      {{ form.body.label(class="form-label") }}
-      {{ form.body(class="form-control", rows=4, placeholder="Write your comment…") }}
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-      <i class="bi bi-send me-1"></i>Post comment
-    </button>
-  </form>
-</div>
+{# ── Main body: fresh empty form (includes Alpine x-data) ────────────────── #}
+{% include "partials/comment_form.html" %}
 
 {# ── OOB 1: append new comment to list ───────────────────────────────────── #}
 <div class="comment-card comment-card-new"
@@ -42,7 +19,7 @@
     </div>
     {% if current_user.is_authenticated %}
       <form hx-post="{{ url_for('posts.delete_comment', comment_id=comment.id) }}"
-            hx-target="#comment-{{ comment.id }}"
+            hx-target="closest .comment-card"
             hx-swap="outerHTML"
             hx-confirm="Delete this comment?"
             hx-indicator="#htmx-indicator">
@@ -59,7 +36,6 @@
 {# ── OOB 2: update comment count ─────────────────────────────────────────── #}
 <h2 id="comment-count"
     hx-swap-oob="outerHTML"
-    class="h5 mb-4 comment-count-heading">
-  <i class="bi bi-chat-square-text me-2"></i>
-  {{ comment_count }} {{ 'Comment' if comment_count == 1 else 'Comments' }}
+    class="comment-count-heading mb-4">
+  {{ comment_count }} {{ 'comment' if comment_count == 1 else 'comments' }}
 </h2>

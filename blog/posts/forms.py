@@ -10,6 +10,7 @@ class PostForm(FlaskForm):
     )
     body = TextAreaField("Body", validators=[DataRequired()])
     published = BooleanField("Published", default=True)
+    featured = BooleanField("Featured poem")
 
 
 class CommentForm(FlaskForm):

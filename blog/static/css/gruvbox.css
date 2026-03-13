@@ -1,5 +1,5 @@
 /* ============================================================
-   Gruvbox Dark — Bootstrap 5 override
+   luvandre — Gruvbox Dark — Bootstrap 5 override
    Palette: https://github.com/morhetz/gruvbox
    ============================================================ */
 
@@ -101,6 +101,20 @@ hr {
   transition: opacity 0.15s ease;
 }
 .navbar-brand:hover { opacity: 0.8; }
+.navbar-brand::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--gb-yellow-b);
+  vertical-align: text-bottom;
+  margin-left: 3px;
+  animation: terminal-blink 1s step-end infinite;
+}
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
 .nav-link {
   color: var(--gb-fg2) !important;
   font-family: system-ui, -apple-system, sans-serif;
@@ -260,6 +274,42 @@ hr {
 .alert-warning  { background-color: rgba(215,153,33,.18); border-color: var(--gb-yellow-b);color: var(--gb-yellow-b);}
 .alert-info     { background-color: rgba(69,133,136,.18); border-color: var(--gb-blue-b);  color: var(--gb-blue-b);  }
 
+/* ── Featured hero ──────────────────────────────────────────── */
+.featured-hero {
+  border-top: 3px solid var(--gb-yellow-b);
+  padding-top: 2.5rem;
+  margin-bottom: 3rem;
+}
+.featured-label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gb-yellow-b);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+.featured-excerpt {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--gb-fg1);
+  margin-bottom: 1.5rem;
+  quotes: "\201C" "\201D";
+}
+.featured-excerpt::before { content: open-quote;  color: var(--gb-yellow-b); }
+.featured-excerpt::after  { content: close-quote; color: var(--gb-yellow-b); }
+.featured-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  color: var(--gb-fg3);
+}
+.featured-title a {
+  color: var(--gb-fg2);
+}
+.featured-title a:hover { color: var(--gb-yellow-b); }
+
 /* ── Post body typography ───────────────────────────────────── */
 .post-body { font-size: 1.08rem; line-height: 1.85; }
 .post-body h1, .post-body h2, .post-body h3,
@@ -270,13 +320,12 @@ hr {
 .post-body p { margin-bottom: 1.35rem; }
 .post-body blockquote {
   border-left: 4px solid var(--gb-yellow);
-  padding-left: 1.25rem;
+  padding: 0.75rem 0 0.75rem 1.25rem;
   color: var(--gb-fg2);
   margin: 1.75rem 0;
   font-style: italic;
   border-radius: 0 8px 8px 0;
   background-color: rgba(215, 153, 33, 0.05);
-  padding: 0.75rem 0 0.75rem 1.25rem;
 }
 .post-body pre {
   background-color: var(--gb-bg1);
@@ -316,6 +365,74 @@ hr {
 .post-body td {
   border: 1px solid var(--gb-bg2);
   padding: 0.6rem 0.85rem;
+}
+
+/* ── Poem detail ────────────────────────────────────────────── */
+.poem-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--gb-yellow-b);
+  margin-bottom: 1rem;
+}
+.poem-meta-line {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  color: var(--gb-fg3);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+hr.poem-divider {
+  width: 3rem;
+  height: 2px;
+  background-color: var(--gb-yellow-b);
+  border: none;
+  opacity: 1;
+  margin: 2.5rem 0;
+}
+.poem-body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.13rem;
+  line-height: 1.9;
+  max-width: 52ch;
+}
+.poem-body p {
+  margin-bottom: 2.25rem;
+}
+.poem-body p:last-child {
+  margin-bottom: 0;
+}
+.poem-body blockquote {
+  border-left: 4px solid var(--gb-yellow);
+  padding: 0.75rem 0 0.75rem 1.25rem;
+  color: var(--gb-fg2);
+  margin: 1.75rem 0;
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+  background-color: rgba(215, 153, 33, 0.05);
+}
+.poem-body pre {
+  background-color: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 10px;
+  padding: 1.1rem 1.35rem;
+  overflow-x: auto;
+}
+.poem-body code {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.9em;
+  color: var(--gb-aqua-b);
+  background-color: var(--gb-bg1);
+  padding: 0.15em 0.45em;
+  border-radius: 5px;
+}
+.poem-body pre code {
+  color: var(--gb-fg);
+  background: transparent;
+  padding: 0;
 }
 
 /* ── Comments ───────────────────────────────────────────────── */
