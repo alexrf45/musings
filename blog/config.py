@@ -16,6 +16,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    SEND_FILE_MAX_AGE_DEFAULT = 0  # disable static file caching in dev
 
 
 class TestingConfig(Config):

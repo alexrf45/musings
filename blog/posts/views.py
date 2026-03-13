@@ -1,11 +1,11 @@
-from flask import abort, flash, redirect, render_template, request, url_for
+from flask import abort, flash, make_response, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
 from blog import db
 from blog.models import Comment, Post
 from blog.posts import posts
 from blog.posts.forms import CommentForm, PostForm
-
+from blog.utils import is_htmx
 
 # ---------------------------------------------------------------------------
 # Public routes
@@ -38,8 +38,26 @@ def view_post(slug: str):
         )
         db.session.add(comment)
         db.session.commit()
+
+        if is_htmx():
+            return render_template(
+                "partials/comment_posted.html",
+                comment=comment,
+                post=post,
+                form=CommentForm(),
+                comment_count=post.comments.count(),
+            )
+
         flash("Your comment has been posted.", "success")
         return redirect(url_for("posts.view_post", slug=slug) + "#comments")
+
+    # Validation failed on an HTMX POST — return form partial with errors
+    if is_htmx():
+        return render_template(
+            "partials/comment_form.html",
+            form=form,
+            post=post,
+        )
 
     comments = post.comments.order_by(Comment.created_at.asc()).all()
     return render_template("post.html", post=post, form=form, comments=comments)
@@ -98,6 +116,10 @@ def delete_post(slug: str):
     db.session.delete(post)
     db.session.commit()
     flash(f'Post "{title}" deleted.', "info")
+    if is_htmx():
+        response = make_response("", 204)
+        response.headers["HX-Redirect"] = url_for("posts.admin_list")
+        return response
     return redirect(url_for("posts.admin_list"))
 
 
@@ -108,5 +130,9 @@ def delete_comment(comment_id: int):
     slug = comment.post.slug
     db.session.delete(comment)
     db.session.commit()
+
+    if is_htmx():
+        return "", 200
+
     flash("Comment deleted.", "info")
     return redirect(url_for("posts.view_post", slug=slug) + "#comments")

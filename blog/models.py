@@ -6,7 +6,6 @@ from flask_login import UserMixin
 
 from blog import db, login_manager
 
-
 # ---------------------------------------------------------------------------
 # Admin (single user, credentials from environment)
 # ---------------------------------------------------------------------------

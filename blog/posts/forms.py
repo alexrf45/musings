@@ -17,4 +17,6 @@ class CommentForm(FlaskForm):
         "Name",
         validators=[DataRequired(), Length(min=1, max=100)],
     )
-    body = TextAreaField("Comment", validators=[DataRequired(), Length(min=1, max=2000)])
+    body = TextAreaField(
+        "Comment", validators=[DataRequired(), Length(min=1, max=2000)]
+    )

@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
-from config import config
+from blog.config import config
 
 db = SQLAlchemy()
 migrate = Migrate()

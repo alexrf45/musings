@@ -6,13 +6,16 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
   PYTHONUNBUFFERED=1 \
   FLASK_APP=wsgi:app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies first for layer caching.
+# Stub blog/__init__.py lets setuptools discover the package
+# without copying the full source yet.
+COPY pyproject.toml .
+RUN mkdir -p blog && touch blog/__init__.py
+RUN pip install --no-cache-dir .
 
 COPY blog/        blog/
 COPY migrations/  migrations/
 COPY wsgi.py      wsgi.py
-COPY config.py    config.py
 COPY entrypoint.sh entrypoint.sh
 
 RUN addgroup --gid 1001 --system app && \

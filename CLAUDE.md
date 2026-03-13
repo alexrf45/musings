@@ -11,10 +11,11 @@ A Flask blog ("Musings" by Sean Fontaine) with a PostgreSQL backend, served by G
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e ".[dev]"
 ```
 
 Always use the `.venv` virtualenv — never install packages system-wide.
+Dependencies and tool config live in `pyproject.toml`. Runtime deps are under `[project.dependencies]`; dev/test deps under `[project.optional-dependencies] dev`.
 
 ### Environment variables (copy `.env.example` to `.env`)
 

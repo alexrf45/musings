@@ -1,0 +1,21 @@
+<div class="comment-card" id="comment-{{ comment.id }}">
+  <div class="d-flex justify-content-between align-items-start">
+    <div>
+      <span class="comment-author">{{ comment.author_name }}</span>
+      <span class="comment-date ms-2">&middot; {{ comment.created_at.strftime('%b %-d, %Y') }}</span>
+    </div>
+    {% if current_user.is_authenticated %}
+      <form hx-post="{{ url_for('posts.delete_comment', comment_id=comment.id) }}"
+            hx-target="#comment-{{ comment.id }}"
+            hx-swap="outerHTML"
+            hx-confirm="Delete this comment?"
+            hx-indicator="#htmx-indicator">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-danger btn-sm py-0 px-2" title="Delete comment">
+          <i class="bi bi-x"></i>
+        </button>
+      </form>
+    {% endif %}
+  </div>
+  <p class="comment-body mt-2 mb-0">{{ comment.body }}</p>
+</div>

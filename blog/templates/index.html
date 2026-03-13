@@ -18,24 +18,29 @@
     {% if pagination.items %}
       <div class="d-flex flex-column gap-4">
         {% for post in pagination.items %}
-          <article class="card p-4">
+          {% set word_count = post.body.split() | length %}
+          {% set read_time = [word_count // 200, 1] | max %}
+          <article class="card post-card p-4">
             <h2 class="h4 card-title mb-1">
               <a href="{{ url_for('posts.view_post', slug=post.slug) }}">{{ post.title }}</a>
             </h2>
-            <div class="post-meta mb-3">
-              <i class="bi bi-calendar3 me-1"></i>
-              <time datetime="{{ post.created_at.isoformat() }}">
-                {{ post.created_at.strftime('%B %-d, %Y') }}
-              </time>
-              <span class="ms-3">
+            <div class="post-meta mb-3 d-flex align-items-center flex-wrap gap-3">
+              <span>
+                <i class="bi bi-calendar3 me-1"></i>
+                <time datetime="{{ post.created_at.isoformat() }}">
+                  {{ post.created_at.strftime('%B %-d, %Y') }}
+                </time>
+              </span>
+              <span class="read-time">
+                <i class="bi bi-clock me-1"></i>{{ read_time }} min read
+              </span>
+              <span>
                 <i class="bi bi-chat me-1"></i>
                 {{ post.comments.count() }}
                 {{ 'comment' if post.comments.count() == 1 else 'comments' }}
               </span>
             </div>
-            {# Render a short plaintext excerpt from the markdown body #}
-            {% set excerpt = post.body | truncate(220, True, '…') %}
-            <p class="card-text">{{ excerpt }}</p>
+            <p class="card-text">{{ post.body | truncate(220, True, '…') }}</p>
             <div>
               <a href="{{ url_for('posts.view_post', slug=post.slug) }}"
                  class="btn btn-outline-secondary btn-sm">

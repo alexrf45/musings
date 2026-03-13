@@ -44,12 +44,10 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -e ".[dev]"
 
       - name: Lint (ruff)
-        run: |
-          pip install ruff
-          ruff check blog/
+        run: ruff check blog/
 
       - name: Apply migrations
         run: flask db upgrade
