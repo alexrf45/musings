@@ -4,7 +4,7 @@ from blog.models import Comment, Post
 def test_index_loads(client):
     response = client.get("/")
     assert response.status_code == 200
-    assert b"Musings" in response.data
+    assert b"luvandre" in response.data
 
 
 def test_index_shows_published_posts(client, sample_post, app):
