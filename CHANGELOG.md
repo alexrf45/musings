@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0-alpha](https://github.com/alexrf45/musings/compare/v3.0.0-alpha...v3.1.0-alpha) (2026-03-15)
+
+
+### Features
+
+* dark/light mode, sticky featured poem sidebar, reworked CI pipeline ([85a051a](https://github.com/alexrf45/musings/commit/85a051ad44c0e7c145be48fbcbc9d70b55182d70))
+
 ## [3.0.0-alpha](https://github.com/alexrf45/musings/compare/v2.0.0-alpha...v3.0.0-alpha) (2026-03-13)
 
 
