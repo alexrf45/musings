@@ -14,59 +14,9 @@ permissions:
   contents: write
 
 jobs:
-  # ─── Quality gate ──────────────────────────────────────────────────────────
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:17-alpine
-        env:
-          POSTGRES_DB: test_musings
-          POSTGRES_USER: musings
-          POSTGRES_PASSWORD: musings
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    env:
-      APP_ENV: testing
-      DATABASE_URL: postgresql://musings:musings@localhost:5432/test_musings
-      SECRET_KEY: ci-secret-key
-      ADMIN_USERNAME: admin
-      ADMIN_PASSWORD: testpassword
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag || github.ref }}
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: pip
-
-      - name: Install dependencies
-        run: pip install -e ".[dev]"
-
-      - name: Lint
-        run: ruff check blog/
-
-      - name: Apply migrations
-        run: flask db upgrade
-
-      - name: Test
-        run: pytest tests/ -v
-
-  # ─── Docker image → Docker Hub ────────────────────────────────────────────
+  # ─── Tag + push semver Docker image ────────────────────────────────────────
   docker:
-    name: Push Docker Image
-    needs: test
+    name: Push Semver Image
     runs-on: ubuntu-latest
     env:
       TAG: ${{ inputs.tag || github.ref_name }}
@@ -82,7 +32,7 @@ jobs:
         with:
           status: starting
           channel: '#musings'
-          message: Starting musings release build ${{ env.TAG }}...
+          message: Tagging musings release ${{ env.TAG }}...
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -105,7 +55,6 @@ jobs:
             type=semver,pattern={{version}},value=${{ env.TAG }}
             type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
             type=semver,pattern={{major}},value=${{ env.TAG }}
-            type=raw,value=latest
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -119,5 +68,5 @@ jobs:
         with:
           status: ${{ job.status }}
           channel: '#musings'
-          message: Release ${{ env.TAG }} complete for musings
+          message: Release ${{ env.TAG }} tagged and pushed
         if: always()

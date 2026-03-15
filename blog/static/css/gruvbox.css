@@ -275,10 +275,20 @@ hr {
 .alert-info     { background-color: rgba(69,133,136,.18); border-color: var(--gb-blue-b);  color: var(--gb-blue-b);  }
 
 /* ── Featured hero ──────────────────────────────────────────── */
+.featured-sidebar {
+  position: sticky;
+  top: 5rem; /* clears sticky navbar */
+}
 .featured-hero {
-  border-top: 3px solid var(--gb-yellow-b);
-  padding-top: 2.5rem;
-  margin-bottom: 3rem;
+  border-left: 2px solid var(--gb-yellow-b);
+  padding-left: 1.25rem;
+}
+.preview-trigger {
+  font-size: 0.82rem;
+  color: var(--gb-yellow-b);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .featured-label {
   font-family: system-ui, -apple-system, sans-serif;
@@ -291,12 +301,22 @@ hr {
 }
 .featured-excerpt {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-style: italic;
   line-height: 1.75;
   color: var(--gb-fg1);
-  margin-bottom: 1.5rem;
   quotes: "\201C" "\201D";
+  white-space: pre-line;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-bottom: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.3s ease;
+}
+.featured-title:has(.preview-trigger:hover) ~ .featured-excerpt {
+  max-height: 20rem;
+  opacity: 1;
+  margin-bottom: 1.5rem;
 }
 .featured-excerpt::before { content: open-quote;  color: var(--gb-yellow-b); }
 .featured-excerpt::after  { content: close-quote; color: var(--gb-yellow-b); }
@@ -658,4 +678,25 @@ footer {
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--gb-bg-hard); }
 ::-webkit-scrollbar-thumb { background: var(--gb-bg2); border-radius: 4px; }
+
+/* ── Light mode (Gruvbox Light) ─────────────────────────────── */
+html[data-bs-theme="light"] {
+  --gb-bg-hard:  #f9f5d7;
+  --gb-bg:       #fbf1c7;
+  --gb-bg-soft:  #f2e5bc;
+  --gb-bg1:      #ebdbb2;
+  --gb-bg2:      #d5c4a1;
+  --gb-bg3:      #bdae93;
+  --gb-bg4:      #a89984;
+  --gb-fg:       #3c3836;
+  --gb-fg1:      #504945;
+  --gb-fg2:      #665c54;
+  --gb-fg3:      #7c6f64;
+
+  --bs-body-bg:         var(--gb-bg);
+  --bs-body-color:      var(--gb-fg);
+  --bs-emphasis-color:  var(--gb-fg);
+  --bs-secondary-color: var(--gb-fg3);
+  --bs-border-color:    var(--gb-bg2);
+}
 ::-webkit-scrollbar-thumb:hover { background: var(--gb-bg3); }

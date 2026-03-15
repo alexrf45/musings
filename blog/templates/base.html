@@ -3,9 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="luvandre — poetry by Sean Fontaine">
+  <meta name="description" content="luvandre">
+
+  <!-- Set theme before paint to avoid flash -->
+  <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-bs-theme',t);})();</script>
 
   <title>{% block title %}luvandre{% endblock %}</title>
+
+  <!-- Emoji favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♉</text></svg>">
 
   <!-- Bootstrap 5 -->
   <link rel="stylesheet"
@@ -38,7 +44,11 @@
       <div class="collapse navbar-collapse justify-content-center" id="navMenu">
         <ul class="navbar-nav align-items-md-center gap-md-2">
           <li class="nav-item">
-            <a class="navbar-brand px-3" href="{{ url_for('posts.index') }}">luvandre</a>
+            <a class="navbar-brand px-3" href="{{ url_for('posts.index') }}">
+              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>"
+                   width="20" height="20" alt="" style="vertical-align: -0.15em;">
+              luvandre
+            </a>
           </li>
           {% if current_user.is_authenticated %}
             <li class="nav-item">
@@ -70,6 +80,19 @@
               </a>
             </li>
           {% endif %}
+          <li class="nav-item"
+              x-data="{ dark: document.documentElement.getAttribute('data-bs-theme') !== 'light' }"
+              x-init="$watch('dark', v => {
+                const t = v ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-bs-theme', t);
+                localStorage.setItem('theme', t);
+              })">
+            <button class="nav-link px-3 border-0 bg-transparent"
+                    @click="dark = !dark"
+                    :title="dark ? 'Switch to light mode' : 'Switch to dark mode'">
+              <i class="bi" :class="dark ? 'bi-sun' : 'bi-moon-stars-fill'"></i>
+            </button>
+          </li>
         </ul>
       </div>
     </div>

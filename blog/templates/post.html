@@ -3,9 +3,20 @@
 {% block title %}{{ post.title }} — luvandre{% endblock %}
 
 {% block head %}
-  <!-- highlight.js — Gruvbox Dark theme -->
-  <link rel="stylesheet"
+  <link id="hljs-theme" rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-dark-medium.min.css">
+  <script>
+    (function () {
+      var DARK  = 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-dark-medium.min.css';
+      var LIGHT = 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-light-medium.min.css';
+      function sync() {
+        var el = document.getElementById('hljs-theme');
+        if (el) el.href = document.documentElement.getAttribute('data-bs-theme') === 'light' ? LIGHT : DARK;
+      }
+      sync();
+      new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+    })();
+  </script>
 {% endblock %}
 
 {% block content %}
