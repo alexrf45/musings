@@ -1,12 +1,11 @@
-name: Release
+name: Release (manual)
 
+# Manual re-tag only — automatic semver pushes are handled by release-please.yml.
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release tag (e.g. v0.1.0)'
+        description: 'Release tag to build and push (e.g. v1.2.3)'
         required: true
         type: string
 
@@ -14,25 +13,24 @@ permissions:
   contents: write
 
 jobs:
-  # ─── Tag + push semver Docker image ────────────────────────────────────────
   docker:
     name: Push Semver Image
     runs-on: ubuntu-latest
     env:
-      TAG: ${{ inputs.tag || github.ref_name }}
+      TAG: ${{ inputs.tag }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.tag || github.ref }}
+          ref: ${{ inputs.tag }}
 
       - name: Notify Slack — starting
         uses: act10ns/slack@v2
         with:
           status: starting
           channel: '#musings'
-          message: Tagging musings release ${{ env.TAG }}...
+          message: Manual re-tag of musings ${{ env.TAG }}...
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -68,5 +66,5 @@ jobs:
         with:
           status: ${{ job.status }}
           channel: '#musings'
-          message: Release ${{ env.TAG }} tagged and pushed
+          message: Manual re-tag ${{ env.TAG }} complete
         if: always()
