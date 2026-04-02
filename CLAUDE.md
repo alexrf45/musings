@@ -19,7 +19,7 @@ Dependencies and tool config live in `pyproject.toml`. Runtime deps are under `[
 
 ### Environment variables (copy `.env.example` to `.env`)
 
-```bash
+```
 APP_ENV=development
 DATABASE_URL=postgresql://musings:musings@localhost:5432/musings
 SECRET_KEY=...
@@ -27,52 +27,21 @@ ADMIN_USERNAME=admin
 ADMIN_PASSWORD=...
 ```
 
-### Full-stack local dev (recommended)
+### Slash commands
 
-```bash
-docker compose up -d                          # db + app at http://localhost:8080; blog/ is volume-mounted (hot reload)
-docker compose build && docker compose up -d  # rebuild image after dep/config changes
-docker compose logs app -f                    # tail app logs
-```
+| Command         | Action                                      |
+| --------------- | ------------------------------------------- |
+| `/dev`          | Start full dev stack or Flask dev server    |
+| `/test`         | Run pytest against local Postgres           |
+| `/migrate`      | Generate and apply a DB migration           |
+| `/docker-build` | Build Docker image locally                  |
 
-### Run locally (Flask dev server + Postgres via Docker Compose)
+### Notes
 
-```bash
-# Start Postgres only
-docker compose up db
-
-# In another terminal
-source .venv/bin/activate
-APP_ENV=development flask run --debug --port 5000
-```
-
-Or use the tmuxp session:
-```bash
-tmuxp load development/dev-tmuxp.yaml
-```
-
-### Database migrations
-
-```bash
-flask db migrate -m "describe the change"   # generate migration
-flask db upgrade                             # apply migrations
-```
-
-### Run tests
-
-```bash
-APP_ENV=testing DATABASE_URL=postgresql://musings:musings@localhost:5432/test_musings \
-  SECRET_KEY=test ADMIN_USERNAME=admin ADMIN_PASSWORD=testpassword \
-  pytest tests/ -v
-```
-
-Tests use SQLite by default if DATABASE_URL falls back to the testing config default. The CI workflow spins up a real Postgres service container.
-
-### Local Docker build
-
-```bash
-bash development/build.sh
-```
+- Docker debugging: check port conflicts, Alpine package availability (edge/community), and binary renames in newer package versions.
+- UI changes: test the full interaction flow (modals, alerts, delete buttons) after each change — HTMX integration can break existing patterns subtly.
+- Git commits may require SSH signing via 1Password agent. If signing fails, inform the user — they need to authenticate manually.
+- Tests: CI uses a real Postgres service container; locally requires Postgres running.
 
 ## Architecture
 
@@ -109,11 +78,11 @@ Single admin user — credentials from env vars (`ADMIN_USERNAME`, `ADMIN_PASSWO
 
 ### Blueprints and URL map
 
-| Blueprint | Prefix | Key routes |
-|-----------|--------|-----------|
-| `auth`    | `/`    | `GET/POST /login`, `GET /logout` |
+| Blueprint | Prefix | Key routes                                                                                                                                                                                       |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `auth`    | `/`    | `GET/POST /login`, `GET /logout`                                                                                                                                                                 |
 | `posts`   | `/`    | `GET /`, `GET/POST /post/<slug>`, `GET /admin/posts`, `GET/POST /admin/posts/create`, `GET/POST /admin/posts/<slug>/edit`, `POST /admin/posts/<slug>/delete`, `POST /admin/comments/<id>/delete` |
-| `errors`  | —      | 403, 404, 500 handlers |
+| `errors`  | —      | 403, 404, 500 handlers                                                                                                                                                                           |
 
 ### Key design decisions
 
@@ -127,12 +96,12 @@ Single admin user — credentials from env vars (`ADMIN_USERNAME`, `ADMIN_PASSWO
 
 Dockerfile: Python 3.13-slim, installs deps, copies `blog/`, `migrations/`, `wsgi.py`, `config.py`. Entrypoint runs `flask db upgrade` then starts Gunicorn (2 workers × 2 threads, port 8080), running as non-root `app` user.
 
-| Workflow | Trigger | Action |
-|----------|---------|--------|
-| `ci.yml` | push/PR to `main` | ruff lint + pytest with Postgres service |
-| `dev.yml` | push to `dev` | build + push `fonalex45/blog:dev` |
-| `release-please.yml` | push to `main` | open/update release PR |
-| `release.yml` | GitHub Release published | test → push semver tags + `latest` |
+| Workflow             | Trigger                  | Action                                   |
+| -------------------- | ------------------------ | ---------------------------------------- |
+| `ci.yml`             | push/PR to `main`        | ruff lint + pytest with Postgres service |
+| `dev.yml`            | push to `dev`            | build + push `fonalex45/blog:dev`        |
+| `release-please.yml` | push to `main`           | open/update release PR                   |
+| `release.yml`        | GitHub Release published | test → push semver tags + `latest`       |
 
 Semver managed by release-please; current version in `.github/release-please-manifest.json`. Start: `0.0.1-alpha`. Conventional commits drive version bumps.
 
@@ -140,22 +109,24 @@ Semver managed by release-please; current version in `.github/release-please-man
 
 Provisions a Hetzner Cloud server in Frankfurt, creates Cloudflare DNS records, and stores the SSH keypair in 1Password.
 
-| Resource | Spec |
-|---|---|
-| Server | `cx22` — 2 vCPU AMD, 4 GB RAM, 40 GB root, Ubuntu 24.04, `fsn1` |
-| Volume | 50 GB block storage mounted at `/opt/musings/data` |
-| Firewall | Inbound: 22 (SSH), 80 (HTTP), 443 (HTTPS), ICMP |
-| DNS | Cloudflare A + AAAA records (DNS-only, not proxied) |
+| Resource    | Spec                                                                           |
+| ----------- | ------------------------------------------------------------------------------ |
+| Server      | `cx22` — 2 vCPU AMD, 4 GB RAM, 40 GB root, Ubuntu 24.04, `fsn1`                |
+| Volume      | 50 GB block storage mounted at `/opt/musings/data`                             |
+| Firewall    | Inbound: 22 (SSH), 80 (HTTP), 443 (HTTPS), ICMP                                |
+| DNS         | Cloudflare A + AAAA records (DNS-only, not proxied)                            |
 | SSH keypair | ED25519 generated by Terraform; private key stored in 1Password, never on disk |
 
 **Providers:** `hetznercloud/hcloud`, `hashicorp/tls`, `1Password/onepassword`, `cloudflare/cloudflare`
 
 **Prerequisites:**
+
 - A 1Password service account token with read/write access to your infra vault
 - A Cloudflare API token (stored as the `credential` field of a 1Password item)
 - The Cloudflare Zone ID for your domain
 
 **First apply:**
+
 ```bash
 cd terraform
 cp terraform.tfvars.example terraform.tfvars   # fill in values
@@ -179,12 +150,14 @@ deploy/
 ```
 
 **Services:**
+
 - `db` — Postgres 17, data on `/opt/musings/data/postgres`
 - `app` — `fonalex45/blog:latest`, proxied by Traefik on internal network
 - `traefik` — terminates TLS via ACME (certs at `/opt/musings/data/traefik/acme.json`), logs to `/var/log/traefik/` for fail2ban, handles HTTP→HTTPS redirect
 - `watchtower` — polls Docker Hub every 5 min, pulls new `app` image automatically, notifies Slack
 
 **Deployment steps on the server:**
+
 ```bash
 cd /opt/musings
 git clone <repo> .
@@ -196,16 +169,17 @@ The init script decrypts `deploy/.env.enc` (via SOPS + age), creates `/opt/musin
 
 **fail2ban jails configured on host (via cloud-init):**
 
-| Jail | Log | Trigger | Ban |
-|---|---|---|---|
-| `sshd` | `/var/log/auth.log` | 3 failed SSH auths | 24 h |
-| `musings-login` | `/var/log/traefik/access.log` | 10 POST /login in 5 min | 24 h |
-| `nginx-limit-req` | `/var/log/traefik/access.log` | 10 × 429 in 2 min | 2 h |
-| `nginx-botsearch` | `/var/log/traefik/access.log` | 10 × 4xx in 5 min | 1 h |
+| Jail              | Log                           | Trigger                 | Ban  |
+| ----------------- | ----------------------------- | ----------------------- | ---- |
+| `sshd`            | `/var/log/auth.log`           | 3 failed SSH auths      | 24 h |
+| `musings-login`   | `/var/log/traefik/access.log` | 10 POST /login in 5 min | 24 h |
+| `nginx-limit-req` | `/var/log/traefik/access.log` | 10 × 429 in 2 min       | 2 h  |
+| `nginx-botsearch` | `/var/log/traefik/access.log` | 10 × 4xx in 5 min       | 1 h  |
 
 Traefik applies rate limiting via middleware labels: 30 req/s (burst 60) globally, 5 req/min (burst 3) on `/login`.
 
 **Manual steps on existing server (cloud-init already ran):**
+
 ```bash
 sed -i 's|/var/log/nginx/access.log|/var/log/traefik/access.log|g' /etc/fail2ban/jail.local
 systemctl restart fail2ban
