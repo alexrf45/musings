@@ -13,3 +13,4 @@ remote.tfbackend
 
 # OS
 .DS_Store
+.claude/*
