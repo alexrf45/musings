@@ -44,7 +44,7 @@ resource "cloudflare_pages_project" "luvandre" {
   }
 
   deployment_configs = {
-    preview    = {}
+    preview = {}
     production = {
       env_vars = {
         HUGO_VERSION = {
@@ -58,14 +58,14 @@ resource "cloudflare_pages_project" "luvandre" {
   source = {
     type = "github"
     config = {
-      owner                        = "alexrf45"
-      repo_name                    = "musings"
-      production_branch            = "hugo"
-      pr_comments_enabled          = true
-      deployments_enabled          = true
+      owner                          = "alexrf45"
+      repo_name                      = "musings"
+      production_branch              = "hugo"
+      pr_comments_enabled            = true
+      deployments_enabled            = true
       production_deployments_enabled = true
-      preview_deployment_setting   = "custom"
-      preview_branch_includes      = ["hugo"]
+      preview_deployment_setting     = "custom"
+      preview_branch_includes        = ["hugo"]
     }
   }
 }
@@ -73,9 +73,9 @@ resource "cloudflare_pages_project" "luvandre" {
 # ── Custom domain ─────────────────────────────────────────────────────────────
 
 resource "cloudflare_pages_domain" "luvandre" {
+  name         = "luvandre.com"
   account_id   = var.cloudflare_account_id
   project_name = cloudflare_pages_project.luvandre.name
-  domain       = var.domain
 }
 
 # ── DNS — CNAME pointing to Cloudflare Pages ─────────────────────────────────
