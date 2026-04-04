@@ -1,0 +1,44 @@
+{{ define "main" }}
+  {{- $posts := where site.RegularPages "Section" "posts" }}
+  {{- $paginator := .Paginate $posts }}
+
+  {{ if $posts }}
+    {{- $featured := index $posts 0 }}
+    <div class="row gx-5">
+
+      <!-- Featured poem — sticky sidebar -->
+      <div class="col-lg-5">
+        <div class="featured-sidebar">
+          <div class="featured-hero">
+            <span class="featured-label">featured poem</span>
+            <div class="featured-title">
+              <a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a>
+              &nbsp;&mdash;&nbsp;
+              <span class="preview-trigger">Preview</span>
+            </div>
+            <p class="featured-excerpt">{{ $featured.Summary }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post list -->
+      <div class="col-lg-7">
+        <div class="d-flex flex-column gap-4">
+          {{ range $paginator.Pages }}
+            {{ partial "post-card.html" . }}
+          {{ end }}
+        </div>
+        {{ partial "pagination.html" . }}
+      </div>
+
+    </div>
+  {{ else }}
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        <div class="text-center py-5">
+          <p class="text-muted fs-5">No posts yet.</p>
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}

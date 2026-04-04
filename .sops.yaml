@@ -1,3 +1,0 @@
-creation_rules:
-  - path_regex: deploy/\.env(\.enc)?$
-    age: age1s5hqhan65c5v6avj3vrtf5lky9anejqe6s4yz26gz7u86f7ega9q7wpuj9

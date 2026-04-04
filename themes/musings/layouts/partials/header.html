@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="container">
+    <button class="navbar-toggler ms-auto" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+      <ul class="navbar-nav align-items-md-center gap-md-2">
+        <li class="nav-item">
+          <a class="navbar-brand px-3" href="{{ "/" | relURL }}">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>"
+                 width="20" height="20" alt="" style="vertical-align: -0.15em;">
+            luvandre
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="{{ site.Params.spotifyURL }}"
+             target="_blank" rel="noopener">
+            <i class="bi bi-spotify me-1"></i>{{ site.Params.spotifyName }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="{{ site.Params.githubURL }}"
+             target="_blank" rel="noopener">
+            <i class="bi bi-github me-1"></i>alexrf45
+          </a>
+        </li>
+        <li class="nav-item"
+            x-data="{ dark: document.documentElement.getAttribute('data-bs-theme') !== 'light' }"
+            x-init="$watch('dark', v => {
+              const t = v ? 'dark' : 'light';
+              document.documentElement.setAttribute('data-bs-theme', t);
+              localStorage.setItem('theme', t);
+            })">
+          <button class="nav-link px-3 border-0 bg-transparent"
+                  @click="dark = !dark"
+                  :title="dark ? 'Switch to light mode' : 'Switch to dark mode'">
+            <i class="bi" :class="dark ? 'bi-sun' : 'bi-moon-stars-fill'"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

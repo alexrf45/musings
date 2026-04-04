@@ -1,0 +1,21 @@
+baseURL      = "https://luvandre.fr3d.dev/"
+languageCode = "en-us"
+title        = "luvandre"
+theme        = "musings"
+
+enableRobotsTXT = true
+enableEmoji     = true
+
+[pagination]
+  pagerSize = 8
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[params]
+  description = "luvandre — writings by Sean Fontaine"
+  author      = "Sean Fontaine"
+  githubURL   = "https://github.com/alexrf45"
+  spotifyURL  = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
+  spotifyName = "Alexander Sean"
