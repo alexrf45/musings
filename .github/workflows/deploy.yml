@@ -2,9 +2,9 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [hugo]
+    branches: [main]
   pull_request:
-    branches: [hugo]
+    branches: [main]
 
 permissions:
   contents: read
