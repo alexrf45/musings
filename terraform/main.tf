@@ -37,31 +37,35 @@ resource "cloudflare_pages_project" "luvandre" {
   name              = "luvandre"
   production_branch = "hugo"
 
-  build_config {
+  build_config = {
     build_command   = "hugo --minify"
     destination_dir = "public"
-    root_dir        = ""
+    root_dir        = "/"
   }
 
-  deployment_configs {
-    production {
-      environment_variables = {
-        HUGO_VERSION = "0.148.0"
+  deployment_configs = {
+    preview    = {}
+    production = {
+      env_vars = {
+        HUGO_VERSION = {
+          type  = "plain_text"
+          value = "0.148.0"
+        }
       }
     }
   }
 
-  source {
+  source = {
     type = "github"
-    config {
-      owner                         = "alexrf45"
-      repo_name                     = "musings"
-      production_branch             = "hugo"
-      pr_comments_enabled           = true
-      deployments_enabled           = true
-      production_deployment_enabled = true
-      preview_deployment_setting    = "custom"
-      preview_branch_includes       = ["hugo"]
+    config = {
+      owner                        = "alexrf45"
+      repo_name                    = "musings"
+      production_branch            = "hugo"
+      pr_comments_enabled          = true
+      deployments_enabled          = true
+      production_deployments_enabled = true
+      preview_deployment_setting   = "custom"
+      preview_branch_includes      = ["hugo"]
     }
   }
 }
