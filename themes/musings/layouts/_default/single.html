@@ -1,0 +1,68 @@
+{{ define "head-extra" }}
+  <link id="hljs-theme" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-dark-medium.min.css">
+  <script>
+    (function () {
+      var DARK  = 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-dark-medium.min.css';
+      var LIGHT = 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/base16/gruvbox-light-medium.min.css';
+      function sync() {
+        var el = document.getElementById('hljs-theme');
+        if (el) el.href = document.documentElement.getAttribute('data-bs-theme') === 'light' ? LIGHT : DARK;
+      }
+      sync();
+      new MutationObserver(sync).observe(document.documentElement, {
+        attributes: true, attributeFilter: ['data-bs-theme']
+      });
+    })();
+  </script>
+{{ end }}
+
+{{ define "main" }}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-xl-7">
+
+    <a href="{{ "/" | relURL }}"
+       class="text-muted small d-inline-flex align-items-center gap-1 mb-5"
+       style="font-family: var(--bs-font-monospace); font-size: 0.68rem; letter-spacing: 0.08em;">
+      <i class="bi bi-arrow-left"></i> all poems
+    </a>
+
+    <header class="mb-5">
+      <h1 class="poem-title">{{ .Title }}</h1>
+      <div class="poem-meta-line">
+        <span>
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+            {{ .Date | time.Format "January 2, 2006" }}
+          </time>
+        </span>
+        {{- with .GetTerms "tags" }}
+          {{- range . }}
+            <a href="{{ .RelPermalink }}"
+               class="badge bg-secondary text-decoration-none">{{ .LinkTitle }}</a>
+          {{- end }}
+        {{- end }}
+      </div>
+    </header>
+
+    <hr class="poem-divider">
+
+    <div class="poem-body mb-5">
+      {{ .Content }}
+    </div>
+
+    <hr class="poem-divider" style="margin-top: 3rem;">
+
+  </div>
+</div>
+{{ end }}
+
+{{ define "foot-extra" }}
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("pre code").forEach(function (el) {
+        hljs.highlightElement(el);
+      });
+    });
+  </script>
+{{ end }}

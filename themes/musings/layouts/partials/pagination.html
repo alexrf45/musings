@@ -1,0 +1,24 @@
+{{ $p := .Paginator }}
+{{ if gt $p.TotalPages 1 }}
+<nav class="mt-5" aria-label="Post pages">
+  <ul class="pagination justify-content-center">
+    <li class="page-item{{ if not $p.HasPrev }} disabled{{ end }}">
+      <a class="page-link" href="{{ if $p.HasPrev }}{{ $p.Prev.URL }}{{ else }}#{{ end }}"
+         aria-label="Previous">
+        <i class="bi bi-chevron-left"></i>
+      </a>
+    </li>
+    {{ range $p.Pagers }}
+      <li class="page-item{{ if eq . $p }} active{{ end }}">
+        <a class="page-link" href="{{ .URL }}">{{ .PageNumber }}</a>
+      </li>
+    {{ end }}
+    <li class="page-item{{ if not $p.HasNext }} disabled{{ end }}">
+      <a class="page-link" href="{{ if $p.HasNext }}{{ $p.Next.URL }}{{ else }}#{{ end }}"
+         aria-label="Next">
+        <i class="bi bi-chevron-right"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+{{ end }}

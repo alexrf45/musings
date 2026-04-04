@@ -1,15 +1,7 @@
-*/output/drafts
-
-# Python
-.venv/
-__pycache__/
-*.py[cod]
-*.egg-info/
-
-# Flask
-instance/
-.env
-deploy/.env      # plaintext — only .env.enc belongs in git
+# Hugo build output
+/public/
+/resources/
+/.hugo_build.lock
 
 # Terraform
 terraform/.terraform/
@@ -18,5 +10,6 @@ terraform/*.tfstate.backup
 terraform/*.tfvars
 terraform/.terraform.lock.hcl
 remote.tfbackend
+
 # OS
 .DS_Store

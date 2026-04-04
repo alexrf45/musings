@@ -2,10 +2,6 @@ terraform {
   required_version = ">= 1.6"
 
   required_providers {
-    hcloud = {
-      source  = "hetznercloud/hcloud"
-      version = "~> 1.49"
-    }
     onepassword = {
       source  = "1Password/onepassword"
       version = "~> 3.2"
@@ -14,18 +10,10 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "~> 5.0"
     }
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 3.0"
-    }
   }
   backend "s3" {
 
   }
-}
-
-provider "hcloud" {
-  token = var.hcloud_token
 }
 
 provider "onepassword" {
@@ -42,153 +30,62 @@ provider "cloudflare" {
   api_token = data.onepassword_item.cloudflare_token.credential
 }
 
-data "onepassword_item" "blog_ssh_key" {
-  vault = var.op_vault_id
-  title = var.op_ssh_key_item_title
-}
+# ── Cloudflare Pages project ──────────────────────────────────────────────────
 
-resource "hcloud_ssh_key" "blog" {
-  name       = "${var.server_name}-key"
-  public_key = data.onepassword_item.blog_ssh_key.public_key
-}
+resource "cloudflare_pages_project" "luvandre" {
+  account_id        = var.cloudflare_account_id
+  name              = "luvandre"
+  production_branch = "hugo"
 
-# ── Firewall ──────────────────────────────────────────────────────────────────
-# Allow SSH, HTTP, HTTPS inbound. All outbound traffic is permitted by default.
-
-resource "hcloud_firewall" "blog" {
-  name = "${var.server_name}-fw"
-
-  # SSH
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "22"
-    source_ips = ["0.0.0.0/0", "::/0"]
+  build_config = {
+    build_command   = "hugo --minify"
+    destination_dir = "public"
+    root_dir        = "/"
   }
 
-  # HTTP (needed for ACME challenge + redirect)
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "80"
-    source_ips = ["0.0.0.0/0", "::/0"]
+  deployment_configs = {
+    preview = {}
+    production = {
+      env_vars = {
+        HUGO_VERSION = {
+          type  = "plain_text"
+          value = "0.148.0"
+        }
+      }
+    }
   }
 
-  # HTTPS
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "443"
-    source_ips = ["0.0.0.0/0", "::/0"]
-  }
-
-  # ICMP (ping)
-  rule {
-    direction  = "in"
-    protocol   = "icmp"
-    source_ips = ["0.0.0.0/0", "::/0"]
+  source = {
+    type = "github"
+    config = {
+      owner                          = "alexrf45"
+      repo_name                      = "musings"
+      production_branch              = "hugo"
+      pr_comments_enabled            = true
+      deployments_enabled            = true
+      production_deployments_enabled = true
+      preview_deployment_setting     = "custom"
+      preview_branch_includes        = ["hugo"]
+    }
   }
 }
 
-# ── Server ────────────────────────────────────────────────────────────────────
-# cx22: 2 vCPU (AMD), 4 GB RAM, 40 GB root disk — Frankfurt (fsn1)
+# ── Custom domain ─────────────────────────────────────────────────────────────
 
-resource "hcloud_server" "blog" {
-  name         = var.server_name
-  server_type  = "cx23"
-  image        = "ubuntu-24.04"
-  location     = "fsn1"
-  ssh_keys     = [hcloud_ssh_key.blog.id]
-  firewall_ids = [hcloud_firewall.blog.id]
-
-  user_data = templatefile("${path.module}/cloud-init.yaml", {
-    domain = var.domain
-  })
-
-  labels = {
-    project = "musings"
-    env     = "production"
-  }
+resource "cloudflare_pages_domain" "luvandre" {
+  name         = "luvandre.com"
+  account_id   = var.cloudflare_account_id
+  project_name = cloudflare_pages_project.luvandre.name
 }
 
-# ── Data volume ───────────────────────────────────────────────────────────────
-# 50 GB block storage for Postgres data, TLS certs, and nginx state.
-# Lives independently of the server so data survives a server rebuild.
+# ── DNS — CNAME pointing to Cloudflare Pages ─────────────────────────────────
+# proxied = true enables Cloudflare CDN and custom domain routing for Pages.
 
-resource "hcloud_volume" "data" {
-  name     = "${var.server_name}-data"
-  size     = 50
-  location = "fsn1"
-  format   = "ext4"
-
-  labels = {
-    project = "musings"
-  }
-}
-
-resource "hcloud_volume_attachment" "data" {
-  volume_id = hcloud_volume.data.id
-  server_id = hcloud_server.blog.id
-  automount = false # We configure the mount ourselves via remote-exec below
-}
-
-# ── Mount volume on first attach ──────────────────────────────────────────────
-
-resource "null_resource" "mount_volume" {
-  depends_on = [hcloud_volume_attachment.data, hcloud_server.blog]
-
-  triggers = {
-    volume_id = hcloud_volume.data.id
-    server_id = hcloud_server.blog.id
-  }
-
-  connection {
-    type    = "ssh"
-    user    = "root"
-    agent   = true # relies on 1Password SSH agent (SSH_AUTH_SOCK must be set)
-    host    = hcloud_server.blog.ipv4_address
-    timeout = "3m"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      # Wait for cloud-init to finish before mounting
-      "cloud-init status --wait",
-
-      # Mount the Hetzner volume at our data path
-      "mkdir -p /opt/musings/data",
-      "mount -o discard,defaults /dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data.id} /opt/musings/data",
-
-      # Persist in fstab
-      "echo '/dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data.id} /opt/musings/data ext4 discard,defaults 0 0' >> /etc/fstab",
-
-      # Create subdirs used by docker-compose services
-      "mkdir -p /opt/musings/data/{postgres,certbot-certs,certbot-www}",
-
-      # Give the deploy user ownership
-      "chown -R deploy:deploy /opt/musings/data",
-    ]
-  }
-}
-
-# ── DNS records ───────────────────────────────────────────────────────────────
-# DNS-only (proxied = false) so Let's Encrypt ACME challenges reach the server
-# directly and fail2ban sees real client IPs in nginx logs.
-
-resource "cloudflare_dns_record" "blog_a" {
+resource "cloudflare_dns_record" "blog_pages" {
   zone_id = var.cloudflare_zone_id
   name    = var.domain
-  type    = "A"
-  content = hcloud_server.blog.ipv4_address
-  ttl     = 300
-  proxied = false
-}
-
-resource "cloudflare_dns_record" "blog_aaaa" {
-  zone_id = var.cloudflare_zone_id
-  name    = var.domain
-  type    = "AAAA"
-  content = hcloud_server.blog.ipv6_address
-  ttl     = 300
-  proxied = false
+  type    = "CNAME"
+  content = "${cloudflare_pages_project.luvandre.name}.pages.dev"
+  ttl     = 1
+  proxied = true
 }

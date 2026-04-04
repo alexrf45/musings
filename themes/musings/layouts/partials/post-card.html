@@ -1,0 +1,29 @@
+<article class="card post-card p-4">
+  <h2 class="h4 card-title mb-1">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  </h2>
+  <div class="post-meta mb-3 d-flex align-items-center flex-wrap gap-3">
+    <span>
+      <i class="bi bi-calendar3 me-1"></i>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date | time.Format "January 2, 2006" }}
+      </time>
+    </span>
+    <span class="read-time">
+      <i class="bi bi-clock me-1"></i>{{ .ReadingTime }} min read
+    </span>
+    {{- with .GetTerms "tags" }}
+      <span class="d-flex flex-wrap gap-1">
+        {{- range . }}
+          <a href="{{ .RelPermalink }}"
+             class="badge bg-secondary text-decoration-none">{{ .LinkTitle }}</a>
+        {{- end }}
+      </span>
+    {{- end }}
+  </div>
+  <div>
+    <a href="{{ .RelPermalink }}" class="btn btn-outline-secondary btn-sm">
+      Read <i class="bi bi-arrow-right ms-1"></i>
+    </a>
+  </div>
+</article>

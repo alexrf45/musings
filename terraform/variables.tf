@@ -1,18 +1,16 @@
-variable "hcloud_token" {
-  description = "Hetzner Cloud API token (read/write)"
-  type        = string
-  sensitive   = true
-}
-
 variable "domain" {
-  description = "Domain name for the blog (e.g. blog.fr3d.dev)"
+  description = "Custom domain for the blog (e.g. luvandre.fr3d.dev)"
   type        = string
 }
 
-variable "server_name" {
-  description = "Hetzner server resource name"
+variable "cloudflare_account_id" {
+  description = "Cloudflare account ID"
   type        = string
-  default     = "musings-blog"
+}
+
+variable "cloudflare_zone_id" {
+  description = "Cloudflare Zone ID for the domain (found in the Cloudflare dashboard)"
+  type        = string
 }
 
 variable "op_service_account_token" {
@@ -26,19 +24,8 @@ variable "op_vault_id" {
   type        = string
 }
 
-variable "op_ssh_key_item_title" {
-  description = "Title of the 1Password SSH Key item holding the server keypair"
-  type        = string
-  default     = "musings-blog-ssh-key"
-}
-
 variable "op_cloudflare_item_title" {
   description = "Title of the 1Password item that holds the Cloudflare API token (credential field)"
   type        = string
   default     = "Cloudflare API Token"
-}
-
-variable "cloudflare_zone_id" {
-  description = "Cloudflare Zone ID for the domain (found in the Cloudflare dashboard)"
-  type        = string
 }

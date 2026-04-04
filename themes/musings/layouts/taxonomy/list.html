@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-xl-7">
+    <h1 class="mb-4" style="font-size: 1.4rem;">
+      <span class="section-title d-block">tag</span>
+      {{ .Title }}
+    </h1>
+    <div class="d-flex flex-column gap-4">
+      {{ range .Pages }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,11 @@
+name        = "musings"
+license     = "MIT"
+licenselink = "https://github.com/alexrf45/musings/blob/hugo/LICENSE"
+description = "Gruvbox dark theme for luvandre, mirroring the Flask blog design"
+homepage    = "https://github.com/alexrf45/musings"
+tags        = ["blog", "gruvbox", "dark", "bootstrap"]
+features    = ["blog"]
+
+[module]
+  [module.hugoVersion]
+    min = "0.120.0"
