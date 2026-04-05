@@ -35,7 +35,7 @@ provider "cloudflare" {
 resource "cloudflare_pages_project" "luvandre" {
   account_id        = var.cloudflare_account_id
   name              = "luvandre"
-  production_branch = "hugo"
+  production_branch = "main"
 
   build_config = {
     build_command   = "hugo --minify"
@@ -60,7 +60,7 @@ resource "cloudflare_pages_project" "luvandre" {
     config = {
       owner                          = "alexrf45"
       repo_name                      = "musings"
-      production_branch              = "hugo"
+      production_branch              = "main"
       pr_comments_enabled            = true
       deployments_enabled            = true
       production_deployments_enabled = true
