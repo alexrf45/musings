@@ -9,6 +9,10 @@ enableEmoji     = true
 [pagination]
   pagerSize = 8
 
+[taxonomies]
+  tag    = "tags"
+  series = "series"
+
 [markup]
   [markup.goldmark.renderer]
     unsafe = true

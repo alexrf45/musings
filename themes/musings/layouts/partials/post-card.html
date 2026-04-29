@@ -3,6 +3,9 @@
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   </h2>
   <div class="post-meta mb-3 d-flex align-items-center flex-wrap gap-3">
+    <span class="badge bg-dark-subtle text-body-secondary text-uppercase">
+      {{ if eq .Section "notes" }}writing{{ else }}poem{{ end }}
+    </span>
     <span>
       <i class="bi bi-calendar3 me-1"></i>
       <time datetime="{{ .Date.Format "2006-01-02" }}">

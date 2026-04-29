@@ -1,16 +1,16 @@
 {{ define "main" }}
-  {{- $posts := where site.RegularPages "Section" "posts" }}
-  {{- $paginator := .Paginate $posts }}
+  {{- $items := where site.RegularPages "Section" "in" (slice "posts" "notes") }}
+  {{- $paginator := .Paginate $items }}
 
-  {{ if $posts }}
-    {{- $featured := index $posts 0 }}
+  {{ if $items }}
+    {{- $featured := index $items 0 }}
     <div class="row gx-5">
 
       <!-- Featured poem — sticky sidebar -->
       <div class="col-lg-5">
         <div class="featured-sidebar">
           <div class="featured-hero">
-            <span class="featured-label">featured poem</span>
+            <span class="featured-label">featured {{ if eq $featured.Section "notes" }}writing{{ else }}poem{{ end }}</span>
             <div class="featured-title">
               <a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a>
               &nbsp;&mdash;&nbsp;
