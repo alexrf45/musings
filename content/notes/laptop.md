@@ -8,7 +8,7 @@ tags:
   - security
   - python3
   - kernel
-date: 2026-01-15T23:09:41Z
+date: 2026-05-05T21:24:41Z
 title: My Laptop Got Pwn'd
 type: note
 uuid: 202601152309
