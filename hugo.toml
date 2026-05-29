@@ -1,25 +1,25 @@
-baseURL      = "https://luvandre.com/"
+baseURL = "https://th0th.dev"
 languageCode = "en-us"
-title        = "luvandre"
-theme        = "musings"
+title = "th0th"
+theme = "musings"
 
 enableRobotsTXT = true
-enableEmoji     = true
+enableEmoji = true
 
 [pagination]
-  pagerSize = 8
+pagerSize = 8
 
 [taxonomies]
-  tag    = "tags"
-  series = "series"
+tag = "tags"
+series = "series"
 
 [markup]
-  [markup.goldmark.renderer]
-    unsafe = true
+[markup.goldmark.renderer]
+unsafe = true
 
 [params]
-  description = "luvandre — writings by Sean Fontaine"
-  author      = "Sean Fontaine"
-  githubURL   = "https://github.com/alexrf45"
-  spotifyURL  = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
-  spotifyName = "Alexander Sean"
+description = "th0th"
+author = "th0th"
+githubURL = "https://github.com/alexrf45"
+spotifyURL = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
+spotifyName = "Alexander Sean"

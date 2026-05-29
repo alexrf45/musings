@@ -34,7 +34,7 @@ provider "cloudflare" {
 
 resource "cloudflare_pages_project" "luvandre" {
   account_id        = var.cloudflare_account_id
-  name              = "luvandre"
+  name              = "th0th"
   production_branch = "main"
 
   build_config = {
@@ -73,7 +73,7 @@ resource "cloudflare_pages_project" "luvandre" {
 # ── Custom domain ─────────────────────────────────────────────────────────────
 
 resource "cloudflare_pages_domain" "luvandre" {
-  name         = "luvandre.com"
+  name         = "th0th.dev"
   account_id   = var.cloudflare_account_id
   project_name = cloudflare_pages_project.luvandre.name
 }
