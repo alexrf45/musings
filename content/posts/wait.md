@@ -1,7 +1,7 @@
 ---
 title: "Wait"
 uuid: 202604031928
-date: 2026-04-03T18:05:48Z
+date: 2026-05-31T12:03:48Z
 type: poem
 tags: [poem, writing]
 draft: false
