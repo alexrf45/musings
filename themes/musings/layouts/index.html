@@ -16,7 +16,7 @@
               &nbsp;&mdash;&nbsp;
               <span class="preview-trigger">Preview</span>
             </div>
-            <p class="featured-excerpt">{{ $featured.Summary }}</p>
+            <p class="featured-excerpt">{{ $featured.Summary | plainify | truncate 180 }}</p>
           </div>
         </div>
       </div>

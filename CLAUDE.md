@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-A Hugo static blog ("luvandre" by Sean Fontaine) with a custom Gruvbox dark theme, deployed to Cloudflare Pages. Posts are Markdown files committed to the `hugo` branch — pushing triggers an automatic Cloudflare Pages build.
+A Hugo static blog ("luvandre" by Sean Fontaine) with a custom Gruvbox dark theme, deployed to Cloudflare Pages. Posts are Markdown files committed to the `main` branch — pushing triggers an automatic Cloudflare Pages build.
 
 ## Development Setup
 
@@ -85,7 +85,7 @@ The `musings` theme mirrors the Flask blog's Gruvbox design exactly:
 
 ## Deployment
 
-**Cloudflare Pages** — auto-deploys on push to `hugo` branch.
+**Cloudflare Pages** — auto-deploys on push to `main` branch.
 
 GitHub Actions workflow: `.github/workflows/deploy.yml`
 - Requires secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
