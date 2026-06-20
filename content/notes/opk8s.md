@@ -1,0 +1,19 @@
+---
+tags: [atomic]
+date: 2026-01-19T16:59:57Z
+title: Create onepassword-token For k8s
+---
+
+```bash
+k create secret generic onepassword-connect-secret \
+--from-file=./1password-credentials.json -o yaml > infrastructure/configs/base/onepassword-connect/1_secrets.yaml
+
+```
+
+```bash
+kubectl create secret generic onepassword-connect-secret -n onepassword --from-literal=1password-credentials.json="$(cat ./utils/1password-credentials.json | base64)" --dry-run=client -o yaml > infrastructure/configs/base/onepassword-connect/1_secrets.yaml
+```
+
+```bash
+kubectl create secret -n external-secrets generic onepassword-token --from-literal=token=$OP_CONNECT_TOKEN
+```

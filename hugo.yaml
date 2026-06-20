@@ -1,0 +1,46 @@
+baseURL: https://th0th.dev/
+locale: en-us
+title: th0th
+enableInlineShortcodes: true
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+menu:
+  main:
+    - name: Notes
+      pageRef: /notes
+      weight: 1
+    - name: Poems
+      pageRef: /posts
+      weight: 2
+    - name: Home Lab
+      pageRef: /docs
+      weight: 3
+    - name: Search
+      weight: 4
+      params:
+        type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/alexrf45"
+      params:
+        icon: github
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/thoth.svg
+      dark: images/thoth.svg
+      width: 80
+      height: 40
+  footer:
+    enable: true
+    displayCopyright: true
+    displayPoweredBy: false
+    width: normal
+  # banner:
+  #   key: 'announcement-xxx'
+  #   message: |
+  #     🎉 Welcome! [Hextra](https://github.com/hextra/hextra) is a static site generator that helps you build modern websites.

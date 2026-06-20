@@ -1,3 +1,5 @@
 ---
-title: "Posts"
+title: "Poems"
+cascade:
+  type: blog
 ---
