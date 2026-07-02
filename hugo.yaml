@@ -14,9 +14,6 @@ menu:
     - name: Poems
       pageRef: /posts
       weight: 2
-    - name: Home Lab
-      pageRef: /docs
-      weight: 3
     - name: Search
       weight: 4
       params:

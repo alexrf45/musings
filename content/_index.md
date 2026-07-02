@@ -7,6 +7,5 @@ cascade:
 
 {{< cards >}}
 {{< card link="/notes" title="Notes" >}}
-{{< card link="/docs" title="Home Lab" >}}
 {{< card link="/posts" title="Poems" >}}
 {{< /cards >}}
