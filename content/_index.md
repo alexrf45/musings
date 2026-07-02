@@ -1,6 +1,6 @@
 ---
 cascade:
-  type: default
+  type: blog
 ---
 
 # Hi I'm Sean
