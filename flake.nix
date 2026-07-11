@@ -22,6 +22,7 @@
             gotools            # Go tools like goimports
             golangci-lint      # Go linter
             hugo
+            gimp
           ];
 
           # Environments variables to inject
