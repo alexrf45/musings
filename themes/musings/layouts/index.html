@@ -3,26 +3,9 @@
   {{- $paginator := .Paginate $items }}
 
   {{ if $items }}
-    {{- $featured := index $items 0 }}
-    <div class="row gx-5">
-
-      <!-- Featured poem — sticky sidebar -->
-      <div class="col-lg-5">
-        <div class="featured-sidebar">
-          <div class="featured-hero">
-            <span class="featured-label">featured {{ if eq $featured.Section "notes" }}writing{{ else }}poem{{ end }}</span>
-            <div class="featured-title">
-              <a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a>
-              &nbsp;&mdash;&nbsp;
-              <span class="preview-trigger">Preview</span>
-            </div>
-            <p class="featured-excerpt">{{ $featured.Summary | plainify | truncate 180 }}</p>
-          </div>
-        </div>
-      </div>
-
+    <div class="row justify-content-center">
       <!-- Post list -->
-      <div class="col-lg-7">
+      <div class="col-lg-8 col-xl-7">
         <div class="d-flex flex-column gap-4">
           {{ range $paginator.Pages }}
             {{ partial "post-card.html" . }}
@@ -30,7 +13,6 @@
         </div>
         {{ partial "pagination.html" . }}
       </div>
-
     </div>
   {{ else }}
     <div class="row justify-content-center">

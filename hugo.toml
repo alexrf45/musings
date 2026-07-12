@@ -1,6 +1,6 @@
-baseURL = "https://th0th.dev"
+baseURL = "https://phr3d.net"
 languageCode = "en-us"
-title = "th0th"
+title = "phr3d"
 theme = "musings"
 
 enableRobotsTXT = true
@@ -18,8 +18,8 @@ series = "series"
 unsafe = true
 
 [params]
-description = "th0th"
-author = "th0th"
+description = "phr3d"
+author = "phr3d"
 githubURL = "https://github.com/alexrf45"
 spotifyURL = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
 spotifyName = "Alexander Sean"

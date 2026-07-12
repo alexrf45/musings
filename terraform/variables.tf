@@ -3,6 +3,11 @@ variable "domain" {
   type        = string
 }
 
+variable "project_name" {
+  description = "cloudflare pages project name"
+  type        = string
+}
+
 variable "cloudflare_account_id" {
   description = "Cloudflare account ID"
   type        = string

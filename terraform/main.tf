@@ -32,9 +32,9 @@ provider "cloudflare" {
 
 # ── Cloudflare Pages project ──────────────────────────────────────────────────
 
-resource "cloudflare_pages_project" "luvandre" {
+resource "cloudflare_pages_project" "this" {
   account_id        = var.cloudflare_account_id
-  name              = "th0th"
+  name              = var.project_name
   production_branch = "main"
 
   build_config = {
@@ -62,20 +62,19 @@ resource "cloudflare_pages_project" "luvandre" {
       repo_name                      = "musings"
       production_branch              = "main"
       pr_comments_enabled            = true
-      deployments_enabled            = true
       production_deployments_enabled = true
       preview_deployment_setting     = "custom"
-      preview_branch_includes        = ["hugo"]
+      preview_branch_includes        = ["dev"]
     }
   }
 }
 
 # ── Custom domain ─────────────────────────────────────────────────────────────
 
-resource "cloudflare_pages_domain" "luvandre" {
-  name         = "th0th.dev"
+resource "cloudflare_pages_domain" "this" {
+  name         = var.domain
   account_id   = var.cloudflare_account_id
-  project_name = cloudflare_pages_project.luvandre.name
+  project_name = cloudflare_pages_project.this.name
 }
 
 # ── DNS — CNAME pointing to Cloudflare Pages ─────────────────────────────────
@@ -85,7 +84,7 @@ resource "cloudflare_dns_record" "blog_pages" {
   zone_id = var.cloudflare_zone_id
   name    = var.domain
   type    = "CNAME"
-  content = "${cloudflare_pages_project.luvandre.name}.pages.dev"
+  content = "${cloudflare_pages_project.this.name}.pages.dev"
   ttl     = 1
   proxied = true
 }

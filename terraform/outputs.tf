@@ -1,6 +1,6 @@
 output "pages_url" {
   description = "Cloudflare Pages deployment URL"
-  value       = "https://${cloudflare_pages_project.luvandre.name}.pages.dev"
+  value       = "https://${cloudflare_pages_project.this.name}.pages.dev"
 }
 
 output "custom_domain" {
