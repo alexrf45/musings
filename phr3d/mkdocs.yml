@@ -1,0 +1,36 @@
+site_name: phr3d
+theme:
+  name: mkdocs
+  custom_dir: theme/
+site_url: "https://phr3d.net"
+site_description: Create Learn Live
+copyright: fr3d 2026
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - sane_lists
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Notes:
+    - Encrypt Secrets with SOPS: notes/202601152309.md
+    - 1Password Token for k8s: notes/202601191659.md
+    - Laptop Setup: notes/laptop.md
+    - Obsidian Security: notes/obsidian_security.md
+  - Poems:
+    - Valentines Day 2025: posts/poems.md
+    - Roses: posts/roses.md
+    - Wait: posts/wait.md
+    - One Day: posts/one_day.md
+    - Sandstorm: posts/sandstorm.md
+    - Dominion: posts/dominion.md
+    - Footprints in the Sand: posts/footprints_in_the_sand.md
+    - Release the Rhythm: posts/release_the_rhythm.md
+    - The Last Keeper: posts/the_last_keeper.md
+    - Wordplay: posts/wordplay.md
+    - Words in Motion: posts/words_in_motion.md
+    - 30 Tips for 30 Years: posts/30_tips_for_30_years.md
+    - Meditation: posts/meditation_20250108.md

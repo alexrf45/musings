@@ -1,0 +1,7 @@
+/home/fr3d/musings/mkdocs/.devenv/bootstrap/bootstrapLib.nix
+/home/fr3d/musings/mkdocs/.devenv/bootstrap/default.nix
+/home/fr3d/musings/mkdocs/devenv.lock
+/home/fr3d/musings/mkdocs/devenv.nix
+/home/fr3d/musings/mkdocs/devenv.yaml
+/home/fr3d/musings/mkdocs/.env
+/home/fr3d/musings/mkdocs/requirements.txt

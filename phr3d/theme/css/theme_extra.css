@@ -1,0 +1,626 @@
+/* =========================================================
+   GRUVBOX MATERIAL DARK — MkDocs ReadTheDocs Theme Override
+   ========================================================= */
+
+:root {
+  --gb-bg0-h:       #1d2021;
+  --gb-bg0:         #282828;
+  --gb-bg0-s:       #32302f;
+  --gb-bg1:         #3c3836;
+  --gb-bg2:         #504945;
+  --gb-bg3:         #665c54;
+  --gb-bg4:         #7c6f64;
+  --gb-fg0:         #fbf1c7;
+  --gb-fg1:         #ebdbb2;
+  --gb-fg2:         #d5c4a1;
+  --gb-fg3:         #bdae93;
+  --gb-fg4:         #a89984;
+  --gb-red:         #fb4934;
+  --gb-green:       #b8bb26;
+  --gb-yellow:      #fabd2f;
+  --gb-yellow-dim:  #d79921;
+  --gb-blue:        #83a598;
+  --gb-aqua:        #8ec07c;
+  --gb-orange:      #fe8019;
+  --gb-purple:      #d3869b;
+  --gb-gray:        #928374;
+}
+
+/* ---- Base ------------------------------------------------ */
+
+html, body, .wy-body-for-nav {
+  background: var(--gb-bg0-h);
+  color: var(--gb-fg1);
+}
+
+/* ---- Sidebar --------------------------------------------- */
+
+.wy-nav-side {
+  background: var(--gb-bg0);
+  border-right: 1px solid var(--gb-bg2);
+}
+
+.wy-side-scroll {
+  background: var(--gb-bg0);
+}
+
+/* Site name / logo search area */
+.wy-side-nav-search {
+  background: var(--gb-bg0);
+  border-bottom: 1px solid var(--gb-bg2);
+  padding: 0.8em 1em;
+}
+
+.wy-side-nav-search > a,
+.wy-side-nav-search > a:visited {
+  color: var(--gb-yellow);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.3em;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+}
+
+.wy-side-nav-search > a:hover {
+  color: var(--gb-orange);
+}
+
+.wy-side-nav-search .icon-home::before {
+  color: var(--gb-yellow);
+}
+
+.wy-side-nav-search input[type='text'] {
+  background: var(--gb-bg1);
+  color: var(--gb-fg1);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.wy-side-nav-search input[type='text']:focus {
+  border-color: var(--gb-yellow-dim);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(215, 153, 33, 0.25);
+}
+
+.wy-side-nav-search input[type='text']::placeholder {
+  color: var(--gb-fg4);
+}
+
+/* ---- Nav Menu -------------------------------------------- */
+
+.wy-menu-vertical {
+  background: var(--gb-bg0);
+}
+
+/* Section caption labels (e.g. "Notes", "Poems") */
+.wy-menu-vertical p.caption {
+  color: var(--gb-yellow);
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--gb-bg2);
+  margin-top: 0.6em;
+  padding: 0.5em 1.618em 0.2em;
+}
+
+.wy-menu-vertical p.caption span.caption-text {
+  color: var(--gb-yellow);
+}
+
+/* All nav links */
+.wy-menu-vertical a {
+  color: var(--gb-fg3);
+  font-size: 0.88em;
+}
+
+.wy-menu-vertical a:hover {
+  background: var(--gb-bg1);
+  color: var(--gb-aqua);
+}
+
+/* Top-level non-section items */
+.wy-menu-vertical li.toctree-l1 > a {
+  color: var(--gb-fg2);
+}
+
+.wy-menu-vertical li.toctree-l1 > a:hover {
+  background: var(--gb-bg1);
+  color: var(--gb-aqua);
+}
+
+/* Active / current page */
+.wy-menu-vertical li.current > a {
+  background: var(--gb-bg1);
+  color: var(--gb-fg1);
+  border-right: 3px solid var(--gb-yellow);
+}
+
+.wy-menu-vertical li.current > a:hover {
+  background: var(--gb-bg1);
+  color: var(--gb-aqua);
+}
+
+.wy-menu-vertical li.current-section p {
+  background: var(--gb-bg2);
+  color: var(--gb-yellow);
+}
+
+/* Nested nav (l2+) */
+.wy-menu-vertical .subnav a,
+.wy-menu-vertical li.toctree-l2 > a,
+.wy-menu-vertical li.toctree-l3 > a {
+  color: var(--gb-fg4);
+  background: var(--gb-bg0-s);
+  padding-left: 2.4em;
+}
+
+.wy-menu-vertical li.toctree-l2 > a:hover,
+.wy-menu-vertical li.toctree-l3 > a:hover {
+  background: var(--gb-bg1);
+  color: var(--gb-aqua);
+}
+
+.wy-menu-vertical li.toctree-l2.current > a,
+.wy-menu-vertical li.toctree-l3.current > a {
+  background: var(--gb-bg1);
+  color: var(--gb-fg1);
+  border-right: 3px solid var(--gb-yellow);
+}
+
+/* Expand icon */
+.wy-menu-vertical li span.toctree-expand {
+  color: var(--gb-gray);
+}
+
+.wy-menu-vertical li.current span.toctree-expand,
+.wy-menu-vertical li a:hover span.toctree-expand {
+  color: var(--gb-yellow);
+}
+
+/* ---- Mobile Nav Bar -------------------------------------- */
+
+.wy-nav-top {
+  background: var(--gb-bg0);
+  color: var(--gb-fg1);
+  border-bottom: 1px solid var(--gb-bg2);
+}
+
+.wy-nav-top a {
+  color: var(--gb-yellow);
+}
+
+.wy-nav-top i {
+  color: var(--gb-fg2);
+}
+
+/* ---- Content Area ---------------------------------------- */
+
+.wy-nav-content-wrap {
+  background: var(--gb-bg0-h);
+}
+
+.wy-nav-content {
+  background: var(--gb-bg0-h);
+  max-width: 860px;
+}
+
+/* ---- Breadcrumbs ----------------------------------------- */
+
+.wy-breadcrumbs {
+  background: var(--gb-bg0-h);
+  border-bottom: 1px solid var(--gb-bg1);
+  padding: 0.4em 0;
+  margin-bottom: 1em;
+}
+
+.wy-breadcrumbs li,
+.wy-breadcrumbs li a {
+  color: var(--gb-fg4);
+  font-size: 0.82em;
+}
+
+.wy-breadcrumbs li a:hover {
+  color: var(--gb-blue);
+}
+
+.wy-breadcrumbs li.wy-breadcrumbs-aside a {
+  color: var(--gb-gray);
+}
+
+.wy-breadcrumbs li.wy-breadcrumbs-aside a:hover {
+  color: var(--gb-fg3);
+}
+
+/* ---- Typography ------------------------------------------ */
+
+.rst-content {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.0em;
+  line-height: 1.75;
+  color: var(--gb-fg1);
+}
+
+.rst-content h1,
+.rst-content h2,
+.rst-content h3,
+.rst-content h4,
+.rst-content h5,
+.rst-content h6 {
+  font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: var(--gb-yellow);
+  border-bottom: none;
+}
+
+.rst-content h1 {
+  font-size: 1.9em;
+  color: var(--gb-fg0);
+  border-bottom: 2px solid var(--gb-bg2);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.7em;
+}
+
+.rst-content h2 {
+  font-size: 1.45em;
+  color: var(--gb-yellow);
+  border-bottom: 1px solid var(--gb-bg2);
+  padding-bottom: 0.2em;
+}
+
+.rst-content h3 {
+  font-size: 1.2em;
+  color: var(--gb-orange);
+}
+
+.rst-content h4, .rst-content h5, .rst-content h6 {
+  color: var(--gb-aqua);
+}
+
+.rst-content p {
+  color: var(--gb-fg1);
+}
+
+.rst-content strong {
+  color: var(--gb-fg0);
+}
+
+.rst-content em {
+  color: var(--gb-fg2);
+}
+
+/* ---- Links ----------------------------------------------- */
+
+a,
+.rst-content a {
+  color: var(--gb-blue);
+  text-decoration: none;
+}
+
+a:hover,
+.rst-content a:hover {
+  color: var(--gb-aqua);
+  text-decoration: underline;
+  text-decoration-color: var(--gb-bg3);
+}
+
+a:visited,
+.rst-content a:visited {
+  color: var(--gb-purple);
+}
+
+/* ---- Code ------------------------------------------------ */
+
+/*
+ * Inline code — keep on one line, Gruvbox green on dark bg
+ * https://github.com/mkdocs/mkdocs/issues/313
+ */
+.rst-content code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 2px 5px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.88em;
+  color: var(--gb-green);
+  background: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 3px;
+}
+
+/*
+ * Block code — full display
+ * https://github.com/mkdocs/mkdocs/issues/855
+ */
+.rst-content pre code {
+  white-space: pre;
+  word-wrap: normal;
+  display: block;
+  padding: 14px 16px;
+  font-size: 0.85em;
+  color: var(--gb-fg1);
+  background: var(--gb-bg0-s);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 4px;
+}
+
+.rst-content pre {
+  background: var(--gb-bg0-s);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 4px;
+  overflow: auto;
+}
+
+/* Fix highlight.js class conflicts
+ * https://github.com/mkdocs/mkdocs/issues/411 */
+pre .cs, pre .c {
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+/* Non-highlighted code
+ * https://github.com/mkdocs/mkdocs/issues/319 */
+.rst-content .no-highlight {
+  display: block;
+  padding: 0.5em;
+  color: var(--gb-fg1);
+  background: var(--gb-bg0-s);
+}
+
+/* Code inside links */
+a code {
+  color: var(--gb-blue);
+}
+a:hover code {
+  color: var(--gb-aqua);
+}
+a:visited code {
+  color: var(--gb-purple);
+}
+
+/* ---- Blockquotes ----------------------------------------- */
+
+.rst-content blockquote {
+  border-left: 4px solid var(--gb-yellow-dim);
+  background: var(--gb-bg0-s);
+  margin: 1em 0;
+  padding: 0.6em 1.2em;
+  color: var(--gb-fg2);
+  font-style: italic;
+}
+
+.rst-content blockquote p {
+  color: var(--gb-fg2);
+}
+
+/* ---- Tables ---------------------------------------------- */
+
+/*
+ * Wide table overflow handling
+ * https://github.com/mkdocs/mkdocs/issues/834
+ */
+.rst-content .section .docutils {
+  width: 100%;
+  overflow: auto;
+  display: block;
+  border: none;
+}
+
+td, th {
+  border: 1px solid var(--gb-bg2) !important;
+  border-collapse: collapse;
+}
+
+.rst-content table.docutils {
+  border: 1px solid var(--gb-bg2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.rst-content table.docutils thead {
+  background: var(--gb-bg2);
+}
+
+.rst-content table.docutils thead th {
+  color: var(--gb-yellow);
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-color: var(--gb-bg3) !important;
+}
+
+.rst-content table.docutils tbody tr {
+  background: var(--gb-bg0-s);
+}
+
+.rst-content table.docutils tbody tr:nth-child(even) {
+  background: var(--gb-bg1);
+}
+
+.rst-content table.docutils td {
+  padding: 0.4em 0.8em;
+  color: var(--gb-fg2);
+}
+
+/* ---- Admonitions ----------------------------------------- */
+
+.rst-content .admonition {
+  background: var(--gb-bg1);
+  border-left: 4px solid var(--gb-blue);
+  border-radius: 0 3px 3px 0;
+}
+
+.rst-content .admonition .admonition-title {
+  background: var(--gb-bg2);
+  color: var(--gb-fg1);
+  font-family: system-ui, sans-serif;
+}
+
+.rst-content .admonition code {
+  color: var(--gb-green);
+  border: 1px solid var(--gb-bg3);
+  background: var(--gb-bg0-s);
+}
+
+.rst-content .warning {
+  border-left-color: var(--gb-orange);
+}
+
+.rst-content .warning .admonition-title {
+  background: rgba(254, 128, 25, 0.15);
+  color: var(--gb-orange);
+}
+
+.rst-content .note {
+  border-left-color: var(--gb-blue);
+}
+
+.rst-content .tip, .rst-content .hint {
+  border-left-color: var(--gb-aqua);
+}
+
+.rst-content .danger, .rst-content .error {
+  border-left-color: var(--gb-red);
+}
+
+/* ---- Horizontal Rule ------------------------------------- */
+
+.rst-content hr {
+  border-color: var(--gb-bg2);
+  border-top: 1px solid var(--gb-bg2);
+  margin: 1.5em 0;
+}
+
+/* ---- Search ---------------------------------------------- */
+
+.search-results {
+  margin-top: 23px;
+}
+
+.search-results article {
+  border-top: 1px solid var(--gb-bg2);
+  padding-top: 24px;
+}
+
+.search-results article:first-child {
+  border-top: none;
+}
+
+.search-results article h3 a {
+  color: var(--gb-yellow);
+}
+
+form .search-query {
+  width: 100%;
+  border-radius: 50px;
+  padding: 6px 12px;
+  border: 1px solid var(--gb-bg2);
+  background: var(--gb-bg1);
+  color: var(--gb-fg1);
+}
+
+form .search-query:focus {
+  border-color: var(--gb-yellow-dim);
+  outline: none;
+}
+
+/* ---- Footer Buttons (prev/next) -------------------------- */
+
+.rst-footer-buttons .btn {
+  background: var(--gb-bg1);
+  color: var(--gb-fg2);
+  border: 1px solid var(--gb-bg2);
+  border-radius: 3px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.rst-footer-buttons .btn:hover {
+  background: var(--gb-bg2);
+  color: var(--gb-fg1);
+}
+
+.rst-footer-buttons .btn span {
+  color: var(--gb-yellow);
+}
+
+/* ---- Footer --------------------------------------------- */
+
+footer {
+  background: var(--gb-bg0-h);
+  color: var(--gb-fg4);
+  font-size: 0.83em;
+  font-family: system-ui, sans-serif;
+  border-top: 1px solid var(--gb-bg2);
+  padding-top: 1em;
+}
+
+footer a {
+  color: var(--gb-gray);
+}
+
+footer a:hover {
+  color: var(--gb-fg3);
+}
+
+footer hr {
+  border-color: var(--gb-bg2);
+}
+
+/* ---- Versions / bottom-of-sidebar strip ----------------- */
+
+.rst-versions {
+  background: var(--gb-bg0-h);
+  border-top: 1px solid var(--gb-bg2);
+}
+
+.rst-versions .rst-current-version {
+  background: var(--gb-bg0-h);
+  color: var(--gb-fg4);
+  padding: 0 12px;
+  display: flex;
+  font-size: initial;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 40px;
+}
+
+.rst-current-version span {
+  flex: 1;
+  text-align: center;
+}
+
+/* ---- Sidebar nav bottom padding fix (issue #2012) ------- */
+.wy-nav-side {
+  padding-bottom: 40px;
+}
+
+/* ---- Scrollbars (WebKit) --------------------------------- */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: var(--gb-bg0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gb-bg3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gb-bg4);
+}
+
+/* ---- Selection ------------------------------------------- */
+
+::selection {
+  background: var(--gb-yellow-dim);
+  color: var(--gb-bg0-h);
+}
+
+/* ---- Responsive tweaks ----------------------------------- */
+
+@media screen and (max-width: 768px) {
+  .wy-nav-content {
+    padding: 1em 1.2em;
+  }
+}
