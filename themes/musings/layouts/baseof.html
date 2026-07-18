@@ -11,8 +11,10 @@
 
   {{ partial "header.html" . }}
 
-  <main class="container py-5">
-    {{ block "main" . }}{{ end }}
+  <main>
+    <div class="site-wrap">
+      {{ block "main" . }}{{ end }}
+    </div>
   </main>
 
   {{ partial "footer.html" . }}

@@ -446,6 +446,111 @@ footer {
 ::-webkit-scrollbar-thumb { background: var(--gb-bg2); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gb-bg3); }
 
+/* ── Site layout ─────────────────────────────────────────────── */
+.site-wrap {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+main {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+/* ── Site header / editorial nav ─────────────────────────────── */
+.site-header {
+  border-bottom: 1px solid var(--gb-bg1);
+  padding: 0.85rem 0;
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gb-fg) !important;
+  text-decoration: none;
+  -webkit-text-fill-color: unset;
+  white-space: nowrap;
+}
+.site-brand:hover { color: var(--gb-yellow-b) !important; }
+.site-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.site-link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color: var(--gb-fg3);
+  text-decoration: none;
+  padding: 0.3rem 0.55rem;
+  border-radius: 5px;
+  transition: color 0.15s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+.site-link:hover { color: var(--gb-fg); }
+.site-link.active { color: var(--gb-fg); }
+
+@media (max-width: 480px) {
+  .site-links { gap: 0; }
+  .site-link { padding: 0.3rem 0.4rem; font-size: 0.8rem; }
+}
+
+/* ── Editorial feed (post list) ──────────────────────────────── */
+.feed {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+}
+.feed-item {
+  padding: 0.6rem 0;
+}
+.feed-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.feed-item-sep {
+  flex: 1;
+  height: 1px;
+  background-color: var(--gb-bg1);
+}
+.feed-item-date {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  color: var(--gb-fg3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.feed-item-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-weight: normal;
+  line-height: 1.45;
+  margin: 0;
+}
+.feed-item-title a {
+  color: var(--gb-fg1);
+  text-decoration: none;
+}
+.feed-item-title a:hover { color: var(--gb-yellow-b); }
+
 /* ── Light mode (Gruvbox Light) ─────────────────────────────── */
 html[data-bs-theme="light"] {
   --gb-bg-hard:  #f9f5d7;

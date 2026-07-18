@@ -3,24 +3,13 @@
   {{- $paginator := .Paginate $items }}
 
   {{ if $items }}
-    <div class="row justify-content-center">
-      <!-- Post list -->
-      <div class="col-lg-8 col-xl-7">
-        <div class="d-flex flex-column gap-4">
-          {{ range $paginator.Pages }}
-            {{ partial "post-card.html" . }}
-          {{ end }}
-        </div>
-        {{ partial "pagination.html" . }}
-      </div>
+    <div class="feed">
+      {{ range $paginator.Pages }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
     </div>
+    {{ partial "pagination.html" . }}
   {{ else }}
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-xl-7">
-        <div class="text-center py-5">
-          <p class="text-muted fs-5">No posts yet.</p>
-        </div>
-      </div>
-    </div>
+    <p class="text-muted mt-5">No posts yet.</p>
   {{ end }}
 {{ end }}
