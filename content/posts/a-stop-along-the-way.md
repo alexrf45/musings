@@ -6,7 +6,6 @@ summary: "Rest weary traveler"
 tags: [poem, travel, meditation]
 ---
 
-```text
 
 A stop along the way
 
@@ -29,6 +28,3 @@ within his soul,
 
 A place of reclamation, a haven for the lost and the weary, he pushes
 on.
-
-
-```
