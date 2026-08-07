@@ -1,12 +1,10 @@
 ---
-title: a__stop__along_the_way
+title: "a stop along the way"
 date: 2026-08-06T20:10:20Z
 draft: false
 summary: "Rest weary traveler"
 tags: [poem, travel, meditation]
 ---
-
-# a__stop__along_the_way
 
 ```text
 
