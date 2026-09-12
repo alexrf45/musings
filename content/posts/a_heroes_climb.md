@@ -6,7 +6,6 @@ summary: "Wings of hope, climb hero"
 tags: [poem, travel, character, hero, hope]
 ---
 
-```text
 
 Tales of the lost and the desolate garner hope for triumph of souls to be.
 
@@ -21,6 +20,3 @@ Inspire from within, be the greater version of what no one expects.
 
 Exceed the reaches of your vision for above those limits your true
 potential climbs.
-
-
-```
