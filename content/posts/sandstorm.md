@@ -2,7 +2,6 @@
 title: "The Sandstorm"
 date: "2025-05-16"
 draft: false
-summary: "There is no love without grief"
 tags: ["growth", "love", "writing", "poems", "grief", "healing"]
 ---
 

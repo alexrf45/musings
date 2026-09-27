@@ -2,7 +2,6 @@
 title: "Valentines Day 2025"
 date: "2025-02-14"
 draft: false
-summary: "Three poems about love"
 tags: ["growth", "love", "writing", "poems", "valentines_day"]
 ---
 

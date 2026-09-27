@@ -2,7 +2,6 @@
 title: "Wordplay"
 date: "2026-04-05"
 draft: false
-summary: "Pick a letter, any letter"
 tags: ["writing"]
 ---
 

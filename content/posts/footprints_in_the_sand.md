@@ -2,7 +2,6 @@
 title: "Footprints in the Sand"
 date: "2025-12-30"
 draft: false
-summary: "step into your voice"
 tags: ["writing", "poems", "healing", "purpose"]
 ---
 

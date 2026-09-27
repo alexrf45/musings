@@ -2,7 +2,6 @@
 title: "The Last Keeper"
 date: "2025-09-14"
 draft: false
-summary: "There is no love without grief"
 tags: ["short-story", "writing", "fantasy"]
 ---
 

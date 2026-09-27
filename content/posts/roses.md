@@ -2,7 +2,6 @@
 title: "Roses"
 date: "2025-05-19"
 draft: false
-summary: "Hold the rose, sentenced to bleed"
 tags: ["growth", "love", "writing", "poems", "grief", "healing"]
 ---
 

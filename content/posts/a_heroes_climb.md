@@ -2,7 +2,6 @@
 title: "a heros climb"
 date: 2026-09-12T09:10:20Z
 draft: false
-summary: "Wings of hope, climb hero"
 tags: [poem, travel, character, hero, hope]
 ---
 

@@ -3,12 +3,12 @@
 
     newpost <uuid|filename|path>        create a Hugo DRAFT (vault untouched)
     newpost <src> --publish            create it live and retag the vault note
-    newpost <src> --summary "..." --tags "a,b"    skip the prompts
+    newpost <src> --tags "a,b"          skip the tag prompt
     newpost <src> --date 2026-09-27T09:00:00Z     override the post date
 
 Frontmatter mapping (vault -> Hugo):
     title:  -> title: (quoted)          date: -> now, or --date
-    tags:   -> tags:, minus lifecycle   summary: -> prompted, no vault equivalent
+    tags:   -> tags:, minus lifecycle tags (they render as badges)
 Body: the ```text fence poems are wrapped in is stripped, as is the leading H1.
 
 With --publish the vault note is retagged draft -> published, the live URL is
@@ -85,7 +85,6 @@ def slugify(title):
 def main():
     ap = argparse.ArgumentParser(add_help=True)
     ap.add_argument("source")
-    ap.add_argument("--summary", default=None)
     ap.add_argument("--tags", default=None)
     ap.add_argument("--date", default=None)
     ap.add_argument("--slug", default=None)
@@ -98,12 +97,6 @@ def main():
     fm, body = split_fm(src.read_text(encoding="utf-8"))
     title = field(fm, "title") or src.stem.replace("_", " ")
     tags = vault_tags(fm)
-
-    summary = a.summary
-    if summary is None:
-        summary = input(f'Summary for "{title}": ').strip()
-    if not summary:
-        die("a summary is required (the theme shows it on the card and sidebar)")
 
     if a.tags is not None:
         tags = [t.strip() for t in a.tags.split(",") if t.strip()]
@@ -124,7 +117,6 @@ def main():
         "{{TITLE}}": title.replace('"', r'\"'),
         "{{DATE}}": date,
         "{{DRAFT}}": "false" if a.publish else "true",
-        "{{SUMMARY}}": summary.replace('"', r'\"'),
         "{{TAGS}}": ", ".join(tags),
         "{{BODY}}": clean_body(body),
     }.items():

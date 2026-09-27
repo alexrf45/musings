@@ -34,14 +34,11 @@ Posts live in `content/posts/` as Markdown files. Front matter format:
 ```yaml
 ---
 title: "Post Title"
-date: "YYYY-MM-DD"
+date: 2026-09-27T08:27:30Z
 draft: false
-summary: "One-line description shown in the featured sidebar and post list"
-tags: ["tag1", "tag2"]
+tags: [tag1, tag2]
 ---
 ```
-
-New post archetype: `hugo new posts/my-post.md`
 
 ## Architecture
 
@@ -55,7 +52,7 @@ themes/musings/
 ├── assets/css/gruvbox.css   # Gruvbox dark design system (Bootstrap 5 override)
 └── layouts/
     ├── baseof.html          # base template: head, navbar, footer, scripts
-    ├── index.html           # home page: featured sidebar + paginated list
+    ├── index.html           # home page: paginated post list
     ├── _default/
     │   ├── list.html        # /posts/ section list
     │   └── single.html      # individual post + highlight.js
@@ -77,7 +74,6 @@ The `musings` theme mirrors the Flask blog's Gruvbox design exactly:
 - **Framework**: Bootstrap 5.3.3 (CDN), Bootstrap Icons 1.11.3 (CDN)
 - **Interactivity**: Alpine.js v3 (CDN, `defer`) for dark/light mode toggle
 - **Code highlighting**: highlight.js 11.9.0 (CDN), Gruvbox theme, swaps on light mode toggle via MutationObserver
-- **Featured post**: Most recent post shown as sticky sidebar on home page; `.Summary` from front matter
 
 ## Deployment
 

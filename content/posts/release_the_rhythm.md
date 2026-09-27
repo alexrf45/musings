@@ -2,7 +2,6 @@
 title: "Release the Rhythm"
 date: "2025-06-23"
 draft: false
-summary: "Will you listen to your pleasure?"
 tags: ["intimacy", "love", "writing", "poems", "sex", "healing"]
 ---
 

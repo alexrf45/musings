@@ -2,7 +2,6 @@
 title: "One Day"
 date: "2025-05-21"
 draft: false
-summary: "Why have hope when clarity comes in clear"
 tags: ["growth", "love", "writing", "healing"]
 ---
 

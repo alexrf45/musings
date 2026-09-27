@@ -2,7 +2,6 @@
 title: "Surfing and Addiction"
 date: 2026-08-09T22:10:00Z
 draft: false
-summary: "What the waves teach about the gap between wanting and doing."
 tags: ["mindfulness", "buddhism", "mental-health"]
 ---
 

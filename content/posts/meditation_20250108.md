@@ -2,7 +2,6 @@
 title: "Meditation 8 Jan 2025"
 date: "2025-02-16"
 draft: false
-summary: "Theme: Nature"
 tags: ["writing", "meditation"]
 ---
 

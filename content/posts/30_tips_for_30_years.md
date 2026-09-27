@@ -2,7 +2,6 @@
 title: "30 Tips for 30 Years"
 date: "2025-02-16"
 draft: false
-summary: "I wrote this for my wife, I hope it resonates"
 tags: ["writing", "meditation"]
 ---
 

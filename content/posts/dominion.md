@@ -2,7 +2,6 @@
 title: "Dominion"
 date: "2025-08-12"
 draft: false
-summary: "Trust in submission"
 tags: ["writing", "meditation", "sex", "submission", "intimacy"]
 ---
 
