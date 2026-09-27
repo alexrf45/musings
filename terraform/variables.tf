@@ -1,5 +1,5 @@
 variable "domain" {
-  description = "Custom domain for the blog (e.g. luvandre.fr3d.dev)"
+  description = "Custom domain for the blog (e.g. blog.net)"
   type        = string
 }
 

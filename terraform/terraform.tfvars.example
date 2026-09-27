@@ -1,6 +1,6 @@
 # Copy to terraform.tfvars (git-ignored) and fill in your values.
 
-domain                = "luvandre.fr3d.dev"
+domain                = "phr3d.net"
 cloudflare_account_id = "your-cloudflare-account-id"
 
 # Cloudflare Zone ID — found on the right-hand sidebar of your domain in the Cloudflare dashboard.

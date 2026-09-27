@@ -20,7 +20,6 @@ provider "onepassword" {
   service_account_token = var.op_service_account_token
 }
 
-# Fetch the Cloudflare API token stored in 1Password.
 data "onepassword_item" "cloudflare_token" {
   vault = var.op_vault_id
   title = var.op_cloudflare_item_title
@@ -30,7 +29,6 @@ provider "cloudflare" {
   api_token = data.onepassword_item.cloudflare_token.credential
 }
 
-# ── Cloudflare Pages project ──────────────────────────────────────────────────
 
 resource "cloudflare_pages_project" "this" {
   account_id        = var.cloudflare_account_id
@@ -69,7 +67,6 @@ resource "cloudflare_pages_project" "this" {
   }
 }
 
-# ── Custom domain ─────────────────────────────────────────────────────────────
 
 resource "cloudflare_pages_domain" "this" {
   name         = var.domain
@@ -77,8 +74,6 @@ resource "cloudflare_pages_domain" "this" {
   project_name = cloudflare_pages_project.this.name
 }
 
-# ── DNS — CNAME pointing to Cloudflare Pages ─────────────────────────────────
-# proxied = true enables Cloudflare CDN and custom domain routing for Pages.
 
 resource "cloudflare_dns_record" "blog_pages" {
   zone_id = var.cloudflare_zone_id

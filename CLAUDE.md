@@ -1,10 +1,6 @@
-# CLAUDE.md
+# Project Overview
 
-This file provides guidance to Claude Code when working with code in this repository.
-
-## Project Overview
-
-A Hugo static blog ("luvandre" by Sean Fontaine) with a custom Gruvbox dark theme, deployed to Cloudflare Pages. Posts are Markdown files committed to the `main` branch — pushing triggers an automatic Cloudflare Pages build.
+A Hugo static blog ("phr3d.net" by Sean Fontaine) with a custom Gruvbox dark theme, deployed to Cloudflare Pages. Posts are Markdown files committed to the `main` branch — pushing triggers an automatic Cloudflare Pages build.
 
 ## Development Setup
 
@@ -96,22 +92,3 @@ GitHub Actions workflow: `.github/workflows/deploy.yml`
 Provisions Cloudflare Pages project and DNS via Terraform.
 
 **Providers:** `1Password/onepassword`, `cloudflare/cloudflare`
-
-**Resources:**
-- `cloudflare_pages_project.luvandre` — Pages project connected to GitHub repo
-- `cloudflare_pages_domain.luvandre` — custom domain attachment
-- `cloudflare_dns_record.blog_pages` — proxied CNAME to `luvandre.pages.dev`
-
-```bash
-cd terraform
-cp terraform.tfvars.example terraform.tfvars   # fill in values
-terraform init
-terraform apply
-```
-
-## Notes
-
-- The `featured-excerpt` preview uses a pure CSS `:has()` hover reveal — no JS required
-- `hugo server -D` shows draft posts locally; they won't appear on the live site
-- Hugo's built-in `.ReadingTime` is used (words ÷ 212 WPM)
-- No comments, no database, no server — pure static
