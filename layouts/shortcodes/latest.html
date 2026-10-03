@@ -1,0 +1,17 @@
+{{- /* Most recent posts and notes: {{< latest >}} or {{< latest count=5 >}} */ -}}
+{{- $count := .Get "count" | default 5 | int -}}
+{{- $pages := where site.RegularPages "Section" "in" (slice "posts" "notes") -}}
+<div class="latest">
+  <h3>Latest</h3>
+  <ul>
+    {{- range first $count $pages.ByDate.Reverse }}
+    <li>
+      <a class="post-link" href="{{ .RelPermalink }}">
+        <span>{{ .Title }}</span>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format site.Params.dateFormat }}</time>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+  <a class="latest-more" href="{{ "posts/" | relURL }}">all poems &rarr;</a>
+</div>

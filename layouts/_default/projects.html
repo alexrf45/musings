@@ -1,0 +1,25 @@
+{{ define "head" }}
+{{ $options := dict "transpiler" "dartsass" "targetPath" "css/list.css" }}
+{{ with resources.Get "sass/layouts/list.scss" | toCSS $options | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+<main id="main" class="archive projects">
+  <div class="post-group">
+    <h3>{{ .Title }}</h3>
+    <ul>
+      {{ range hugo.Data.projects.projects }}
+      <li class="project">
+        <a class="post-link" href="{{ .url }}" target="_blank" rel="noopener">
+          <span>{{ .name }}</span>
+          <time>{{ .language }}</time>
+        </a>
+        <p class="project-description">{{ .description }}</p>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</main>
+{{ end }}

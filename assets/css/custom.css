@@ -1,0 +1,173 @@
+/* phr3d additions on top of TeXify3 */
+#header h1 .site-brand {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4em;
+}
+#header h1 .site-logo {
+  height: 0.85em;
+  width: auto;
+}
+
+/* Projects page */
+.projects .project-description {
+  color: var(--fg3);
+  font-style: italic;
+  margin: 0.1rem 0 0.9rem;
+}
+
+/* ── Home page ─────────────────────────────────────────────── */
+
+/* Intro block ({{< intro >}} shortcode); style="terminal|card|abstract" */
+.intro {
+  margin: 0.5rem auto 2.5rem;
+  max-width: 38rem;
+  text-align: center;
+}
+.intro-tagline p { margin: 0; }
+.intro-greeting {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin: 1rem 0 0;
+}
+
+/* abstract: small-caps title, italic tagline between fading rules */
+.intro--abstract .intro-title {
+  font-size: 1.1rem;
+  font-variant: small-caps;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+.intro--abstract .intro-tagline {
+  font-size: 1.45rem;
+  font-style: italic;
+  line-height: 1.45;
+  padding: 1rem 0.5rem;
+  position: relative;
+}
+.intro--abstract .intro-tagline::before,
+.intro--abstract .intro-tagline::after {
+  background: linear-gradient(to right, transparent, var(--fg4), transparent);
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+.intro--abstract .intro-tagline::before { top: 0; }
+.intro--abstract .intro-tagline::after { bottom: 0; }
+
+/* card: soft panel with a yellow accent bar */
+.intro--card {
+  background-color: var(--bg_s);
+  border: 1px solid var(--bg2);
+  border-left: 4px solid var(--yellow);
+  border-radius: 0.3rem;
+  padding: 1.75rem 2rem 1.5rem;
+}
+.intro--card .intro-tagline {
+  font-size: 1.45rem;
+  line-height: 1.45;
+}
+.intro--card .intro-greeting { color: var(--fg3); }
+.intro--card .bmc { margin-bottom: 0; }
+
+/* terminal: shell window, monospace, blinking cursor */
+.intro--terminal .terminal {
+  background-color: var(--bg_h);
+  border: 1px solid var(--bg2);
+  border-radius: 0.4rem;
+  font-family: "Latin Modern Mono", Courier, monospace;
+  overflow: hidden;
+  text-align: left;
+}
+.terminal-bar {
+  background-color: var(--bg1);
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+}
+.terminal-bar span {
+  border-radius: 50%;
+  height: 0.7rem;
+  width: 0.7rem;
+}
+.terminal-bar span:nth-child(1) { background-color: var(--red); }
+.terminal-bar span:nth-child(2) { background-color: var(--yellow); }
+.terminal-bar span:nth-child(3) { background-color: var(--green); }
+.terminal-body {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.terminal-prompt { color: var(--green); }
+.terminal-output {
+  color: var(--fg);
+  font-size: 1.25rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.terminal-output p { margin: 0; }
+.terminal-cursor {
+  animation: terminal-blink 1.1s steps(1) infinite;
+  background-color: var(--fg);
+  display: inline-block;
+  height: 1.1em;
+  margin-left: 0.2rem;
+  vertical-align: text-bottom;
+  width: 0.55em;
+}
+@keyframes terminal-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .terminal-cursor { animation: none; }
+}
+
+/* Buy Me a Coffee button ({{< buymeacoffee >}} shortcode).
+   :link/:visited are needed to beat the theme's a:link colour. */
+.bmc {
+  margin: 1.25rem 0 0;
+  text-align: center;
+}
+.bmc-button:link,
+.bmc-button:visited {
+  background-color: var(--yellow);
+  border-radius: 0.3rem;
+  color: var(--bg_h);
+  display: inline-block;
+  font-size: 1.1rem;
+  padding: 0.45rem 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.bmc-button:hover,
+.bmc-button:focus {
+  background-color: var(--orange);
+  color: var(--bg_h);
+}
+
+/* Latest posts ({{< latest >}} shortcode) */
+.latest h3 {
+  border-bottom: 1px solid var(--bg2);
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.3rem;
+}
+.latest ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.latest .post-link {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+}
+.latest .post-link:link,
+.latest .post-link:visited { color: var(--fg1); }
+.latest .post-link:hover { color: var(--yellow); }
+.latest .post-link time { white-space: nowrap; }
+.latest-more {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: right;
+}

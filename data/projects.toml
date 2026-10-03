@@ -1,0 +1,32 @@
+# Projects shown on /projects/, in display order.
+# Descriptions start from each repo's GitHub description; edit freely.
+
+[[projects]]
+name = "nix-config"
+url = "https://github.com/alexrf45/nix-config"
+description = "My NixOS configs and modules"
+language = "Nix"
+
+[[projects]]
+name = "security-labs"
+url = "https://github.com/alexrf45/security-labs"
+description = "Security research home lab & continuity"
+language = "HCL"
+
+[[projects]]
+name = "musings"
+url = "https://github.com/alexrf45/musings"
+description = "Writing is healing — the source for this site"
+language = "Hugo"
+
+[[projects]]
+name = "lab"
+url = "https://github.com/alexrf45/lab"
+description = "Snippets of code I've either built or modified"
+language = "HCL"
+
+[[projects]]
+name = "prox-tor"
+url = "https://github.com/alexrf45/Prox-Tor"
+description = "A simple Tor proxy for routing traffic"
+language = "Dockerfile"

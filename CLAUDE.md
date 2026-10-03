@@ -1,35 +1,23 @@
 # Project Overview
 
-A Hugo static blog ("phr3d.net" by Sean Fontaine) with a custom Gruvbox dark theme, deployed to Cloudflare Pages. Posts are Markdown files committed to the `main` branch — pushing triggers an automatic Cloudflare Pages build.
+A Hugo static blog ("phr3d.net" by Sean Fontaine) using the [TeXify3](https://github.com/michaelneuper/hugo-texify3) theme (LaTeX-style, Gruvbox light/dark), deployed to Cloudflare Pages. Posts are Markdown files committed to the `main` branch — pushing triggers the GitHub Actions deploy.
 
 ## Development Setup
 
-Install Hugo (>= 0.120.0):
+All tooling comes from the Nix flake: Hugo (extended), Dart Sass, Node, and Go.
 
 ```bash
-# macOS
-brew install hugo
-
-# Arch / Debian
-sudo pacman -S hugo  # or apt install hugo
+nix develop                 # enter the dev shell
+npm install                 # once: PostCSS deps used by the theme
+hugo server -D              # dev server incl. drafts
+hugo --minify               # production build -> public/
 ```
 
-Run local dev server:
-
-```bash
-hugo server -D        # includes drafts
-hugo server           # published posts only
-```
-
-Build for production:
-
-```bash
-hugo --minify
-```
+The theme is a Hugo module (`go.mod`), not a git submodule. Update it with `hugo mod get -u github.com/michaelneuper/hugo-texify3`.
 
 ## Content
 
-Posts live in `content/posts/` as Markdown files. Front matter format:
+Posts live in `content/posts/`, notes in `content/notes/`. Front matter format:
 
 ```yaml
 ---
@@ -40,48 +28,55 @@ tags: [tag1, tag2]
 ---
 ```
 
+Other content:
+- `content/_index.md` — home page: `{{< intro >}}` block (tagline, greeting, coffee button) and `{{< latest >}}`, beside the tag sidebar
+- `content/search.md` — on-site search page (`layout: search`)
+- `content/projects.md` — projects page (`layout: projects`); the list itself is `data/projects.toml`
+
 ## Architecture
 
 ```
-hugo.toml                    # site config (baseURL, theme, params)
-archetypes/default.md        # new post template
-content/posts/               # all post markdown files
-static/                      # static assets (favicon, images)
-themes/musings/
-├── hugo.toml                # theme metadata
-├── assets/css/gruvbox.css   # Gruvbox dark design system (Bootstrap 5 override)
-└── layouts/
-    ├── baseof.html          # base template: head, navbar, footer, scripts
-    ├── index.html           # home page: paginated post list
-    ├── _default/
-    │   ├── list.html        # /posts/ section list
-    │   └── single.html      # individual post + highlight.js
-    ├── partials/
-    │   ├── head.html        # meta, CDN links, fingerprinted CSS
-    │   ├── header.html      # sticky navbar with Alpine.js theme toggle
-    │   ├── footer.html
-    │   ├── post-card.html   # reusable post card partial
-    │   └── pagination.html
-    └── taxonomy/list.html   # /tags/<tag>/ pages
+hugo.toml                       # site config, menu, theme params, BMC widget
+go.mod / go.sum                 # Hugo module import of hugo-texify3
+package.json, postcss.config.js # PostCSS toolchain the theme's CSS pipeline requires
+data/projects.toml              # repos listed on /projects/
+assets/css/custom.css           # site CSS on top of the theme, fingerprinted; linked from partials/header.html
+static/images/                  # logo + favicons (override the theme's same-named files)
+layouts/
+├── index.searchindex.json      # JSON search index (home output format "searchindex")
+├── _default/
+│   ├── list.html               # override: lists all regular pages (posts + notes)
+│   ├── single.html             # override: notes get the post title/date/tags header
+│   ├── search.html             # search page, client-side filter over search-index.json
+│   └── projects.html           # projects page
+├── shortcodes/
+│   ├── intro.html              # home intro; style="terminal" (in use), "card", or "abstract"
+│   ├── buymeacoffee.html       # Gruvbox Buy Me a Coffee button (wraps partials/buymeacoffee-button.html)
+│   └── latest.html             # latest posts/notes list (home)
+└── partials/
+    ├── header.html             # override: logo, early dark-mode script (prevents light flash), site CSS link
+    ├── footer.html             # override: copyright footer
+    └── buymeacoffee-button.html # shared coffee button (intro + shortcode)
+themes/musings/                 # legacy Bootstrap theme, no longer used
 ```
+
+Theme overrides are copies of the upstream file with a minimal change and a `{{/* Override of ... */}}` header comment; re-check them when updating the theme.
 
 ## Design System
 
-The `musings` theme mirrors the Flask blog's Gruvbox design exactly:
-
-- **Colors**: Gruvbox dark palette (`--gb-*` CSS variables); light mode variant on `html[data-bs-theme="light"]`
-- **Typography**: Georgia serif for post body; system-ui sans-serif for headings and UI
-- **Framework**: Bootstrap 5.3.3 (CDN), Bootstrap Icons 1.11.3 (CDN)
-- **Interactivity**: Alpine.js v3 (CDN, `defer`) for dark/light mode toggle
-- **Code highlighting**: highlight.js 11.9.0 (CDN), Gruvbox theme, swaps on light mode toggle via MutationObserver
+- **Colors**: Gruvbox via the theme's CSS variables (`--bg`, `--fg`, `--yellow`, ...); dark mode is the `darkmode` class on `<body>`
+- **Typography**: theme's Latin Modern (LaTeX) fonts
+- **Dark mode**: theme toggle + system preference, saved in `localStorage.darkMode`
+- **Buy Me a Coffee**: floating widget in `[params.buymeacoffee]` (must load with `defer`, not `async`, because it only initialises on `DOMContentLoaded`), plus a Gruvbox-styled button on the home page via the `{{< buymeacoffee >}}` shortcode (URL in `params.buymeacoffeeURL`)
 
 ## Deployment
 
-**Cloudflare Pages** — auto-deploys on push to `main` branch.
-
-GitHub Actions workflow: `.github/workflows/deploy.yml`
+**GitHub Actions** (`.github/workflows/deploy.yml`) builds and deploys with wrangler:
+- Push to `main` → production; pull requests → preview deployment on the PR branch
 - Requires secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`
-- Build: `hugo --minify`, output: `public/`
+- Build: Hugo extended 0.164.0 + Go + Node (`npm ci`) + Dart Sass, `hugo --minify`, output: `public/`
+
+The Cloudflare Pages project (Terraform) also has its own GitHub-connected build (`HUGO_VERSION` 0.148.0, no Dart Sass), which fails with this theme; the Actions deploy is the one that publishes.
 
 ## Infrastructure (`terraform/`)
 

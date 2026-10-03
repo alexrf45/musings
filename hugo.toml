@@ -1,10 +1,22 @@
 baseURL = "https://phr3d.net"
-languageCode = "en-us"
+locale = "en-us"
 title = "phr3d"
-theme = "musings"
 
 enableRobotsTXT = true
 enableEmoji = true
+
+[module]
+[[module.imports]]
+path = "github.com/michaelneuper/hugo-texify3"
+
+[outputs]
+home = ["html", "rss", "searchindex"]
+
+[outputFormats.searchindex]
+mediaType = "application/json"
+baseName = "search-index"
+isPlainText = true
+notAlternative = true
 
 [pagination]
 pagerSize = 10
@@ -16,10 +28,83 @@ series = "series"
 [markup]
 [markup.goldmark.renderer]
 unsafe = true
+[markup.highlight]
+noClasses = false
+
+[menu]
+[[menu.main]]
+name = "poems"
+url = "/posts/"
+weight = 10
+[[menu.main]]
+name = "notes"
+url = "/notes/"
+weight = 20
+[[menu.main]]
+name = "projects"
+url = "/projects/"
+weight = 25
+[[menu.main]]
+name = "search"
+url = "/search/"
+weight = 30
+[[menu.main]]
+name = "music"
+url = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
+weight = 40
+[[menu.main]]
+name = "github"
+url = "https://github.com/alexrf45"
+weight = 50
 
 [params]
+title = "phr3d"
 description = "phr3d"
 author = "phr3d"
+keywords = ["poems", "poetry", "writing", "notes"]
 githubURL = "https://github.com/alexrf45"
 spotifyURL = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
 spotifyName = "Alexander Sean"
+buymeacoffeeURL = "https://buymeacoffee.com/phr3dzz"  # used by the {{< buymeacoffee >}} shortcode
+
+# TeXify3
+footnote = ""
+dateFormat = "2 January 2006"
+rootFontSize = "100%"
+emphasisWithDots = true
+numberedSubtitles = false
+toc = false
+math = false
+showWordCount = false
+showReadingTime = false
+enableDuckDuckGoSearchBox = false
+customCSS = []
+customJS = []
+
+# Override the theme author's own widgets inherited from the theme defaults
+[params.commentEngine]
+code = ""
+[params.buymeacoffee]
+# defer, not async: the widget only initialises on DOMContentLoaded
+code = """
+<script defer data-name="BMC-Widget"
+    data-cfasync="true"
+    src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+    data-id="phr3dzz"
+    data-description="Your support is much appreciated!"
+    data-message=""
+    data-color="#d79921"
+    data-position="Right"
+    data-x_margin="18"
+    data-y_margin="18">
+</script>
+"""
+[params.sharingbuttons]
+facebook = false
+twitter = false
+email = false
+linkedin = false
+reddit = false
+whatsapp = false
+hackernews = false
+telegram = false

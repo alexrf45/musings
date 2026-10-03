@@ -22,6 +22,8 @@
             gotools            # Go tools like goimports
             golangci-lint      # Go linter
             hugo
+            dart-sass          # SCSS compiler used by the TeXify3 theme
+            nodejs             # PostCSS toolchain used by the TeXify3 theme
           ];
 
           # Environments variables to inject

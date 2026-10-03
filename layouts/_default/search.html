@@ -1,0 +1,67 @@
+{{ define "head" }}
+{{ $options := dict "transpiler" "dartsass" "targetPath" "css/list.css" }}
+{{ with resources.Get "sass/layouts/list.scss" | toCSS $options | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+<main id="main" class="archive">
+  <div id="searchbox">
+    <form id="ddgSearch" role="search" onsubmit="return false">
+      <input type="search" id="search-query" placeholder="Search…" aria-label="Search poems and notes" autocomplete="off" autofocus>
+    </form>
+  </div>
+  <div class="post-group">
+    <h3 id="search-status">Type to search poems and notes</h3>
+    <ul id="search-results"></ul>
+  </div>
+</main>
+
+<script>
+(function () {
+  const input = document.getElementById("search-query");
+  const status = document.getElementById("search-status");
+  const results = document.getElementById("search-results");
+  let index = null;
+
+  function render(query) {
+    results.replaceChildren();
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!terms.length) {
+      status.textContent = "Type to search poems and notes";
+      return;
+    }
+    const matches = index.filter(p => {
+      const haystack = [p.title, p.content, p.tags.join(" ")].join(" ").toLowerCase();
+      return terms.every(t => haystack.includes(t));
+    });
+    status.textContent = matches.length === 1 ? "1 result" : matches.length + " results";
+    for (const p of matches) {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.className = "post-link";
+      a.href = p.url;
+      const title = document.createElement("span");
+      title.textContent = p.title;
+      const time = document.createElement("time");
+      time.textContent = p.date;
+      a.append(title, time);
+      li.append(a);
+      results.append(li);
+    }
+  }
+
+  fetch({{ "search-index.json" | relURL }})
+    .then(r => r.json())
+    .then(data => {
+      index = data;
+      const q = new URLSearchParams(location.search).get("q");
+      if (q) input.value = q;
+      render(input.value);
+      input.addEventListener("input", () => render(input.value));
+    })
+    .catch(() => { status.textContent = "Search is unavailable right now."; });
+})();
+</script>
+{{ end }}
