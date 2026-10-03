@@ -14,3 +14,6 @@ remote.tfbackend
 # OS
 .DS_Store
 .claude/*
+
+# Node (PostCSS for the TeXify3 theme)
+node_modules/

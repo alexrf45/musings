@@ -1,0 +1,17 @@
+/* phr3d additions on top of TeXify3 */
+#header h1 .site-brand {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4em;
+}
+#header h1 .site-logo {
+  height: 0.85em;
+  width: auto;
+}
+
+/* Projects page */
+.projects .project-description {
+  color: var(--fg3);
+  font-style: italic;
+  margin: 0.1rem 0 0.9rem;
+}
