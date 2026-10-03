@@ -2,7 +2,8 @@
 title: "phr3d"
 ---
 
-Poems, notes, and musings.
+{{< intro style="terminal" greeting="What are you creating today?" >}}
+Hi I'm Sean, drawing the link between cybersecurity and humanity, a poem or article at a time!
+{{< /intro >}}
 
-- [Poems](/posts/)
-- [Notes](/notes/)
+{{< latest >}}

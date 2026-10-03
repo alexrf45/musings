@@ -29,7 +29,7 @@ tags: [tag1, tag2]
 ```
 
 Other content:
-- `content/_index.md` — home page intro text (shown beside the tag sidebar)
+- `content/_index.md` — home page: `{{< intro >}}` block (tagline, greeting, coffee button) and `{{< latest >}}`, beside the tag sidebar
 - `content/search.md` — on-site search page (`layout: search`)
 - `content/projects.md` — projects page (`layout: projects`); the list itself is `data/projects.toml`
 
@@ -40,7 +40,7 @@ hugo.toml                       # site config, menu, theme params, BMC widget
 go.mod / go.sum                 # Hugo module import of hugo-texify3
 package.json, postcss.config.js # PostCSS toolchain the theme's CSS pipeline requires
 data/projects.toml              # repos listed on /projects/
-static/css/custom.css           # site CSS on top of the theme (logo, projects page)
+assets/css/custom.css           # site CSS on top of the theme, fingerprinted; linked from partials/header.html
 static/images/                  # logo + favicons (override the theme's same-named files)
 layouts/
 ├── index.searchindex.json      # JSON search index (home output format "searchindex")
@@ -49,9 +49,14 @@ layouts/
 │   ├── single.html             # override: notes get the post title/date/tags header
 │   ├── search.html             # search page, client-side filter over search-index.json
 │   └── projects.html           # projects page
+├── shortcodes/
+│   ├── intro.html              # home intro; style="terminal" (in use), "card", or "abstract"
+│   ├── buymeacoffee.html       # Gruvbox Buy Me a Coffee button (wraps partials/buymeacoffee-button.html)
+│   └── latest.html             # latest posts/notes list (home)
 └── partials/
-    ├── header.html             # override: logo + early dark-mode script (prevents light flash)
-    └── footer.html             # override: copyright footer
+    ├── header.html             # override: logo, early dark-mode script (prevents light flash), site CSS link
+    ├── footer.html             # override: copyright footer
+    └── buymeacoffee-button.html # shared coffee button (intro + shortcode)
 themes/musings/                 # legacy Bootstrap theme, no longer used
 ```
 
@@ -62,7 +67,7 @@ Theme overrides are copies of the upstream file with a minimal change and a `{{/
 - **Colors**: Gruvbox via the theme's CSS variables (`--bg`, `--fg`, `--yellow`, ...); dark mode is the `darkmode` class on `<body>`
 - **Typography**: theme's Latin Modern (LaTeX) fonts
 - **Dark mode**: theme toggle + system preference, saved in `localStorage.darkMode`
-- **Buy Me a Coffee**: floating widget, configured in `[params.buymeacoffee]`; must load with `defer` (not `async`) because it only initialises on `DOMContentLoaded`
+- **Buy Me a Coffee**: floating widget in `[params.buymeacoffee]` (must load with `defer`, not `async`, because it only initialises on `DOMContentLoaded`), plus a Gruvbox-styled button on the home page via the `{{< buymeacoffee >}}` shortcode (URL in `params.buymeacoffeeURL`)
 
 ## Deployment
 

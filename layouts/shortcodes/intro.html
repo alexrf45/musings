@@ -1,0 +1,38 @@
+{{- /*
+  Home page intro block.
+  {{< intro style="terminal|card|abstract" greeting="..." title="Abstract" user="sean" coffee=true >}}
+  tagline (markdown)
+  {{< /intro >}}
+*/ -}}
+{{- $style := .Get "style" | default "terminal" -}}
+{{- $greeting := .Get "greeting" -}}
+{{- $coffee := ne (.Get "coffee") false -}}
+{{- $tagline := .Inner | strings.TrimSpace | .Page.RenderString -}}
+<div class="intro intro--{{ $style }}">
+  {{- if eq $style "terminal" }}
+  {{- $prompt := printf "%s@%s:~$" (.Get "user" | default "sean") (lower site.Title) }}
+  {{- /* Terminals use straight quotes: undo Goldmark's typographer entities */}}
+  {{- $tagline = $tagline | replaceRE "&[lr]squo;" "'" | replaceRE "&[lr]dquo;" "&quot;" | safeHTML }}
+  <div class="terminal" role="img" aria-label="{{ $tagline | plainify }} {{ $greeting }}">
+    <div class="terminal-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="terminal-body" aria-hidden="true">
+      <div><span class="terminal-prompt">{{ $prompt }}</span> cat about.txt</div>
+      <div class="terminal-output">{{ $tagline }}</div>
+      {{- with $greeting }}
+      <div><span class="terminal-prompt">{{ $prompt }}</span> {{ . }}<span class="terminal-cursor"></span></div>
+      {{- end }}
+    </div>
+  </div>
+  {{- else }}
+  {{- if eq $style "abstract" }}
+  <div class="intro-title">{{ .Get "title" | default "Abstract" }}</div>
+  {{- end }}
+  <div class="intro-tagline">{{ $tagline }}</div>
+  {{- with $greeting }}
+  <p class="intro-greeting">{{ . }}</p>
+  {{- end }}
+  {{- end }}
+  {{- if $coffee }}
+  {{ partial "buymeacoffee-button.html" . }}
+  {{- end }}
+</div>

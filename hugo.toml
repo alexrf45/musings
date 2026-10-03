@@ -65,6 +65,7 @@ keywords = ["poems", "poetry", "writing", "notes"]
 githubURL = "https://github.com/alexrf45"
 spotifyURL = "https://open.spotify.com/user/22gfjmri5pyghz74jnktm5xzi"
 spotifyName = "Alexander Sean"
+buymeacoffeeURL = "https://buymeacoffee.com/phr3dzz"  # used by the {{< buymeacoffee >}} shortcode
 
 # TeXify3
 footnote = ""
@@ -77,13 +78,14 @@ math = false
 showWordCount = false
 showReadingTime = false
 enableDuckDuckGoSearchBox = false
-customCSS = ["css/custom.css"]
+customCSS = []
 customJS = []
 
 # Override the theme author's own widgets inherited from the theme defaults
 [params.commentEngine]
 code = ""
 [params.buymeacoffee]
+# defer, not async: the widget only initialises on DOMContentLoaded
 code = """
 <script defer data-name="BMC-Widget"
     data-cfasync="true"

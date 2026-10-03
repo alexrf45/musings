@@ -1,4 +1,8 @@
-{{/* Override of hugo-texify3 partials/header.html: adds the site logo before the title, and applies dark mode before first paint. */}}
+{{/* Override of hugo-texify3 partials/header.html: adds the site logo before the title, applies dark mode before first paint, and loads the fingerprinted site CSS. */}}
+{{/* Site CSS, fingerprinted so browsers and Cloudflare pick up changes (the theme's customCSS param only links unversioned static files). */}}
+{{ with resources.Get "css/custom.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{ end }}
 {{/* The theme's script.js sets body.darkmode only after the whole page loads (deferred),
      so dark mode flashes light on every navigation. Apply the same rule here, before any content renders.
      script.js still owns the toggle and re-applies the same state afterward. */}}
